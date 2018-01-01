@@ -26,7 +26,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <MethodButton methodName="add" disabled={false} onClick={(argums) => { addSnapshot(this.state.snapshots, 'add', argums) }}>
+        <MethodButton methodName="add" disabled={false} onClick={(argums) => { /*addSnapshot(this.state.snapshots, 'add', argums)*/ }}>
           <ValueInput value="A" />
         </MethodButton>
         <MethodButton methodName="add" disabled={false} onClick={() => { console.log('add button clicked'); }}>

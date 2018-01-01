@@ -24,9 +24,7 @@ class ValueInput extends React.Component {
       newValue = newValue.substring(0, 1);
     }
 
-    this.setState({
-      value: newValue
-    });
+    this.props.onChange(this.props.inputIndex, newValue);
   }
 
   render() {
@@ -37,7 +35,7 @@ class ValueInput extends React.Component {
         minLength="1"
         maxLength="1"
         ref={(input) => { this.input = input; }} 
-        value={this.state.value}
+        value={this.props.value}
         onChange={this.onChange}
         onClick={e => { e.stopPropagation() }}
       />

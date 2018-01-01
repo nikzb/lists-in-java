@@ -7,10 +7,6 @@ class IndexInput extends React.Component {
     super(props);
     this.focusInput = this.focusInput.bind(this);
     this.onChange = this.onChange.bind(this);
-
-    this.state = {
-      value: 0
-    }
   }
 
   focusInput() {
@@ -20,9 +16,7 @@ class IndexInput extends React.Component {
   onChange() {
     const newValue = this.input.value;
     if (newValue >= 0 && newValue <= this.props.maxValue) {
-      this.setState({
-        value: newValue
-      });
+      this.props.onChange(this.props.inputIndex, newValue);
     }
   }
 
@@ -34,7 +28,7 @@ class IndexInput extends React.Component {
         min="0"
         max={ this.props.maxValue }
         ref={(input) => { this.input = input; }} 
-        value={this.state.value}
+        value={this.props.value}
         onChange={this.onChange}
         onClick={e => { e.stopPropagation() }}
       />

@@ -1,38 +1,103 @@
 import React from 'react';
 import './MethodButton.css';
 
-// function renderChildren(props) {
-//   return React.Children.map(props.children, child => {
-//     return React.cloneElement(child, {
-
-//     });
-//   })
+// function onClick(children) {
+//   if (!children) {
+//     console.log('no children');
+//   } else { 
+//     console.log(children);
+//   }
 // }
-function onClick(children) {
-  if (!children) {
-    console.log('no children');
-  } else { 
-    console.log(children);
-  }
-  // if (children.length === 1) {
-  //   console.log(children[0]);
-  // } else if (children.length === 3) {
-  //   console.log(`Child 1: ${children[0]}`);
-  //   console.log(`Child 2: ${children[2]}`);
-  // }
-}
 
-function MethodButton(props) {
-  const classNames = ["MethodButton", `MethodButton--${props.methodName}`];
+class MethodButton extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if (props.disabled) {
-    classNames.push("MethodButton--disabled");
+    let inputValues = [];
+    if (props.children) {
+      if (!Array.isArray(props.children)) {
+        if (props.children.type.name === 'IndexInput') {
+          inputValues.push(0);
+        } else if (props.children.type.name === 'ValueInput') {
+          inputValues.push('A');
+        }
+      } else {
+        for (let index = 0; index < props.children.length; index += 1) {
+          console.log(props.children[index]);
+          if (index % 2 === 0) {
+            if (props.children[index].type.name === 'IndexInput') {
+              inputValues.push(0);
+            } else if (props.children[index].type.name === 'ValueInput') {
+              inputValues.push('A');
+            } else {
+              throw new Error('Child is not a valid Input type');
+            }
+          }
+        }
+      }
+    }
+
+    this.state = {
+      inputValues
+    };
+
+    this.onChange = this.onChange.bind(this);
   }
-  return (
-    <button className={classNames.join(' ')} onClick={onClick(props.children)} disabled={props.disabled}>
-      {props.methodName}({props.children})
-    </button>
-  );
+
+  onChange(index, newValue) {
+    this.setState((prevState, props) => ({
+      inputValues: prevState.inputValues.map((value, currentIndex) => {
+        if (index === currentIndex) {
+          return newValue;
+        }
+        return value;
+      })
+    }));
+  }
+
+  renderChildren(props) {
+    if (!props.children) {
+      return;
+    } else if (!Array.isArray(props.children)) {
+      return React.cloneElement(props.children, {
+        value: this.state.inputValues[0],
+        onChange: this.onChange,
+        inputIndex: 0
+      });
+    } else {
+      let newChildren = [];
+
+      for (let index = 0; index < props.children.length; index += 1) {
+        if (index % 2 === 0) {
+          newChildren.push(React.cloneElement(props.children[index], {
+            value: this.state.inputValues[index / 2],
+            onChange: this.onChange,
+            inputIndex: index / 2
+          }));
+        } else {
+          newChildren.push(props.children[index]);
+        }
+      }
+
+      return newChildren;
+    }
+  }
+
+  render() {
+    const classNames = ["MethodButton", `MethodButton--${this.props.methodName}`];
+
+    if (this.props.disabled) {
+      classNames.push("MethodButton--disabled");
+    }
+    return (
+      <button 
+        className={classNames.join(' ')} 
+        onClick={this.props.onClick(this.props.children)} 
+        disabled={this.props.disabled}>
+        {this.props.methodName}({this.renderChildren(this.props)})
+      </button>
+    );
+  }
 }
 
 export default MethodButton;
