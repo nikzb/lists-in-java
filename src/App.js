@@ -19,14 +19,16 @@ class App extends Component {
   render() {
     // Buttons for set, remove, get will be disabled when the list is empty
     let disabled = false;
-    console.log(currentListSize(this.state.snapshots));
+    // console.log(currentListSize(this.state.snapshots));
     if (currentListSize(this.state.snapshots) === 0) {
       disabled = true;
     }
 
+    console.log(this.state.snapshots);
+
     return (
       <div className="App">
-        <MethodButton methodName="add" disabled={false} onClick={(argums) => { /*addSnapshot(this.state.snapshots, 'add', argums)*/ }}>
+        <MethodButton methodName="add" disabled={false} onClick={(argums) => { this.setState({ snapshots: addSnapshot(this.state.snapshots, 'add', argums) }); console.log(this.state.snapshots); }}>
           <ValueInput value="A" />
         </MethodButton>
         <MethodButton methodName="add" disabled={false} onClick={() => { console.log('add button clicked'); }}>

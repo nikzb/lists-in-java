@@ -1,14 +1,6 @@
 import React from 'react';
 import './MethodButton.css';
 
-// function onClick(children) {
-//   if (!children) {
-//     console.log('no children');
-//   } else { 
-//     console.log(children);
-//   }
-// }
-
 class MethodButton extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +15,6 @@ class MethodButton extends React.Component {
         }
       } else {
         for (let index = 0; index < props.children.length; index += 1) {
-          console.log(props.children[index]);
           if (index % 2 === 0) {
             if (props.children[index].type.name === 'IndexInput') {
               inputValues.push(0);
@@ -92,7 +83,7 @@ class MethodButton extends React.Component {
     return (
       <button 
         className={classNames.join(' ')} 
-        onClick={this.props.onClick(this.props.children)} 
+        onClick={ () => { this.props.onClick(this.state.inputValues) }} 
         disabled={this.props.disabled}>
         {this.props.methodName}({this.renderChildren(this.props)})
       </button>
