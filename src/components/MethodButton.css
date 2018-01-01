@@ -1,0 +1,32 @@
+.MethodButton {
+  display: flex;
+  align-items: center;
+  background: lightgreen;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  font-size: 1.0em;
+}
+
+.MethodButton--add {
+  background: rgb(134, 205, 134);
+}
+
+.MethodButton--set {
+  background: #ffffac;
+}
+
+.MethodButton--remove {
+  background: #ff9966;
+}
+
+.MethodButton--get {
+  background: #bb88ff;
+}
+
+.MethodButton--size {
+  background: #ccaabb;
+}
+
+.MethodButton--disabled {
+  background: lightgrey;
+}
