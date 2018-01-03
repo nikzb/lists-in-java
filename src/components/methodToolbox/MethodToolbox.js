@@ -4,8 +4,6 @@ import MethodButton from './MethodButton';
 import IndexInput from './IndexInput';
 import ValueInput from './ValueInput';
 
-import { addSnapshot, currentListSize } from '../../models/Snapshots';
-
 import './MethodToolbox.css';
 
 function makeOnClickFuncForMethodButton(onClickFromParent, method) {
@@ -24,11 +22,12 @@ function MethodToolbox(props) {
 
   return (
     <div className="MethodToolbox">
+      <h2 className="section-title">List Methods</h2>
       <MethodButton methodName="add" disabled={false} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>    
         <ValueInput value="A" />
       </MethodButton>
       <MethodButton methodName="add" disabled={false} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>
-        <IndexInput value={0} maxValue={props.listSize - 1}/>, 
+        <IndexInput value={0} maxValue={props.listSize}/>, 
         <ValueInput value="A" />
       </MethodButton>
       <MethodButton methodName="set" disabled={disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>

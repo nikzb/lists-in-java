@@ -1,0 +1,18 @@
+.ListItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.3em;
+}
+
+.ListItem__index {
+  font-size: 1.0em;
+}
+
+.ListItem__value {
+  font-size: 1.5em;
+  background: rgb(84, 161, 255);
+  padding: 0.5em 0.7em;
+  border-radius: 0.5em;
+  color: white;
+}

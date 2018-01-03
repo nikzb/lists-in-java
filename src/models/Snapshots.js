@@ -1,4 +1,4 @@
-import { List, Map } from 'immutable';
+import { List } from 'immutable';
 import { Snapshot, add, set, remove, get, size } from './Snapshot';
 
 export function Snapshots() {

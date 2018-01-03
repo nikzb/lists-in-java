@@ -1,0 +1,14 @@
+.ListHistory__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ListHistory__list-vizzes {
+  flex: 1 1 auto;
+}
+
+.ListHistory__method-call-and-return {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 20em;
+}
