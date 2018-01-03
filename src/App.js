@@ -4,9 +4,7 @@ import './App.css';
 
 import { Snapshots, addSnapshot, undoSnapshot, currentListSize } from './models/Snapshots';
 
-import MethodButton from './components/MethodButton';
-import IndexInput from './components/IndexInput';
-import ValueInput from './components/ValueInput';
+import MethodToolbox from './components/methodToolbox/MethodToolbox';
 
 class App extends Component {
   constructor(props) {
@@ -17,36 +15,22 @@ class App extends Component {
   }
 
   render() {
-    // Buttons for set, remove, get will be disabled when the list is empty
-    let disabled = false;
-    // console.log(currentListSize(this.state.snapshots));
-    if (currentListSize(this.state.snapshots) === 0) {
-      disabled = true;
-    }
-
     console.log(this.state.snapshots);
 
     return (
       <div className="App">
-        <MethodButton methodName="add" disabled={false} onClick={(argums) => { this.setState({ snapshots: addSnapshot(this.state.snapshots, 'add', argums) }); console.log(this.state.snapshots); }}>
-          <ValueInput value="A" />
-        </MethodButton>
-        <MethodButton methodName="add" disabled={false} onClick={() => { console.log('add button clicked'); }}>
-          <IndexInput value={0} maxValue={3}/>, 
-          <ValueInput value="A" />
-        </MethodButton>
-        <MethodButton methodName="set" disabled={disabled} onClick={() => { console.log('add button clicked'); }}>
-          <IndexInput value={0} maxValue={3}/>, 
-          <ValueInput value="A" />
-        </MethodButton>
-        <MethodButton methodName="remove" disabled={disabled} onClick={() => { console.log('add button clicked'); }}>
-          <IndexInput value={0} maxValue={3}/>
-        </MethodButton>
-        <MethodButton methodName="get" disabled={disabled} onClick={() => { console.log('add button clicked'); }}>
-          <IndexInput value={0} maxValue={3}/>
-        </MethodButton>
-        <MethodButton methodName="size" disabled={false} onClick={() => { console.log('add button clicked'); }}>
-        </MethodButton>
+        <MethodToolbox 
+          onButtonClick={
+            (method, argums) => { 
+              this.setState((prevState, props) => ({ 
+                snapshots: addSnapshot(prevState.snapshots, method, argums) 
+              })); 
+              console.log('state updated', this.state.snapshots);
+            }
+          } 
+          listSize={currentListSize(this.state.snapshots)}
+        />
+
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
