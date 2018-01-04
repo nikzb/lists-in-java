@@ -7,6 +7,17 @@ import { undoSnapshot } from '../../models/Snapshots';
 
 import './StateTracker.css';
 
+// Epic Fail
+// function getHeightStyle(snapshots) {
+//   let stateTrackerStyle = {};
+
+//   if (snapshots.size < 10) {
+//     stateTrackerStyle.height = '100vh'
+//   } 
+
+//   return stateTrackerStyle;
+// }
+
 function StateTracker({snapshots, onUndo}) {
   return (
     <div className="StateTracker">

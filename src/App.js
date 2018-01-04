@@ -62,13 +62,11 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.snapshots);
-
     return (
       <div className="App">
         <h1 className="App__header">Lists in Java</h1>
         <div className="App__main-row">
-          <StateTracker 
+          <StateTracker
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 
           />
