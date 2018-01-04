@@ -1,3 +1,6 @@
 .ListViz {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* border-top: 1px dashed black; */
 }

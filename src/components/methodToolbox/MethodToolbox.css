@@ -1,4 +1,6 @@
 .MethodToolbox {
-  border: 1px solid red;
   flex: 0 0 12em;
+  margin-left: 1em;
+  padding-left: 1em;
+  border-left: 1px dashed black;
 }

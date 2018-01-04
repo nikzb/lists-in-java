@@ -1,0 +1,8 @@
+.MethodCallAndReturn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  flex: 0 0 4em;
+  align-self: flex-end;
+}

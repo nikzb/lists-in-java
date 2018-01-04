@@ -15,6 +15,12 @@ function ListHistory({snapshots}) {
   if (snapshots.size > 1) {
     history.push(<MethodCallAndReturn command={snapshots.get(snapshots.size - 1).get('command')} />);
     for (let index = 0; index < pastSnapshots.size - 1; index += 1) {
+      // history.push(
+      //   <div className="ListHistory__list-method-return">
+      //     <ListViz snapshot={pastSnapshots.get(index)} />
+      //     <MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />
+      //   </div>
+      // );
       history.push(<ListViz snapshot={pastSnapshots.get(index)} />);
       history.push(<MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />);
     }
@@ -23,13 +29,16 @@ function ListHistory({snapshots}) {
   return (
     <div className="ListHistory">
       <div className="ListHistory__header">
-        <h2 className="ListHistory__list-vizzes section-title">History</h2>
-        <div className="ListHistory__method-call-and-return">
-          <h2 className="section-title">Method Call</h2>
-          <h2 className="section-title">Returned</h2>
-        </div>
+        <h3 className="ListHistory__list-vizzes section-title">History</h3>
+        {/* <div className="ListHistory__method-call-and-return"> */}
+        <h3 className="section-title">Method Call ➔ Return Value</h3>
+          {/* <h3 className="section-title">Method Call</h3> */}
+          {/* <h3 className="section-title">Returned</h3> */}
+        {/* </div> */}
       </div>
-      {history}
+      <div className="ListHistory__body">
+        {history}
+      </div>
     </div>
   )
 }
