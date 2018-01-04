@@ -13,16 +13,28 @@ function ListHistory({snapshots}) {
   const history = [];
 
   if (snapshots.size > 1) {
+    // Use command from most recent snapshot
     history.push(<MethodCallAndReturn command={snapshots.get(snapshots.size - 1).get('command')} />);
-    for (let index = 0; index < pastSnapshots.size - 1; index += 1) {
+    
+    // The pastSnapshots are in reverse order, so start at beginning of List 
+    for (let index = 0; index < pastSnapshots.size; index += 1) {
       // history.push(
       //   <div className="ListHistory__list-method-return">
       //     <ListViz snapshot={pastSnapshots.get(index)} />
       //     <MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />
       //   </div>
       // );
-      history.push(<ListViz snapshot={pastSnapshots.get(index)} />);
-      history.push(<MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />);
+      if (index === 0) {
+        if (!pastSnapshots.get(0).get('listValues').equals(snapshots.get(snapshots.size - 1).get('listValues'))) {
+          history.push(<ListViz snapshot={pastSnapshots.get(0)} />);
+        }
+      } else if (!pastSnapshots.get(index).get('listValues').equals(pastSnapshots.get(index - 1).get('listValues'))) {
+          history.push(<ListViz snapshot={pastSnapshots.get(index)} />);
+      }
+
+      if (index < pastSnapshots.size - 1) { 
+        history.push(<MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />);
+      }
     }
   }
 

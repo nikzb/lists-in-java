@@ -2,5 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  height: 6em;
   /* border-top: 1px dashed black; */
+}
+
+.ListViz--empty {
+  margin: 2.0em;
+  margin-left: 0.4em;
+  color: rgb(84, 161, 255);
+  font-size: 1.2em;
+
 }
