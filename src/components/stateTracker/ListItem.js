@@ -1,5 +1,6 @@
 import React from 'react';
 
+import '../../variables.css';
 import './ListItem.css';
 
 function ListItem({value, index}) {

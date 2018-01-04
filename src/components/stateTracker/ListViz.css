@@ -9,7 +9,6 @@
 .ListViz--empty {
   margin: 2.0em;
   margin-left: 0.4em;
-  color: rgb(84, 161, 255);
+  color: var(--default-item-color, rgb(84, 161, 255));
   font-size: 1.2em;
-
 }

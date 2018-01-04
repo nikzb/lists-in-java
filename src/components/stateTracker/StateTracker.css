@@ -3,3 +3,8 @@
   margin-left: 1em;
   /* height: 100vh; */
 }
+
+.StateTracker__header {
+  display: flex;
+  justify-content: space-between;
+}

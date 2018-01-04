@@ -16,6 +16,7 @@ class App extends Component {
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
+    this.onUndoButtonClick = this.onUndoButtonClick.bind(this);
   }
 
   onMethodButtonClick(method, argums) {
@@ -52,6 +53,14 @@ class App extends Component {
     }
   }
 
+  onUndoButtonClick() {
+    if (this.state.snapshots.size > 1) {
+      this.setState((prevState, props) => ({
+        snapshots: undoSnapshot(prevState.snapshots) 
+      }));
+    }
+  }
+
   render() {
     console.log(this.state.snapshots);
 
@@ -59,7 +68,10 @@ class App extends Component {
       <div className="App">
         <h1 className="App__header">Lists in Java</h1>
         <div className="App__main-row">
-          <StateTracker snapshots={this.state.snapshots} />
+          <StateTracker 
+            snapshots={this.state.snapshots}
+            onUndo={this.onUndoButtonClick} 
+          />
           <MethodToolbox 
             onButtonClick={this.onMethodButtonClick} 
             listSize={currentListSize(this.state.snapshots)}
