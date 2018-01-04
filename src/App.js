@@ -11,7 +11,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      snapshots: Snapshots()
+      snapshots: Snapshots(),
+      nextValue: 'A'
+    }
+
+    this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
+  }
+
+  onMethodButtonClick(method, argums) {
+    let valueUsed;
+    if (method === 'add' || method === 'set') {
+      if (argums.length === 1) {
+        valueUsed = argums[0];
+      } else if (argums.length === 2) {
+        valueUsed = argums[1];
+      } else {
+        throw new Error('Invalid number of arguments: Unsure which argument is the value used');
+      }
+    }
+
+    console.log(argums);
+    console.log(valueUsed);
+
+    if (valueUsed !== undefined) {
+      // https://stackoverflow.com/questions/43095621/how-to-increment-letters-in-javascript-to-next-letter
+      const i = (parseInt(valueUsed, 36) + 1 ) % 36;
+      const nextValue = (!i * 10 + i).toString(36).toUpperCase();
+
+      console.log(nextValue);
+
+      this.setState((prevState, props) => ({ 
+        snapshots: addSnapshot(prevState.snapshots, method, argums),
+        nextValue 
+      }));
+    }
+    else {
+      this.setState((prevState, props) => ({ 
+        snapshots: addSnapshot(prevState.snapshots, method, argums) 
+      }));
     }
   }
 
@@ -24,15 +61,9 @@ class App extends Component {
         <div className="App__main-row">
           <StateTracker snapshots={this.state.snapshots} />
           <MethodToolbox 
-            onButtonClick={
-              (method, argums) => { 
-                this.setState((prevState, props) => ({ 
-                  snapshots: addSnapshot(prevState.snapshots, method, argums) 
-                })); 
-                console.log('state updated', this.state.snapshots);
-              }
-            } 
+            onButtonClick={this.onMethodButtonClick} 
             listSize={currentListSize(this.state.snapshots)}
+            nextValue={this.state.nextValue}
           />
         </div>
 

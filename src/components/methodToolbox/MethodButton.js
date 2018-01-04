@@ -35,6 +35,37 @@ class MethodButton extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('ComponentWillReceiveProps', nextProps);
+    const newInputValues = [];
+
+    if (nextProps.nextValue !== undefined && nextProps.children) {  
+      if (!Array.isArray(nextProps.children)) {
+        if (nextProps.children.type.name === 'IndexInput') {
+          newInputValues.push(this.state.inputValues[0]);
+        } else if (nextProps.children.type.name === 'ValueInput') {
+          newInputValues.push(nextProps.nextValue);
+        }
+      } else {
+        for (let index = 0; index < nextProps.children.length; index += 1) {
+          if (index % 2 === 0) {
+            if (nextProps.children[index].type.name === 'IndexInput') {
+              newInputValues.push(this.state.inputValues[index]);
+            } else if (nextProps.children[index].type.name === 'ValueInput') {
+              newInputValues.push(nextProps.nextValue);
+            } else {
+              throw new Error('Child is not a valid Input type');
+            }
+          }
+        }
+      }
+    }
+
+    this.setState({
+      inputValues: newInputValues
+    });
+  }
+
   onChange(index, newValue) {
     this.setState((prevState, props) => ({
       inputValues: prevState.inputValues.map((value, currentIndex) => {

@@ -38,4 +38,3 @@ export function currentListSize(snapshots) {
   const mostRecentSnapshot = snapshots.get(snapshots.size - 1);
   return mostRecentSnapshot.get('listValues').size;
 }
-

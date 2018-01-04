@@ -13,6 +13,7 @@ function makeOnClickFuncForMethodButton(onClickFromParent, method) {
 }
 
 function MethodToolbox(props) {
+  console.log('MethodToolbox props', props);
   // Buttons for set, remove, get will be disabled when the list is empty
   let disabled = false;
   
@@ -23,16 +24,16 @@ function MethodToolbox(props) {
   return (
     <div className="MethodToolbox">
       <h2 className="section-title">List Methods</h2>
-      <MethodButton methodName="add" disabled={false} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>    
-        <ValueInput value="A" />
+      <MethodButton methodName="add" disabled={false} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>    
+        <ValueInput value={props.nextValue} />
       </MethodButton>
-      <MethodButton methodName="add" disabled={false} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>
+      <MethodButton methodName="add" disabled={false} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>
         <IndexInput value={0} maxValue={props.listSize}/>, 
-        <ValueInput value="A" />
+        <ValueInput value={props.nextValue} />
       </MethodButton>
-      <MethodButton methodName="set" disabled={disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>
+      <MethodButton methodName="set" disabled={disabled} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>
         <IndexInput value={0} maxValue={props.listSize - 1}/>, 
-        <ValueInput value="A" />
+        <ValueInput value={props.nextValue} />
       </MethodButton>
       <MethodButton methodName="remove" disabled={disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}>
         <IndexInput value={0} maxValue={props.listSize - 1}/>

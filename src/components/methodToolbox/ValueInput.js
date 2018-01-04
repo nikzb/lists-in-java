@@ -7,10 +7,6 @@ class ValueInput extends React.Component {
     super(props);
     this.focusInput = this.focusInput.bind(this);
     this.onChange = this.onChange.bind(this);
-
-    this.state = {
-      value: 'A'
-    }
   }
 
   focusInput() {
@@ -28,6 +24,7 @@ class ValueInput extends React.Component {
   }
 
   render() {
+    console.log('ValueInput', this.props);
     return (
       <input className="Input"
         type="text"
