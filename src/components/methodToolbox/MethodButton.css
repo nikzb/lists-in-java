@@ -6,28 +6,29 @@
   border-radius: 0.5em;
   font-size: 1.0em;
   margin: 0.5em;
+  color: #f9f9f9;
 }
 
 .MethodButton--add {
-  background: rgb(134, 205, 134);
+  background: rgb(95, 199, 95);
 }
 
 .MethodButton--set {
-  background: #ffffac;
+  background: #fa903f;
 }
 
 .MethodButton--remove {
-  background: #ff9966;
+  background: #ff3939;
 }
 
 .MethodButton--get {
-  background: #bb88ff;
+  background: #9c52fc;
 }
 
 .MethodButton--size {
-  background: #ccaabb;
+  background: #ff79bc;
 }
 
 .MethodButton--disabled {
-  background: lightgrey;
+  background: rgb(157, 157, 157);
 }

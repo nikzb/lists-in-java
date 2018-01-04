@@ -59,11 +59,11 @@ class MethodButton extends React.Component {
           }
         }
       }
-    }
 
-    this.setState({
-      inputValues: newInputValues
-    });
+      this.setState({
+        inputValues: newInputValues
+      });
+    }
   }
 
   onChange(index, newValue) {
