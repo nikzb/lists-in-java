@@ -12,7 +12,7 @@
 .ListItem__value {
   font-size: 1.5em;
   background: var(--default-item-color, rgb(84, 161, 255));
-  padding: 0.5em 0;
+  padding: 0.7em 0;
   width: 2.5em;
   border-radius: 0.5em;
   color: #f9f9f9;
