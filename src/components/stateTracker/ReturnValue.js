@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ReturnValue.css';
 
-function ReturnValue({value}) {
+function ReturnValue({value, id}) {
   if (value === null) {
     return <div></div>;
   }

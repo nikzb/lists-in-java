@@ -10,8 +10,8 @@ function ListViz({snapshot}) {
   if (snapshot.get('listValues').size === 0) {
     listVizElements = <div className="ListViz ListViz--empty">Empty</div>
   } else {
-    listVizElements = snapshot.get('listValues').map((value, index) => 
-      <ListItem value={value} index={index} key={index}/>
+    listVizElements = snapshot.get('listValues').map((valueMap, index) => 
+      <ListItem value={valueMap.get('value')} index={index} id={valueMap.get('id')} key={valueMap.get('id')}/>
     );
   }
 

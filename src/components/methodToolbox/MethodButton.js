@@ -36,7 +36,6 @@ class MethodButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('ComponentWillReceiveProps', nextProps);
     const newInputValues = [];
 
     if (nextProps.nextValue !== undefined && nextProps.children) {  

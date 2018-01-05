@@ -30,16 +30,11 @@ class App extends Component {
         throw new Error('Invalid number of arguments: Unsure which argument is the value used');
       }
     }
-
-    console.log(argums);
-    console.log(valueUsed);
-
+    
     if (valueUsed !== undefined) {
       // https://stackoverflow.com/questions/43095621/how-to-increment-letters-in-javascript-to-next-letter
       const i = (parseInt(valueUsed, 36) + 1 ) % 36;
       const nextValue = (!i * 10 + i).toString(36).toUpperCase();
-
-      console.log(nextValue);
 
       this.setState((prevState, props) => ({ 
         snapshots: addSnapshot(prevState.snapshots, method, argums),

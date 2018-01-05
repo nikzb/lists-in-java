@@ -1,11 +1,16 @@
 import { Map, List } from 'immutable';
+import nanoid from 'nanoid';
 
 export function Snapshot(listValues, command) {
   if (!List.isList(listValues)) {
     throw new Error('Snapshot parameter listValues must be of type immutable List');
   }
   //return Map({ 'listValues': listValues, 'command': command });
-  return Map({ listValues, command });
+  return Map({ listValues, command, id: nanoid() });
+}
+
+function getValueMap(value) {
+  return Map({ value, id: nanoid() });
 }
 
 export function add(prevSnapshot, argums) {
@@ -13,13 +18,13 @@ export function add(prevSnapshot, argums) {
   let newListValues;
 
   if (argums.length === 1) {
-    newListValues = listValues.push(argums[0]);
+    newListValues = listValues.push(getValueMap(argums[0]));
   } else if (argums.length === 2) {
     const index = argums[0];
     if (index < 0 || index > listValues.size) {
       throw new Error(`Cannot add at index greater than size of list: Tried to add at index ${index} when size is ${listValues.size}`);
     }
-    newListValues = listValues.insert(argums[0], argums[1]);
+    newListValues = listValues.insert(argums[0], getValueMap(argums[1]));
   } else {
     throw new Error(`Invalid Number of Arguments: Tried to call add with ${argums.length} arguments`);
   }
@@ -54,7 +59,7 @@ export function set(prevSnapshot, argums) {
 
   const valueToReplace = listValues.get(index);
   const command = Map({ method: 'set', arguments: argums, returned: valueToReplace });
-  const newListValues = listValues.set(index, newValue);
+  const newListValues = listValues.set(index, getValueMap(newValue));
 
   return Snapshot(newListValues, command);
 }

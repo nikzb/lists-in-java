@@ -12,7 +12,9 @@ function ListHistory({snapshots}) {
 
   if (snapshots.size > 1) {
     // Use command from most recent snapshot
-    history.push(<MethodCallAndReturn command={snapshots.get(snapshots.size - 1).get('command')} />);
+    history.push(<MethodCallAndReturn 
+      command={snapshots.get(snapshots.size - 1).get('command')} 
+      key={`${snapshots.get(snapshots.size - 1).get('id')}MCR`} />);
     
     // The pastSnapshots are in reverse order, so start at beginning of List 
     for (let index = 0; index < pastSnapshots.size; index += 1) {
@@ -24,14 +26,16 @@ function ListHistory({snapshots}) {
       // );
       if (index === 0) {
         if (!pastSnapshots.get(0).get('listValues').equals(snapshots.get(snapshots.size - 1).get('listValues'))) {
-          history.push(<ListViz snapshot={pastSnapshots.get(0)} />);
+          history.push(<ListViz snapshot={pastSnapshots.get(0)} key={pastSnapshots.get(0).get('id')} />);
         }
       } else if (!pastSnapshots.get(index).get('listValues').equals(pastSnapshots.get(index - 1).get('listValues'))) {
-          history.push(<ListViz snapshot={pastSnapshots.get(index)} />);
+          history.push(<ListViz snapshot={pastSnapshots.get(index)} key={pastSnapshots.get(index).get('id')} />);
       }
 
       if (index < pastSnapshots.size - 1) { 
-        history.push(<MethodCallAndReturn command={pastSnapshots.get(index).get('command')} />);
+        history.push(<MethodCallAndReturn 
+          command={pastSnapshots.get(index).get('command')} 
+          key={`${pastSnapshots.get(index).get('id')}MCR`} />);
       }
     }
   }
