@@ -8,8 +8,6 @@ import './ListHistory.css';
 function ListHistory({snapshots}) {
   const pastSnapshots = snapshots.pop().reverse();
 
-  console.log(snapshots.get(snapshots.size - 1).get('command'));
-
   const history = [];
 
   if (snapshots.size > 1) {

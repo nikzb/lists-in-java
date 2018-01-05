@@ -13,7 +13,6 @@ function makeOnClickFuncForMethodButton(onClickFromParent, method) {
 }
 
 function MethodToolbox(props) {
-  console.log('MethodToolbox props', props);
   // Buttons for set, remove, get will be disabled when the list is empty
   let disabled = false;
   

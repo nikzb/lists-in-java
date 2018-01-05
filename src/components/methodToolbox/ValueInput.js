@@ -15,7 +15,7 @@ class ValueInput extends React.Component {
 
   onChange() {
     let newValue = this.input.value;
-    console.log(newValue);
+
     if (newValue.length > 1) {
       newValue = newValue.substring(0, 1);
     }
@@ -24,7 +24,6 @@ class ValueInput extends React.Component {
   }
 
   render() {
-    console.log('ValueInput', this.props);
     return (
       <input className="Input"
         type="text"

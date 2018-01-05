@@ -3,7 +3,6 @@ import React from 'react';
 import ListHistory from './ListHistory';
 import ListViz from './ListViz';
 import UndoButton from './UndoButton';
-import { undoSnapshot } from '../../models/Snapshots';
 
 import './StateTracker.css';
 

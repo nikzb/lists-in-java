@@ -94,7 +94,8 @@ class MethodButton extends React.Component {
           newChildren.push(React.cloneElement(props.children[index], {
             value: this.state.inputValues[index / 2],
             onChange: this.onChange,
-            inputIndex: index / 2
+            inputIndex: index / 2,
+            key: index
           }));
         } else {
           newChildren.push(props.children[index]);

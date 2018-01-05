@@ -11,7 +11,7 @@ function ListViz({snapshot}) {
     listVizElements = <div className="ListViz ListViz--empty">Empty</div>
   } else {
     listVizElements = snapshot.get('listValues').map((value, index) => 
-      <ListItem value={value} index={index} />
+      <ListItem value={value} index={index} key={index}/>
     );
   }
 
