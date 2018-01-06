@@ -1,4 +1,6 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
+import nanoid from 'nanoid';
 
 import ListItem from './ListItem';
 // import '../../variables.css';
@@ -15,7 +17,13 @@ function ListViz({snapshot}) {
     );
   }
 
-  return <div className="ListViz">{listVizElements}</div>
+  return (
+    // <div className="ListViz">
+      <FlipMove className="ListViz" duration={750}>
+        {listVizElements}
+      </FlipMove>
+    // </div>
+  );
 }
 
 export default ListViz;

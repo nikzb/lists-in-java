@@ -1,4 +1,5 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
 
 import ListViz from './ListViz';
 import MethodCallAndReturn from './MethodCallAndReturn';
