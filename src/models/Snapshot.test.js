@@ -6,25 +6,44 @@ describe('Snapshot', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
-      prevSnapshot = Snapshot(List(['A', 'B', 'C']), Map({ method: '', arguments: [], returned: null }));
+      prevSnapshot = Snapshot(List([
+        Map({ value: 'A', id: 'A1' }),
+        Map({ value: 'B', id: 'B1' }),
+        Map({ value: 'C', id: 'C1' })
+      ]), Map({ method: '', arguments: [], returned: null }));
     });
 
     it('should return a new Snapshot with an added item at the end', () => {
-      expect(add(prevSnapshot, ['D'])).toEqual(
-            Snapshot(List(['A', 'B', 'C', 'D']), Map({ method: 'add', arguments: ['D'], returned: null }))
-      );
+      const newSnapshot = add(prevSnapshot, ['D']);
+
+      expect(newSnapshot.get('listValues').size).toBe(4);
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+
+      expect(newValues).toEqual(List(['A', 'B', 'C', 'D']));
+      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: ['D'], returned: null }));
     });
 
     it('should return a new Snapshot with an added item at the beginning', () => {
-      expect(add(prevSnapshot, [0, 'D'])).toEqual(
-            Snapshot(List(['D', 'A', 'B', 'C']), Map({ method: 'add', arguments: [0, 'D'], returned: null }))
-      );
+      const newSnapshot = add(prevSnapshot, [0, 'D']);
+
+      expect(newSnapshot.get('listValues').size).toBe(4);
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+
+      expect(newValues).toEqual(List(['D', 'A', 'B', 'C']));
+      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [0, 'D'], returned: null }));
     });
 
     it('should return a new Snapshot with an added item somewhere in the middle', () => {
-      expect(add(prevSnapshot, [1, 'D'])).toEqual(
-            Snapshot(List(['A', 'D', 'B', 'C']), Map({ method: 'add', arguments: [1, 'D'], returned: null }))
-      );
+      const newSnapshot = add(prevSnapshot, [1, 'D']);
+
+      expect(newSnapshot.get('listValues').size).toBe(4);
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+
+      expect(newValues).toEqual(List(['A', 'D', 'B', 'C']));
+      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [1, 'D'], returned: null }));
     });
   });
 
@@ -36,15 +55,25 @@ describe('Snapshot', () => {
     });
 
     it('should return a new Snapshot with the initial item added', () => {
-      expect(add(prevSnapshot, ['D'])).toEqual(
-            Snapshot(List(['D']), Map({ method: 'add', arguments: ['D'], returned: null }))
-      );
+      const newSnapshot = add(prevSnapshot, ['D']);
+
+      expect(newSnapshot.get('listValues').size).toBe(1);
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+
+      expect(newValues).toEqual(List(['D']));
+      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: ['D'], returned: null }));
     });
 
     it('should return a new Snapshot with the initial item added at index 0', () => {
-      expect(add(prevSnapshot, [0, 'D'])).toEqual(
-            Snapshot(List(['D']), Map({ method: 'add', arguments: [0, 'D'], returned: null }))
-      );
+      const newSnapshot = add(prevSnapshot, [0, 'D']);
+
+      expect(newSnapshot.get('listValues').size).toBe(1);
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+
+      expect(newValues).toEqual(List(['D']));
+      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [0, 'D'], returned: null }));
     });
   });
 
@@ -52,13 +81,19 @@ describe('Snapshot', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
-      prevSnapshot = Snapshot(List(['A', 'B', 'C']), Map({ method: '', arguments: [], returned: null }));
+      prevSnapshot = Snapshot(List([
+        Map({ value: 'A', id: 'A1' }),
+        Map({ value: 'B', id: 'B1' }),
+        Map({ value: 'C', id: 'C1' })
+      ]), Map({ method: '', arguments: [], returned: null }));
     });
 
     it('should fetch the correct value from the list and not modify list values', () => {
       const newSnapshot = get(prevSnapshot, [0]);
-      expect(newSnapshot.get('command').get('returned')).toEqual('A');
-      expect(newSnapshot.get('listValues')).toEqual(prevSnapshot.get('listValues'));
+      expect(newSnapshot.get('command').get('returned').get('value')).toEqual('A');
+
+      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+      expect(newValues).toEqual(List(['A', 'B', 'C']));
     });
   });
 
@@ -66,16 +101,20 @@ describe('Snapshot', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
-      prevSnapshot = Snapshot(List(['A', 'B', 'C']), Map({ method: '', arguments: [], returned: null }));
+      prevSnapshot = Snapshot(List([
+        Map({ value: 'A', id: 'A1' }),
+        Map({ value: 'B', id: 'B1' }),
+        Map({ value: 'C', id: 'C1' })
+      ]), Map({ method: '', arguments: [], returned: null }));
     });
 
     it('should set the value at index to the new value', () => {
       const newSnapshot = set(prevSnapshot, [0, 'D']);
-      expect(newSnapshot.get('command').get('returned')).toEqual('A');
+      expect(newSnapshot.get('command').get('returned').get('value')).toEqual('A');
 
       const newListValues = newSnapshot.get('listValues');
       expect(newListValues.size).toBe(prevSnapshot.get('listValues').size);
-      expect(newListValues.get(0)).toEqual('D');
+      expect(newListValues.get(0).get('value')).toEqual('D');
     });
   });
 
@@ -83,16 +122,20 @@ describe('Snapshot', () => {
     let prevSnapshot;
 
     beforeEach(() => {
-      prevSnapshot = Snapshot(List(['A', 'B', 'C']), Map({ method: '', arguments: [], returned: null }));
+      prevSnapshot = Snapshot(List([
+        Map({ value: 'A', id: 'A1' }),
+        Map({ value: 'B', id: 'B1' }),
+        Map({ value: 'C', id: 'C1' })
+      ]), Map({ method: '', arguments: [], returned: null }));
     });
 
     it('should remove the value at index', () => {
       const newSnapshot = remove(prevSnapshot, [0]);
-      expect(newSnapshot.get('command').get('returned')).toEqual('A');
+      expect(newSnapshot.get('command').get('returned').get('value')).toEqual('A');
 
       const newListValues = newSnapshot.get('listValues');
       expect(newListValues.size).toBe(prevSnapshot.get('listValues').size - 1);
-      expect(newListValues.get(0)).toEqual('B');
+      expect(newListValues.get(0).get('value')).toEqual('B');
     });
   });
 

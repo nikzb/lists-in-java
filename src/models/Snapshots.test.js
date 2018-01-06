@@ -13,9 +13,9 @@ describe('Snapshots', () => {
     const snapshots = Snapshots();
     const newSnapshots = addSnapshot(snapshots, 'add', ['A']);
     expect(newSnapshots.size).toBe(2);
-    expect(newSnapshots.get(1)).toEqual(
-      Snapshot(List(['A']), Map({ 'method': 'add', 'arguments': ['A'], 'returned': null })) 
-    );
+
+    expect(newSnapshots.get(1).get('listValues').get(0).get('value')).toEqual('A');
+    expect(newSnapshots.get(1).get('command')).toEqual(Map({ 'method': 'add', 'arguments': ['A'], 'returned': null }));
   });
 
   it('should add multiple snapshots to Snapshots', () => {
@@ -24,9 +24,16 @@ describe('Snapshots', () => {
     snapshots = addSnapshot(snapshots, 'add', ['C']);
     snapshots = addSnapshot(snapshots, 'set', [0, 'B']);
     expect(snapshots.size).toBe(4);
-    expect(snapshots.get(3)).toEqual(
-      Snapshot(List(['B', 'C']), Map({ 'method': 'set', 'arguments': [0, 'B'], 'returned': 'A' })) 
-    );
+
+    const snapshot = snapshots.get(3);
+
+    expect(snapshot.get('listValues').map(item => item.get('value'))).toEqual(List(['B', 'C']));
+
+    const command = snapshot.get('command');
+
+    expect(command.get('method')).toEqual('set');
+    expect(command.get('arguments')).toEqual([0, 'B']);
+    expect(command.get('returned').get('value')).toEqual('A');
   });
   
   describe('Remove most recent', () => {
@@ -36,21 +43,26 @@ describe('Snapshots', () => {
       snapshots = addSnapshot(snapshots, 'set', [0, 'B']);
       snapshots = undoSnapshot(snapshots);
       expect(snapshots.size).toBe(2);
-      expect(snapshots.get(0)).toEqual(
-        Snapshot(List([]), null) 
-      );
-      expect(snapshots.get(1)).toEqual(
-        Snapshot(List(['A']), Map({ 'method': 'add', 'arguments': ['A'], 'returned': null })) 
-      );
+
+      const snapshotA = snapshots.get(0);
+      expect(snapshotA.get('listValues')).toEqual(List([]));
+      expect(snapshotA.get('command')).toBe(null);
+
+      const snapshotB = snapshots.get(1);
+      expect(snapshotB.get('listValues').get(0).get('value')).toEqual('A');
+
+      const command = snapshotB.get('command');
+      expect(command).toEqual(Map({ 'method': 'add', 'arguments': ['A'], 'returned': null }));
     });
 
     it('should not remove the first Snapshot (the one with the empty list)', () => {
       let snapshots = Snapshots();
       snapshots = undoSnapshot(snapshots);
       expect(snapshots.size).toBe(1);
-      expect(snapshots.get(0)).toEqual(
-        Snapshot(List([]), null) 
-      );
+      
+      const snapshotA = snapshots.get(0);
+      expect(snapshotA.get('listValues')).toEqual(List([]));
+      expect(snapshotA.get('command')).toBe(null);
     });
   });
 });
