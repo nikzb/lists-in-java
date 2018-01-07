@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  overflow: scroll;
+  overflow-x: scroll;
   padding-bottom: 1.0em;
   /* min-height: 6em; */
   /* border-top: 1px dashed black; */
@@ -14,4 +14,5 @@
   color: var(--default-item-color, rgb(84, 161, 255));
   font-size: 1.2rem;
   padding-bottom: 0;
+  overflow: visible;
 }
