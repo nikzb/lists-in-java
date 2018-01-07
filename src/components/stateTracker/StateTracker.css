@@ -1,6 +1,7 @@
 .StateTracker {
-  flex: 1 1 auto;
+  flex: 0 0 36em;
   margin-left: 1em;
+  overflow: scroll;
 }
 
 .StateTracker__header {

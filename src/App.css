@@ -1,5 +1,7 @@
 .App {
   text-align: left;
+  margin: auto;
+  width: 50em;
 }
 
 .App__main-row {
