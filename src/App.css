@@ -2,6 +2,7 @@
   text-align: left;
   margin: auto;
   width: 50em;
+  color: #222;
 }
 
 .App__main-row {
@@ -14,11 +15,11 @@
 }
 
 .App__header {
-  background-color: #222;
+  /* background-color: #222; */
   height: 50px;
   padding: 20px;
-  color: white;
   margin-top: 0;
+  /* text-align: center; */
 }
 
 .App-title {
