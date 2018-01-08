@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../variables.css';
 import './MethodButton.css';
 
 class MethodButton extends React.Component {

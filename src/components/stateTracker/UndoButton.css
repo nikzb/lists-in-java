@@ -4,5 +4,11 @@
   font-size: 1.0em;
   margin: 0.5em;
   width: 6.0em;
-  background-color: rgb(174, 0, 0)
+  background-color: rgb(174, 0, 0);
+  transition: background-color 0.8s;
+}
+
+.UndoButton--disabled {
+  background: var(--disabled-grey);
+  color: var(--disabled-grey-text);
 }

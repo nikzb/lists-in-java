@@ -4,6 +4,7 @@
   padding: 0.5em;
   font-size: 1.0em;
   margin: 0.5em;
+  transition: background-color 0.8s;
 }
 
 .MethodButton--add {
@@ -27,5 +28,6 @@
 }
 
 .MethodButton--disabled {
-  background: rgb(157, 157, 157);
+  background: var(--disabled-grey);
+  color: var(--disabled-grey-text);
 }
