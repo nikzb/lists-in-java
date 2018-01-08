@@ -10,15 +10,11 @@ function ListHistory({snapshots}) {
   const pastSnapshots = snapshots.pop().reverse();
 
   const history = [];
-  let animationDelay = 1000;
-
+  let animationDelay = 0;
+  
   if (snapshots.size > 1) {
     // Use command from most recent snapshot
     const command = snapshots.get(snapshots.size - 1).get('command');
-
-    if (['get', 'size'].includes(command.get('method'))) {
-      animationDelay = 100;
-    }
 
     history.push(<MethodCallAndReturn 
       command={command} 
@@ -44,11 +40,7 @@ function ListHistory({snapshots}) {
     <div className="ListHistory">
       <div className="ListHistory__header">
         <h3 className="ListHistory__list-vizzes section-title">History</h3>
-        {/* <div className="ListHistory__method-call-and-return"> */}
         <h3 className="section-title">Method Call ➔ Return Value</h3>
-          {/* <h3 className="section-title">Method Call</h3> */}
-          {/* <h3 className="section-title">Returned</h3> */}
-        {/* </div> */}
       </div>
       {/* <div className="ListHistory__body"> */}
       <FlipMove className="ListHistory__body" duration={500} delay={animationDelay}>

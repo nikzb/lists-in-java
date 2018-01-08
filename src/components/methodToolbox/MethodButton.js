@@ -36,22 +36,47 @@ class MethodButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     const newInputValues = [];
 
-    if (nextProps.nextValue !== undefined && nextProps.children) {  
+    if (nextProps.children) {  
       if (!Array.isArray(nextProps.children)) {
+        console.log('in non array');
         if (nextProps.children.type.name === 'IndexInput') {
-          newInputValues.push(this.state.inputValues[0]);
+          console.log('in index input');
+          const inputValue = this.state.inputValues[0];
+          const max = nextProps.children.props.maxValue;
+          console.log(max);
+          if (inputValue > max) {
+            newInputValues.push(max);
+          } else {
+            newInputValues.push(inputValue);
+          }
         } else if (nextProps.children.type.name === 'ValueInput') {
-          newInputValues.push(nextProps.nextValue);
+          if (nextProps.nextValue !== undefined) {
+            newInputValues.push(nextProps.nextValue);
+          } else {
+            throw new Error('prop nextValue is undefined. Need nextValue for ValueInput');
+          }
         }
       } else {
         for (let index = 0; index < nextProps.children.length; index += 1) {
           if (index % 2 === 0) {
             if (nextProps.children[index].type.name === 'IndexInput') {
-              newInputValues.push(this.state.inputValues[index]);
+              const inputValue = this.state.inputValues[index];
+              const max = nextProps.children[index].props.maxValue;
+              console.log(max);
+              if (inputValue > max) {
+                newInputValues.push(max);
+              } else {
+                newInputValues.push(inputValue);
+              }
             } else if (nextProps.children[index].type.name === 'ValueInput') {
-              newInputValues.push(nextProps.nextValue);
+              if (nextProps.nextValue !== undefined) {
+                newInputValues.push(nextProps.nextValue);
+              } else {
+                throw new Error('prop nextValue is undefined. Need nextValue for ValueInput');
+              }
             } else {
               throw new Error('Child is not a valid Input type');
             }
@@ -77,6 +102,7 @@ class MethodButton extends React.Component {
   }
 
   renderChildren(props) {
+    console.log(`in renderChildren ${this.state.inputValues}`);
     if (!props.children) {
       return;
     } else if (!Array.isArray(props.children)) {

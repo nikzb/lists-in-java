@@ -12,11 +12,22 @@ class App extends Component {
     super(props);
     this.state = {
       snapshots: Snapshots(),
-      nextValue: 'A'
+      nextValue: 'A',
+      buttonsDisabled: false,
+      waitTimeForDisabledButtons: 0
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
     this.onUndoButtonClick = this.onUndoButtonClick.bind(this);
+    this.enableButtonsAfterWait = this.enableButtonsAfterWait.bind(this);
+  }
+
+  enableButtonsAfterWait(waitTime) {
+    setTimeout(() => { 
+      this.setState({
+        buttonsDisabled: false
+      });
+    }, waitTime);
   }
 
   onMethodButtonClick(method, argums) {
@@ -38,21 +49,30 @@ class App extends Component {
 
       this.setState((prevState, props) => ({ 
         snapshots: addSnapshot(prevState.snapshots, method, argums),
+        buttonsDisabled: true,
         nextValue 
       }));
     }
     else {
       this.setState((prevState, props) => ({ 
-        snapshots: addSnapshot(prevState.snapshots, method, argums) 
+        snapshots: addSnapshot(prevState.snapshots, method, argums),
+        buttonsDisabled: true 
       }));
     }
+
+    // Have buttons re-enable after animation is done
+    // Delay depends on method used
+    this.enableButtonsAfterWait(2000);
   }
 
   onUndoButtonClick() {
     if (this.state.snapshots.size > 1) {
       this.setState((prevState, props) => ({
-        snapshots: undoSnapshot(prevState.snapshots) 
+        snapshots: undoSnapshot(prevState.snapshots),
+        buttonsDisabled: true 
       }));
+
+      this.enableButtonsAfterWait(2000);
     }
   }
 
@@ -64,11 +84,13 @@ class App extends Component {
           <StateTracker
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 
+            buttonsDisabled={this.state.buttonsDisabled}
           />
           <MethodToolbox 
             onButtonClick={this.onMethodButtonClick} 
             listSize={currentListSize(this.state.snapshots)}
             nextValue={this.state.nextValue}
+            disabled={this.state.buttonsDisabled}
           />
         </div>
 

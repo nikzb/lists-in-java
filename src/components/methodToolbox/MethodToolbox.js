@@ -13,34 +13,31 @@ function makeOnClickFuncForMethodButton(onClickFromParent, method) {
 }
 
 function MethodToolbox(props) {
+  console.log(`MethodToolbox props.listSize: ${props.listSize}`);
   // Buttons for set, remove, get will be disabled when the list is empty
-  let disabled = false;
-  
-  if (props.listSize === 0) {
-    disabled = true;
-  }
+  const listEmpty = props.listSize === 0;
 
   return (
     <div className="MethodToolbox">
       <h2 className="section-title">List Methods</h2>
-      <MethodButton methodName="add" disabled={false} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>    
+      <MethodButton methodName="add" disabled={props.disabled} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>    
         <ValueInput value={props.nextValue} />
       </MethodButton>
-      <MethodButton methodName="add" disabled={false} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>
+      <MethodButton methodName="add" disabled={props.disabled} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}>
         <IndexInput value={0} maxValue={props.listSize}/>, 
         <ValueInput value={props.nextValue} />
       </MethodButton>
-      <MethodButton methodName="set" disabled={disabled} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>
+      <MethodButton methodName="set" disabled={props.disabled || listEmpty} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>
         <IndexInput value={0} maxValue={props.listSize - 1}/>, 
         <ValueInput value={props.nextValue} />
       </MethodButton>
-      <MethodButton methodName="remove" disabled={disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}>
+      <MethodButton methodName="remove" disabled={props.disabled || listEmpty} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}>
         <IndexInput value={0} maxValue={props.listSize - 1}/>
       </MethodButton>
-      <MethodButton methodName="get" disabled={disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'get')}>
+      <MethodButton methodName="get" disabled={props.disabled || listEmpty} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'get')}>
         <IndexInput value={0} maxValue={props.listSize - 1}/>
       </MethodButton>
-      <MethodButton methodName="size" disabled={false} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'size')}>
+      <MethodButton methodName="size" disabled={props.disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'size')}>
       </MethodButton>
     </div>
   );

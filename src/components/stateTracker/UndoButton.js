@@ -2,8 +2,8 @@ import React from 'react';
 
 import './UndoButton.css';
 
-function UndoButton({onClick}) {
-  return <button className='UndoButton' onClick={onClick}>Undo</button>;
+function UndoButton({onClick, disabled}) {
+  return <button className='UndoButton' onClick={onClick} disabled={disabled}>Undo</button>;
 }
 
 export default UndoButton;

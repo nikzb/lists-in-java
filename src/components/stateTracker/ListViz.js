@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 import nanoid from 'nanoid';
+import Immutable from 'immutable';
 
 import ListItem from './ListItem';
+import { FlipMoveProps, timeToFinish } from '../../models/FlipMoveProps';
 // import '../../variables.css';
 import './ListViz.css';
 
@@ -11,6 +14,7 @@ class ListViz extends React.Component {
     const snapshot = this.props.snapshot;
 
     let listVizElements; 
+    let numberOfElements = 1;
 
     if (snapshot.get('listValues').size === 0) {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>
@@ -18,16 +22,30 @@ class ListViz extends React.Component {
       listVizElements = snapshot.get('listValues').map((valueMap, index) => 
         <ListItem value={valueMap.get('value')} index={index} id={valueMap.get('id')} key={valueMap.get('id')}/>
       );
+      console.log(listVizElements);
+      numberOfElements = listVizElements.size;
+      console.log(`Number of ListItems in ListViz: ${numberOfElements}`);
     }
+
+    const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
 
     return (
       // <div className="ListViz">
-        <FlipMove className="ListViz" duration={750} delay={200}>
+        <FlipMove className="ListViz" {...flipMoveProps.toObject()}>
           {listVizElements}
         </FlipMove>
       // </div>
     );
   }
 }
+
+ListViz.defaultProps = {
+  isCurrentState: false
+};
+
+ListViz.propTypes = {
+  snapshot: PropTypes.object,
+  isCurrentState: PropTypes.bool
+};
 
 export default ListViz;
