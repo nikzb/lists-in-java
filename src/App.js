@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Snapshots, addSnapshot, undoSnapshot, currentListSize } from './models/Snapshots';
+import { FlipMoveProps, timeToFinish } from './models/FlipMoveProps';
 
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
@@ -14,7 +15,8 @@ class App extends Component {
       snapshots: Snapshots(),
       nextValue: 'A',
       buttonsDisabled: false,
-      waitTimeForDisabledButtons: 0
+      listVizFlipMoveProps: null,
+      listHistoryFlipMoveProps: null
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
@@ -42,37 +44,69 @@ class App extends Component {
       }
     }
     
+    const updatedSnapshots = addSnapshot(this.state.snapshots, method, argums);
+    const newSnapshotListSize = currentListSize(updatedSnapshots);
+    const listVizFlipMoveProps = FlipMoveProps({ 
+      duration: 1000, 
+      delay: 250, 
+      staggerDelayBy: 10 
+    });
+    const listHistoryFlipMoveProps = FlipMoveProps({ 
+      duration: 800, 
+      delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
+      staggerDelayBy: 50 
+    });
+
     if (valueUsed !== undefined) {
       // https://stackoverflow.com/questions/43095621/how-to-increment-letters-in-javascript-to-next-letter
       const i = (parseInt(valueUsed, 36) + 1 ) % 36;
       const nextValue = (!i * 10 + i).toString(36).toUpperCase();
 
       this.setState((prevState, props) => ({ 
-        snapshots: addSnapshot(prevState.snapshots, method, argums),
+        snapshots: updatedSnapshots,
         buttonsDisabled: true,
+        listVizFlipMoveProps,
+        listHistoryFlipMoveProps,
         nextValue 
       }));
     }
     else {
       this.setState((prevState, props) => ({ 
-        snapshots: addSnapshot(prevState.snapshots, method, argums),
-        buttonsDisabled: true 
+        snapshots: updatedSnapshots,
+        buttonsDisabled: true,
+        listVizFlipMoveProps,
+        listHistoryFlipMoveProps,
       }));
     }
 
     // Have buttons re-enable after animation is done
     // Delay depends on method used
-    this.enableButtonsAfterWait(2000);
+    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size));
   }
 
   onUndoButtonClick() {
     if (this.state.snapshots.size > 1) {
+      const updatedSnapshots = undoSnapshot(this.state.snapshots);
+      const newSnapshotListSize = currentListSize(updatedSnapshots);
+      const listVizFlipMoveProps = FlipMoveProps({ 
+        duration: 1000, 
+        delay: 250, 
+        staggerDelayBy: 10 
+      });
+      const listHistoryFlipMoveProps = FlipMoveProps({ 
+        duration: 800, 
+        delay: 250, //timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
+        staggerDelayBy: 50 
+      });
+
       this.setState((prevState, props) => ({
         snapshots: undoSnapshot(prevState.snapshots),
-        buttonsDisabled: true 
+        buttonsDisabled: true ,
+        listVizFlipMoveProps,
+        listHistoryFlipMoveProps
       }));
 
-      this.enableButtonsAfterWait(2000);
+      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size));
     }
   }
 
@@ -85,6 +119,8 @@ class App extends Component {
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 
             buttonsDisabled={this.state.buttonsDisabled}
+            listVizFlipMoveProps={this.state.listVizFlipMoveProps}
+            listHistoryFlipMoveProps={this.state.listHistoryFlipMoveProps}
           />
           <MethodToolbox 
             onButtonClick={this.onMethodButtonClick} 

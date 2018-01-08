@@ -6,7 +6,7 @@ import MethodCallAndReturn from './MethodCallAndReturn';
 
 import './ListHistory.css';
 
-function ListHistory({snapshots}) {
+function ListHistory({snapshots, flipMoveProps}) {
   const pastSnapshots = snapshots.pop().reverse();
 
   const history = [];
@@ -33,8 +33,24 @@ function ListHistory({snapshots}) {
       }
     }
 
-    history.push(<ListViz snapshot={pastSnapshots.get(pastSnapshots.size - 1)} key={pastSnapshots.get(pastSnapshots.size - 1).get('id')} />);
+    history.push(
+      <ListViz 
+        snapshot={pastSnapshots.get(pastSnapshots.size - 1)} 
+        key={pastSnapshots.get(pastSnapshots.size - 1).get('id')} 
+      />
+    );
   }
+
+  const flipMove = flipMoveProps ? (
+    <FlipMove className="ListHistory__body" {...flipMoveProps.toObject()}>
+      {history}
+    </FlipMove>
+  ) : (
+    <FlipMove className="ListHistory__body">
+      {history}
+    </FlipMove>
+  );
+  
 
   return (
     <div className="ListHistory">
@@ -42,11 +58,7 @@ function ListHistory({snapshots}) {
         <h3 className="ListHistory__list-vizzes section-title">History</h3>
         <h3 className="section-title">Method Call ➔ Return Value</h3>
       </div>
-      {/* <div className="ListHistory__body"> */}
-      <FlipMove className="ListHistory__body" duration={500} delay={animationDelay}>
-        {history}
-      </FlipMove>
-      {/* </div> */}
+      {flipMove}
     </div>
   )
 }

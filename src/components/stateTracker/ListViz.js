@@ -27,15 +27,18 @@ class ListViz extends React.Component {
       console.log(`Number of ListItems in ListViz: ${numberOfElements}`);
     }
 
-    const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
-
-    return (
-      // <div className="ListViz">
-        <FlipMove className="ListViz" {...flipMoveProps.toObject()}>
-          {listVizElements}
-        </FlipMove>
-      // </div>
+    // const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
+    const flipMove = this.props.flipMoveProps ? (
+      <FlipMove className="ListViz" {...this.props.flipMoveProps.toObject()}>
+        {listVizElements}
+      </FlipMove>
+    ) : (
+      <FlipMove className="ListViz">
+        {listVizElements}
+      </FlipMove>
     );
+
+    return flipMove;
   }
 }
 
