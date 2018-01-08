@@ -28,14 +28,14 @@ function MethodToolbox(props) {
         <ValueInput value={props.nextValue} />
       </MethodButton>
       <MethodButton methodName="set" disabled={props.disabled || listEmpty} nextValue={props.nextValue} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}>
-        <IndexInput value={0} maxValue={props.listSize - 1}/>, 
+        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>, 
         <ValueInput value={props.nextValue} />
       </MethodButton>
       <MethodButton methodName="remove" disabled={props.disabled || listEmpty} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}>
-        <IndexInput value={0} maxValue={props.listSize - 1}/>
+        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton methodName="get" disabled={props.disabled || listEmpty} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'get')}>
-        <IndexInput value={0} maxValue={props.listSize - 1}/>
+        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton methodName="size" disabled={props.disabled} onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'size')}>
       </MethodButton>

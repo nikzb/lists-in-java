@@ -37,17 +37,14 @@ class MethodButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     const newInputValues = [];
 
     if (nextProps.children) {  
       if (!Array.isArray(nextProps.children)) {
-        console.log('in non array');
         if (nextProps.children.type.name === 'IndexInput') {
-          console.log('in index input');
           const inputValue = this.state.inputValues[0];
           const max = nextProps.children.props.maxValue;
-          console.log(max);
+          console.log(`single index input max ${max}`);
           if (inputValue > max) {
             newInputValues.push(max);
           } else {
@@ -66,7 +63,7 @@ class MethodButton extends React.Component {
             if (nextProps.children[index].type.name === 'IndexInput') {
               const inputValue = this.state.inputValues[index];
               const max = nextProps.children[index].props.maxValue;
-              console.log(max);
+              console.log(`array, index input max: ${max}`);
               if (inputValue > max) {
                 newInputValues.push(max);
               } else {
@@ -103,7 +100,6 @@ class MethodButton extends React.Component {
   }
 
   renderChildren(props) {
-    console.log(`in renderChildren ${this.state.inputValues}`);
     if (!props.children) {
       return;
     } else if (!Array.isArray(props.children)) {
