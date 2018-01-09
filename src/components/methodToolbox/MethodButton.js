@@ -134,13 +134,25 @@ class MethodButton extends React.Component {
     if (this.props.disabled) {
       classNames.push("MethodButton--disabled");
     }
+
+    // const descriptions = [<p>{this.props.description(...this.state.inputValues)}</p>];
+    // if (this.props.description2) {
+    //   descriptions.push(<p>{this.props.description2}</p>);
+    // }
+
     return (
-      <button 
-        className={classNames.join(' ')} 
-        onClick={ () => { this.props.onClick(this.state.inputValues) }} 
-        disabled={this.props.disabled}>
-        {this.props.methodName}({this.renderChildren(this.props)})
-      </button>
+      <details>
+        <summary>
+          <button 
+            className={classNames.join(' ')} 
+            onClick={ () => { this.props.onClick(this.state.inputValues) }} 
+            disabled={this.props.disabled}>
+            {this.props.methodName}({this.renderChildren(this.props)})
+          </button>
+        </summary>
+        {/* {...descriptions} */}
+        <p>{this.props.description(...this.state.inputValues)}</p>
+      </details>
     );
   }
 }
