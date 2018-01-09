@@ -42,6 +42,7 @@ function MethodToolbox(props) {
       <MethodButton 
         methodName="set" 
         description={(index, element) => `Replace the element at index ${index} with the element ${element}.`}
+        description2="Returns the element that was replaced."
         disabled={props.disabled || listEmpty} 
         nextValue={props.nextValue} 
         onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}
@@ -52,6 +53,7 @@ function MethodToolbox(props) {
       <MethodButton 
         methodName="remove" 
         description={(index) => `Remove the element at index ${index}.`}
+        description2="Returns the element that was removed."
         disabled={props.disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}
       >
@@ -59,14 +61,14 @@ function MethodToolbox(props) {
       </MethodButton>
       <MethodButton 
         methodName="get" 
-        description={(index) => `Get a copy of the value at index ${index}.`}
+        description={(index) => `Return a copy of the value at index ${index}.`}
         disabled={props.disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'get')}>
         <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton 
         methodName="size" 
-        description={() => `Get the number of elements in the list.`}
+        description={() => `Return the number of elements in the list.`}
         disabled={props.disabled} 
         onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'size')}>
       </MethodButton>
