@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import { Map, List } from 'immutable';
 // import logo from './logo.svg';
 import './App.css';
 
@@ -16,7 +18,8 @@ class App extends Component {
       nextValue: 'A',
       buttonsDisabled: false,
       listVizFlipMoveProps: null,
-      listHistoryFlipMoveProps: null
+      listHistoryFlipMoveProps: null,
+      animationClasses: Map({ index: List() })
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
@@ -32,7 +35,7 @@ class App extends Component {
     }, waitTime);
   }
 
-  onMethodButtonClick(method, argums) {
+  getValueUsed(method, argums) {
     let valueUsed;
     if (method === 'add' || method === 'set') {
       if (argums.length === 1) {
@@ -43,9 +46,38 @@ class App extends Component {
         throw new Error('Invalid number of arguments: Unsure which argument is the value used');
       }
     }
-    
+    return valueUsed;
+  }
+
+  getNextValue(valueUsed) {
+     // https://stackoverflow.com/questions/43095621/how-to-increment-letters-in-javascript-to-next-letter
+     const i = (parseInt(valueUsed, 36) + 1 ) % 36;
+     return (!i * 10 + i).toString(36).toUpperCase();
+  }
+
+  initiateAnimation({ animationName, element, delay, duration }) {
+    setTimeout(() => {
+      const updatedClasses = this.state.animationClasses.get(element).push(animationName);
+      const updatedAnimationClasses = this.state.animationClasses.set(element, updatedClasses);
+      this.setState({
+        animationClasses: updatedAnimationClasses
+      }, () => {
+        setTimeout(() => {
+          const index = this.state.animationClasses.get(element).indexOf(animationName);
+          const updatedClasses = this.state.animationClasses.get(element).delete(index);
+          const updatedAnimationClasses = this.state.animationClasses.set(element, updatedClasses);
+          this.setState({
+            animationClasses: updatedAnimationClasses
+          });
+        }, duration);
+      });
+    }, delay);
+  }
+
+  onMethodButtonClick(method, argums) {
     const updatedSnapshots = addSnapshot(this.state.snapshots, method, argums);
     const newSnapshotListSize = currentListSize(updatedSnapshots);
+
     const listVizFlipMoveProps = FlipMoveProps({ 
       duration: 1000, 
       delay: 250, 
@@ -57,10 +89,25 @@ class App extends Component {
       staggerDelayBy: 50 
     });
 
+    // const animations = [];
+    let indexAnimation;
+
+    if (method === 'get') {
+      // animations.push({
+      indexAnimation = {
+        animationName: 'attention',
+        element: 'index',
+        delay: 350,
+        duration: 1000
+      };
+
+      this.initiateAnimation(indexAnimation);
+    }
+
+    const valueUsed = this.getValueUsed(method, argums);
+
     if (valueUsed !== undefined) {
-      // https://stackoverflow.com/questions/43095621/how-to-increment-letters-in-javascript-to-next-letter
-      const i = (parseInt(valueUsed, 36) + 1 ) % 36;
-      const nextValue = (!i * 10 + i).toString(36).toUpperCase();
+      const nextValue = this.getNextValue(valueUsed);
 
       this.setState((prevState, props) => ({ 
         snapshots: updatedSnapshots,
@@ -95,7 +142,7 @@ class App extends Component {
       });
       const listHistoryFlipMoveProps = FlipMoveProps({ 
         duration: 800, 
-        delay: 250, //timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
+        delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
         staggerDelayBy: 50 
       });
 
@@ -119,8 +166,11 @@ class App extends Component {
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 
             buttonsDisabled={this.state.buttonsDisabled}
+
             listVizFlipMoveProps={this.state.listVizFlipMoveProps}
             listHistoryFlipMoveProps={this.state.listHistoryFlipMoveProps}
+
+            indexAnimationClasses={this.state.animationClasses.get('index')}
           />
           <MethodToolbox 
             onButtonClick={this.onMethodButtonClick} 

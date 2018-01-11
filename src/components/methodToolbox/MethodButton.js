@@ -44,7 +44,7 @@ class MethodButton extends React.Component {
         if (nextProps.children.type.name === 'IndexInput') {
           const inputValue = this.state.inputValues[0];
           const max = nextProps.children.props.maxValue;
-          console.log(`single index input max ${max}`);
+          
           if (inputValue > max) {
             newInputValues.push(max);
           } else {
@@ -63,7 +63,7 @@ class MethodButton extends React.Component {
             if (nextProps.children[index].type.name === 'IndexInput') {
               const inputValue = this.state.inputValues[index];
               const max = nextProps.children[index].props.maxValue;
-              console.log(`array, index input max: ${max}`);
+              
               if (inputValue > max) {
                 newInputValues.push(max);
               } else {

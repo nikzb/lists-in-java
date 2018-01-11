@@ -6,7 +6,15 @@ import UndoButton from './UndoButton';
 
 import './StateTracker.css';
 
-function StateTracker({snapshots, onUndo, buttonsDisabled, listVizFlipMoveProps, listHistoryFlipMoveProps}) {
+function StateTracker({
+      snapshots, 
+      onUndo, 
+      buttonsDisabled, 
+      listVizFlipMoveProps, 
+      listHistoryFlipMoveProps,
+
+      indexAnimationClasses
+  }) {
   return (
     <div className="StateTracker">
       <div className="StateTracker__header">
@@ -17,6 +25,7 @@ function StateTracker({snapshots, onUndo, buttonsDisabled, listVizFlipMoveProps,
         snapshot={snapshots.get(snapshots.size - 1)} 
         isCurrentState={true} 
         flipMoveProps={listVizFlipMoveProps}
+        indexAnimationClasses={indexAnimationClasses}
       />
       <ListHistory snapshots={snapshots} flipMoveProps={listHistoryFlipMoveProps} />
     </div>

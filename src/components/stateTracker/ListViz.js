@@ -20,14 +20,18 @@ class ListViz extends React.Component {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>
     } else {
       listVizElements = snapshot.get('listValues').map((valueMap, index) => 
-        <ListItem value={valueMap.get('value')} index={index} id={valueMap.get('id')} key={valueMap.get('id')}/>
+        <ListItem 
+          value={valueMap.get('value')} 
+          index={index} 
+          indexClasses={this.props.indexAnimationClasses}
+          // valueClasses={}
+          id={valueMap.get('id')} 
+          key={valueMap.get('id')}
+        />
       );
-      console.log(listVizElements);
-      numberOfElements = listVizElements.size;
-      console.log(`Number of ListItems in ListViz: ${numberOfElements}`);
     }
 
-    // const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
+    const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
     const flipMove = this.props.flipMoveProps ? (
       <FlipMove className="ListViz" {...this.props.flipMoveProps.toObject()}>
         {listVizElements}
@@ -37,6 +41,12 @@ class ListViz extends React.Component {
         {listVizElements}
       </FlipMove>
     );
+
+    // return (
+    //   <div className="ListViz">
+    //     {listVizElements}
+    //   </div>
+    // );
 
     return flipMove;
   }

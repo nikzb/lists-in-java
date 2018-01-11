@@ -6,7 +6,8 @@
 }
 
 .ListItem__index {
-  font-size: 1.5em;
+  font-size: 1.6em;
+  transition: color 0.5s ease-out;
 }
 
 .ListItem__value {
@@ -18,3 +19,16 @@
   color: #f9f9f9;
   text-align: center;
 }
+
+.ListItem__value--tada {
+  animation: tada 1.0s;
+}
+
+.ListItem__index--attention {
+  color: #9c52fc;
+  animation: rubberBand 1.0s;
+}
+
+/* .ListItem__index--pulse {
+  font-size: 2.0em;
+} */

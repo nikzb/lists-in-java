@@ -13,7 +13,6 @@ function makeOnClickFuncForMethodButton(onClickFromParent, method) {
 }
 
 function MethodToolbox(props) {
-  console.log(`MethodToolbox props.listSize: ${props.listSize}`);
   // Buttons for set, remove, get will be disabled when the list is empty
   const listEmpty = props.listSize === 0;
 
