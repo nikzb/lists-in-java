@@ -13,7 +13,6 @@ class ListViz extends React.Component {
   render() {
     const snapshot = this.props.snapshot;
     const animationClasses = this.props.animationClasses;
-    console.log('in ListViz', animationClasses);
     
     let listVizElements; 
     let numberOfElements = 1;

@@ -57,48 +57,35 @@ class App extends Component {
 
   getAnimationFunction({ elementId, elementPart, className, delay, duration }) { 
     return () => {
-      setTimeout(() => {
+      setTimeout(async () => {
         let elementMap;
-        console.log('animation classes', this.state.animationClasses.toString());
+        
         if (!this.state.animationClasses.has(elementId)) {
           elementMap = Map({ index: List(), value: List() });
-          console.log(`New Map since element ID ${elementId} was not found`);
         } else {
           elementMap = this.state.animationClasses.get(elementId);
-          console.log(`Found element with id ${elementId}`);
-          console.log(elementMap.toString());
         }
 
         const updatedClassesList = elementMap.get(elementPart).push(className);
-
         const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
-
         const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
 
-        console.log('first set timeout', updatedElementMap.toString());
-
-        this.setState({
+        await this.setState({
           animationClasses: updatedAnimationClasses
-        }, () => {
-          console.log('done first set timeout');
-          setTimeout(() => {
-            const elementMap = this.state.animationClasses.get(elementId);
-            console.log(`second timout: elementMap with id ${elementId} is ${elementMap}`);
-            const classesList = elementMap.get(elementPart);
-            const index = classesList.indexOf(className);
-
-            const updatedClassesList = classesList.delete(index);
-
-            const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
-            console.log('second set timeout', updatedElementMap.toString());
-
-            const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
-
-            this.setState({
-              animationClasses: updatedAnimationClasses
-            });
-          }, duration);
         });
+
+        setTimeout(() => {
+          const elementMap = this.state.animationClasses.get(elementId);
+          const classesList = elementMap.get(elementPart);
+          const index = classesList.indexOf(className);
+          const updatedClassesList = classesList.delete(index);
+          const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
+          const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
+
+          this.setState({
+            animationClasses: updatedAnimationClasses
+          });
+        }, duration);
       }, delay);
     };
   }
