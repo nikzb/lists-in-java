@@ -4,7 +4,7 @@ import { Map, List } from 'immutable';
 // import logo from './logo.svg';
 import './App.css';
 
-import { Snapshots, addSnapshot, undoSnapshot, currentListSize } from './models/Snapshots';
+import { Snapshots, addSnapshot, undoSnapshot, currentListSize, getMostRecentSnapshot } from './models/Snapshots';
 import { FlipMoveProps, timeToFinish } from './models/FlipMoveProps';
 
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
@@ -19,7 +19,7 @@ class App extends Component {
       buttonsDisabled: false,
       listVizFlipMoveProps: null,
       listHistoryFlipMoveProps: null,
-      animationClasses: Map({ index: List() })
+      animationClasses: Map()
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
@@ -55,26 +55,94 @@ class App extends Component {
      return (!i * 10 + i).toString(36).toUpperCase();
   }
 
-  initiateAnimation({ animationName, element, delay, duration }) {
-    setTimeout(() => {
-      const updatedClasses = this.state.animationClasses.get(element).push(animationName);
-      const updatedAnimationClasses = this.state.animationClasses.set(element, updatedClasses);
-      this.setState({
-        animationClasses: updatedAnimationClasses
-      }, () => {
-        setTimeout(() => {
-          const index = this.state.animationClasses.get(element).indexOf(animationName);
-          const updatedClasses = this.state.animationClasses.get(element).delete(index);
-          const updatedAnimationClasses = this.state.animationClasses.set(element, updatedClasses);
-          this.setState({
-            animationClasses: updatedAnimationClasses
-          });
-        }, duration);
-      });
-    }, delay);
+  getAnimationFunction({ elementId, elementPart, className, delay, duration }) { 
+    return () => {
+      setTimeout(() => {
+        let elementMap;
+        console.log('animation classes', this.state.animationClasses.toString());
+        if (!this.state.animationClasses.has(elementId)) {
+          elementMap = Map({ index: List(), value: List() });
+          console.log(`New Map since element ID ${elementId} was not found`);
+        } else {
+          elementMap = this.state.animationClasses.get(elementId);
+          console.log(`Found element with id ${elementId}`);
+          console.log(elementMap.toString());
+        }
+
+        const updatedClassesList = elementMap.get(elementPart).push(className);
+
+        const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
+
+        const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
+
+        console.log('first set timeout', updatedElementMap.toString());
+
+        this.setState({
+          animationClasses: updatedAnimationClasses
+        }, () => {
+          console.log('done first set timeout');
+          setTimeout(() => {
+            const elementMap = this.state.animationClasses.get(elementId);
+            console.log(`second timout: elementMap with id ${elementId} is ${elementMap}`);
+            const classesList = elementMap.get(elementPart);
+            const index = classesList.indexOf(className);
+
+            const updatedClassesList = classesList.delete(index);
+
+            const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
+            console.log('second set timeout', updatedElementMap.toString());
+
+            const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
+
+            this.setState({
+              animationClasses: updatedAnimationClasses
+            });
+          }, duration);
+        });
+      }, delay);
+    };
   }
 
-  onMethodButtonClick(method, argums) {
+  getAnimationsList(updatedSnapshots, method, argums) {
+    let animationsList = List();
+
+    if (method === 'get') {
+      const index = argums[0];
+
+      const mostRecentSnapshot = getMostRecentSnapshot(updatedSnapshots);
+      const prevSnapshot = getMostRecentSnapshot(this.state.snapshots);
+
+      const returnedValue = mostRecentSnapshot.get('command').get('returned');
+
+      // Animation should happen on previous snapshot, not most recent
+      const elementToAnimate = prevSnapshot.get('listValues').get(index);
+
+      const elementId = elementToAnimate.get('id');
+
+      const indexAnimation = {
+        elementId,
+        elementPart: 'index',
+        className: 'attention',
+        delay: 350,
+        duration: 5000
+      };
+
+      const valueAnimation = {
+        elementId,
+        elementPart: 'value',
+        className: 'attention',
+        delay: 700,
+        duration: 5000
+      }
+
+      animationsList = animationsList.push(this.getAnimationFunction(indexAnimation));
+      animationsList = animationsList.push(this.getAnimationFunction(valueAnimation));
+    }
+    
+    return animationsList;
+  }
+
+  async onMethodButtonClick(method, argums) {
     const updatedSnapshots = addSnapshot(this.state.snapshots, method, argums);
     const newSnapshotListSize = currentListSize(updatedSnapshots);
 
@@ -89,42 +157,27 @@ class App extends Component {
       staggerDelayBy: 50 
     });
 
-    // const animations = [];
-    let indexAnimation;
-
-    if (method === 'get') {
-      // animations.push({
-      indexAnimation = {
-        animationName: 'attention',
-        element: 'index',
-        delay: 350,
-        duration: 1000
-      };
-
-      this.initiateAnimation(indexAnimation);
-    }
-
     const valueUsed = this.getValueUsed(method, argums);
 
-    if (valueUsed !== undefined) {
-      const nextValue = this.getNextValue(valueUsed);
+    let newState = {
+      snapshots: updatedSnapshots,
+      buttonsDisabled: true,
+      listVizFlipMoveProps,
+      listHistoryFlipMoveProps
+    }
 
-      this.setState((prevState, props) => ({ 
-        snapshots: updatedSnapshots,
-        buttonsDisabled: true,
-        listVizFlipMoveProps,
-        listHistoryFlipMoveProps,
-        nextValue 
-      }));
+    if (valueUsed !== undefined) {
+      newState.nextValue = this.getNextValue(valueUsed);
     }
-    else {
-      this.setState((prevState, props) => ({ 
-        snapshots: updatedSnapshots,
-        buttonsDisabled: true,
-        listVizFlipMoveProps,
-        listHistoryFlipMoveProps,
-      }));
-    }
+
+    const animationsList = this.getAnimationsList(updatedSnapshots, method, argums);
+
+    await this.setState(newState);
+    
+    animationsList.forEach((animationFunc) => {
+      animationFunc();
+    });
+    
 
     // Have buttons re-enable after animation is done
     // Delay depends on method used
@@ -170,7 +223,7 @@ class App extends Component {
             listVizFlipMoveProps={this.state.listVizFlipMoveProps}
             listHistoryFlipMoveProps={this.state.listHistoryFlipMoveProps}
 
-            indexAnimationClasses={this.state.animationClasses.get('index')}
+            animationClasses={this.state.animationClasses}
           />
           <MethodToolbox 
             onButtonClick={this.onMethodButtonClick} 

@@ -51,7 +51,7 @@ class MethodButton extends React.Component {
             newInputValues.push(inputValue);
           }
         } else if (nextProps.children.type.name === 'ValueInput') {
-          if (nextProps.nextValue !== undefined) {
+          if (nextProps.nextValue) {
             newInputValues.push(nextProps.nextValue);
           } else {
             throw new Error('prop nextValue is undefined. Need nextValue for ValueInput');
@@ -70,7 +70,7 @@ class MethodButton extends React.Component {
                 newInputValues.push(inputValue);
               }
             } else if (nextProps.children[index].type.name === 'ValueInput') {
-              if (nextProps.nextValue !== undefined) {
+              if (nextProps.nextValue) {
                 newInputValues.push(nextProps.nextValue);
               } else {
                 throw new Error('prop nextValue is undefined. Need nextValue for ValueInput');

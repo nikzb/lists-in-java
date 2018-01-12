@@ -8,27 +8,30 @@ import './ListItem.css';
 class ListItem extends React.Component
 {
   render() {
-    console.log('indexClasses prop ', this.props.indexClasses);
+    // console.log('animationClasses prop ', this.props.animationClasses);
 
     let indexClasses = [];
     let valueClasses = [];
 
-    if (this.props.indexClasses) {
-      const indexClassesArray = this.props.indexClasses.toJS();
+    if (this.props.animationClasses) {
+      // console.log(this.props.animationClasses.get('index'));
 
-      console.log('indexClasse after conversion to JS array ', indexClassesArray);
+      const indexClassesArray = this.props.animationClasses.get('index').toJS();
+      const valueClassesArray = this.props.animationClasses.get('value').toJS();
 
-      indexClasses = ['ListItem__index', 'animated'].concat(this.props.indexClasses.map(
+      console.log('indexClasses after conversion to JS array ', indexClassesArray);
+
+      indexClasses = ['ListItem__index', 'animated'].concat(indexClassesArray.map(
         className => `ListItem__index--${className}`
-      ).toJS());
-
-      // indexClasses = ['ListItem__index', 'animated'].concat(this.props.indexClasses.toJS());
-
-      valueClasses = ['ListItem__value', 'animated'].concat(this.props.valueClasses.map(
+      ));
+      valueClasses = ['ListItem__value', 'animated'].concat(valueClassesArray.map(
         className => `ListItem__value--${className}`
       ));
 
-      console.log('indexClasses variable ', indexClasses);
+      console.log('valueClasses variable ', valueClasses);
+    } else {
+      indexClasses = ['ListItem__index'];
+      valueClasses = ['ListItem__value'];
     }
   
     return (

@@ -7,7 +7,7 @@
 
 .ListItem__index {
   font-size: 1.6em;
-  transition: color 0.5s ease-out;
+  transition: color 5.0s ease-out;
 }
 
 .ListItem__value {
@@ -18,15 +18,17 @@
   border-radius: 0.5em;
   color: #f9f9f9;
   text-align: center;
+  transition: background-color 0.5s ease-out;
 }
 
-.ListItem__value--tada {
-  animation: tada 1.0s;
+.ListItem__value--attention {
+  background-color: #5dc;
+  animation: pulse 5.0s;
 }
 
 .ListItem__index--attention {
   color: #9c52fc;
-  animation: rubberBand 1.0s;
+  animation: rubberBand 5.0s;
 }
 
 /* .ListItem__index--pulse {

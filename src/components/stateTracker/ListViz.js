@@ -12,23 +12,26 @@ import './ListViz.css';
 class ListViz extends React.Component {
   render() {
     const snapshot = this.props.snapshot;
-
+    const animationClasses = this.props.animationClasses;
+    console.log('in ListViz', animationClasses);
+    
     let listVizElements; 
     let numberOfElements = 1;
 
     if (snapshot.get('listValues').size === 0) {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>
     } else {
-      listVizElements = snapshot.get('listValues').map((valueMap, index) => 
-        <ListItem 
-          value={valueMap.get('value')} 
-          index={index} 
-          indexClasses={this.props.indexAnimationClasses}
-          // valueClasses={}
-          id={valueMap.get('id')} 
-          key={valueMap.get('id')}
-        />
-      );
+      listVizElements = snapshot.get('listValues').map((valueMap, index) => {
+        return (
+          <ListItem 
+            value={valueMap.get('value')} 
+            index={index} 
+            animationClasses={animationClasses ? animationClasses.get(valueMap.get('id')) : null}
+            id={valueMap.get('id')} 
+            key={valueMap.get('id')}
+          />
+        );
+      });
     }
 
     const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });

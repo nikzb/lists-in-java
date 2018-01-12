@@ -12,8 +12,7 @@ function StateTracker({
       buttonsDisabled, 
       listVizFlipMoveProps, 
       listHistoryFlipMoveProps,
-
-      indexAnimationClasses
+      animationClasses
   }) {
   return (
     <div className="StateTracker">
@@ -25,7 +24,7 @@ function StateTracker({
         snapshot={snapshots.get(snapshots.size - 1)} 
         isCurrentState={true} 
         flipMoveProps={listVizFlipMoveProps}
-        indexAnimationClasses={indexAnimationClasses}
+        animationClasses={animationClasses}
       />
       <ListHistory snapshots={snapshots} flipMoveProps={listHistoryFlipMoveProps} />
     </div>
