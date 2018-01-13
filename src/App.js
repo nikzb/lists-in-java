@@ -6,6 +6,7 @@ import './App.css';
 
 import { Snapshots, addSnapshot, undoSnapshot, currentListSize, getMostRecentSnapshot } from './models/Snapshots';
 import { FlipMoveProps, timeToFinish } from './models/FlipMoveProps';
+import AnimationList from './animations/AnimationList';
 
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
@@ -25,6 +26,7 @@ class App extends Component {
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
     this.onUndoButtonClick = this.onUndoButtonClick.bind(this);
     this.enableButtonsAfterWait = this.enableButtonsAfterWait.bind(this);
+    this.getAnimationFunction = this.getAnimationFunction.bind(this);
   }
 
   enableButtonsAfterWait(waitTime) {
@@ -65,15 +67,16 @@ class App extends Component {
         } else {
           elementMap = this.state.animationClasses.get(elementId);
         }
-
+  
         const updatedClassesList = elementMap.get(elementPart).push(className);
         const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
         const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
-
+  
+        console.log(`In animation function `, updatedAnimationClasses.toString());
         await this.setState({
           animationClasses: updatedAnimationClasses
         });
-
+  
         setTimeout(() => {
           const elementMap = this.state.animationClasses.get(elementId);
           const classesList = elementMap.get(elementPart);
@@ -81,7 +84,7 @@ class App extends Component {
           const updatedClassesList = classesList.delete(index);
           const updatedElementMap = elementMap.set(elementPart, updatedClassesList);
           const updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
-
+  
           this.setState({
             animationClasses: updatedAnimationClasses
           });
@@ -90,85 +93,61 @@ class App extends Component {
     };
   }
 
-  getAnimationsList(updatedSnapshots, method, argums) {
-    let animationsList = List();
-
-    if (method === 'get') {
-      const index = argums[0];
-
-      const mostRecentSnapshot = getMostRecentSnapshot(updatedSnapshots);
-      const prevSnapshot = getMostRecentSnapshot(this.state.snapshots);
-
-      const returnedValue = mostRecentSnapshot.get('command').get('returned');
-
-      // Animation should happen on previous snapshot, not most recent
-      const elementToAnimate = prevSnapshot.get('listValues').get(index);
-
-      const elementId = elementToAnimate.get('id');
-
-      const indexAnimation = {
-        elementId,
-        elementPart: 'index',
-        className: 'attention',
-        delay: 350,
-        duration: 5000
-      };
-
-      const valueAnimation = {
-        elementId,
-        elementPart: 'value',
-        className: 'attention',
-        delay: 700,
-        duration: 5000
-      }
-
-      animationsList = animationsList.push(this.getAnimationFunction(indexAnimation));
-      animationsList = animationsList.push(this.getAnimationFunction(valueAnimation));
-    }
-    
-    return animationsList;
-  }
-
   async onMethodButtonClick(method, argums) {
     const updatedSnapshots = addSnapshot(this.state.snapshots, method, argums);
     const newSnapshotListSize = currentListSize(updatedSnapshots);
 
-    const listVizFlipMoveProps = FlipMoveProps({ 
-      duration: 1000, 
-      delay: 250, 
-      staggerDelayBy: 10 
-    });
-    const listHistoryFlipMoveProps = FlipMoveProps({ 
-      duration: 800, 
-      delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
-      staggerDelayBy: 50 
+    // const animationsList = this.getAnimationsList(updatedSnapshots, method, argums);
+    const animationList = AnimationList({ 
+      getAnimationFunction: this.getAnimationFunction,
+      newSnapshot: getMostRecentSnapshot(updatedSnapshots),
+      prevSnapshot: getMostRecentSnapshot(this.state.snapshots),
+      method,
+      argums
     });
 
-    const valueUsed = this.getValueUsed(method, argums);
-
-    let newState = {
-      snapshots: updatedSnapshots,
-      buttonsDisabled: true,
-      listVizFlipMoveProps,
-      listHistoryFlipMoveProps
-    }
-
-    if (valueUsed !== undefined) {
-      newState.nextValue = this.getNextValue(valueUsed);
-    }
-
-    const animationsList = this.getAnimationsList(updatedSnapshots, method, argums);
-
-    await this.setState(newState);
-    
-    animationsList.forEach((animationFunc) => {
+    animationList.listOfFunctions.forEach((animationFunc) => {
       animationFunc();
     });
-    
 
-    // Have buttons re-enable after animation is done
-    // Delay depends on method used
-    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size));
+    setTimeout(async () => {
+
+      let listVizFlipMoveDuration = 0;
+
+      if (method === 'set' || method === 'remove' || method === 'add') {
+        listVizFlipMoveDuration = 1000;
+      }
+
+      const listVizFlipMoveProps = FlipMoveProps({ 
+        duration: listVizFlipMoveDuration, 
+        delay: 0, 
+        staggerDelayBy: 10 
+      });
+      const listHistoryFlipMoveProps = FlipMoveProps({ 
+        duration: 800, 
+        delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
+        staggerDelayBy: 50 
+      });
+
+      const valueUsed = this.getValueUsed(method, argums);
+
+      let newState = {
+        snapshots: updatedSnapshots,
+        buttonsDisabled: true,
+        listVizFlipMoveProps,
+        listHistoryFlipMoveProps
+      }
+
+      if (valueUsed !== undefined) {
+        newState.nextValue = this.getNextValue(valueUsed);
+      }
+
+      await this.setState(newState);
+      
+      // Have buttons re-enable after animation is done
+      // Delay depends on method used
+      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size));
+    }, animationList.timeToFinish);
   }
 
   onUndoButtonClick() {
@@ -198,6 +177,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('rendering app', this.state.animationClasses.toString());
+
     return (
       <div className="App">
         <h1 className="App__header">Lists in Java</h1>

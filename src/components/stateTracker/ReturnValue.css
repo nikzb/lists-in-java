@@ -12,7 +12,7 @@
 /* These should be the same as for ListItem__value */
 .ReturnValue--string {
   font-size: 1.5em;
-  background: rgb(84, 161, 255);
+  background: var(--default-item-color, rgb(67, 157, 235));
   padding: 0.5em 0;
   border-radius: 0.5em;
   color: white;

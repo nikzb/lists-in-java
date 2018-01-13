@@ -7,12 +7,12 @@
 
 .ListItem__index {
   font-size: 1.6em;
-  transition: color 5.0s ease-out;
+  transition: color 1.0s ease-out;
 }
 
 .ListItem__value {
   font-size: 1.5em;
-  background: var(--default-item-color, rgb(84, 161, 255));
+  background: var(--default-item-color, rgb(67, 157, 235));
   padding: 0.7em 0;
   width: 2.5em;
   border-radius: 0.5em;
@@ -22,13 +22,13 @@
 }
 
 .ListItem__value--attention {
-  background-color: #5dc;
-  animation: pulse 5.0s;
+  /* background-color: #9c52fc;; */
+  animation: tada 1.0s; /* or modify pulse to make more obvious */
 }
 
 .ListItem__index--attention {
-  color: #9c52fc;
-  animation: rubberBand 5.0s;
+  color:  rgb(67, 157, 235);
+  animation: rubberBand 1.0s;
 }
 
 /* .ListItem__index--pulse {
