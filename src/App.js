@@ -114,7 +114,6 @@ class App extends Component {
     animationList.listOfFunctions.forEach((animationFunc) => {
       animationFunc();
     });
-    console.log(animationList.timeToFinish);
 
     await timeout(animationList.timeToFinish);
 
@@ -134,9 +133,6 @@ class App extends Component {
       delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
       staggerDelayBy: 50 
     });
-
-    console.log(timeToFinish(listVizFlipMoveProps, newSnapshotListSize));
-    console.log(800);
 
     const valueUsed = this.getValueUsed(method, argums);
 

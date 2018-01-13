@@ -1,5 +1,13 @@
 import { List } from 'immutable';
 
+function longerTimeToFinish(accum, anim) {
+  if (anim.delay + anim.duration > accum.delay + accum.duration) {
+    return anim;
+  } else {
+    return accum;
+  }
+}
+
 export default function AnimationList({ getAnimationFunction, newSnapshot, prevSnapshot, method, argums }) {
   let animationList = List();
 
@@ -31,13 +39,29 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
       duration: 1000
     }
 
-    timeToFinish = 1900;
+    animationList = animationList.push(indexAnimation);
+    animationList = animationList.push(valueAnimation);
+  } else if (method === 'size') {
+    animationList = prevSnapshot.get('listValues').map((listValue, index) => (
+      {
+        elementId: listValue.get('id'),
+        elementPart: 'value',
+        className: 'count',
+        delay: 350 + index * 50,
+        duration: 1000
+      }
+    ));
+  }
 
-    animationList = animationList.push(getAnimationFunction(indexAnimation));
-    animationList = animationList.push(getAnimationFunction(valueAnimation));
-  } 
-  
-  return { timeToFinish, listOfFunctions: animationList };
+  if (animationList.size > 0) {
+    const longestAnimation = animationList.reduce(longerTimeToFinish, animationList.get(0));
+    timeToFinish = longestAnimation.delay + longestAnimation.duration;
+  }
+
+  return { 
+    timeToFinish, 
+    listOfFunctions: animationList.map(getAnimationFunction) 
+  };
 }
 
 

@@ -31,6 +31,10 @@
   animation: rubberBand 1.0s;
 }
 
+.ListItem__value--count {
+  animation: mini-bounce 0.7s;
+}
+
 /* .ListItem__index--pulse {
   font-size: 2.0em;
 } */
