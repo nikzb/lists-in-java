@@ -15,13 +15,22 @@ class ListViz extends React.Component {
     // if (animationClasses) {
     //   console.log(`In list viz render`, animationClasses.toString());
     // }
+
+    const style = {};
     
     let listVizElements; 
 
     if (snapshot.get('listValues').size === 0) {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>
     } else {
-      listVizElements = snapshot.get('listValues').map((valueMap, index) => {
+      const listValues = snapshot.get('listValues');
+      const numberOfElements = listValues.size;
+      const width = 100 / numberOfElements;
+      const fontSize = Math.min(1.0, 8 / numberOfElements);
+
+      style.fontSize = `${fontSize}em`;
+
+      listVizElements = listValues.map((valueMap, index) => {
         // if (animationClasses) {
         //   const itemAnimationClasses =  animationClasses.get(valueMap.get('id'));
         //   console.log(`searching for animation classes by id ${valueMap.get('id')}`, animationClasses.get(valueMap.get('id')));
@@ -34,6 +43,7 @@ class ListViz extends React.Component {
             value={valueMap.get('value')} 
             index={index} 
             animationClasses={animationClasses ? animationClasses.get(valueMap.get('id')) : null}
+            width={width}
             id={valueMap.get('id')} 
             key={valueMap.get('id')}
           />
@@ -43,11 +53,11 @@ class ListViz extends React.Component {
 
     // const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
     const flipMove = flipMoveProps ? (
-      <FlipMove className="ListViz" {...flipMoveProps.toObject()}>
+      <FlipMove className="ListViz" style={style} {...flipMoveProps.toObject()}>
         {listVizElements}
       </FlipMove>
     ) : (
-      <FlipMove className="ListViz">
+      <FlipMove className="ListViz" style={style}>
         {listVizElements}
       </FlipMove>
     );
