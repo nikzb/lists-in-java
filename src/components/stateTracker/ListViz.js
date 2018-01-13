@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
-import nanoid from 'nanoid';
-import Immutable from 'immutable';
 
 import ListItem from './ListItem';
-import { FlipMoveProps, timeToFinish } from '../../models/FlipMoveProps';
 // import '../../variables.css';
 import './ListViz.css';
 
@@ -20,7 +17,6 @@ class ListViz extends React.Component {
     // }
     
     let listVizElements; 
-    let numberOfElements = 1;
 
     if (snapshot.get('listValues').size === 0) {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>

@@ -160,7 +160,7 @@ class App extends Component {
   onUndoButtonClick() {
     if (this.state.snapshots.size > 1) {
       const updatedSnapshots = undoSnapshot(this.state.snapshots);
-      const newSnapshotListSize = currentListSize(updatedSnapshots);
+      
       const listVizFlipMoveProps = FlipMoveProps({ 
         duration: 1000, 
         delay: 250, 
@@ -179,7 +179,7 @@ class App extends Component {
         listHistoryFlipMoveProps
       }));
 
-      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size));
+      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * 0.9);
     }
   }
 

@@ -5,10 +5,10 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
 
   let timeToFinish = 0;
 
-  if (method === 'get' || method === 'remove') {
+  if (method === 'get' || method === 'remove' || method === 'set') {
     const index = argums[0];
 
-    const returnedValue = newSnapshot.get('command').get('returned');
+    // const returnedValue = newSnapshot.get('command').get('returned');
 
     // Animation should happen on previous snapshot, not most recent
     const elementToAnimate = prevSnapshot.get('listValues').get(index);

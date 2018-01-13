@@ -10,7 +10,6 @@ function ListHistory({snapshots, flipMoveProps}) {
   const pastSnapshots = snapshots.pop().reverse();
 
   const history = [];
-  let animationDelay = 0;
   
   if (snapshots.size > 1) {
     // Use command from most recent snapshot
