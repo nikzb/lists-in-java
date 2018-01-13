@@ -5,6 +5,7 @@
   "dependencies": {
     "immutable": "^3.8.2",
     "nanoid": "^1.0.1",
+    "normalize.css": "^7.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flip-move": "^2.10.1",
