@@ -3,10 +3,12 @@
   margin: auto;
   width: 50em;
   color: #222;
+  min-height: inherit;
 }
 
 .App__main-row {
   display: flex;
+  min-height: inherit;
 }
 
 .App-logo {

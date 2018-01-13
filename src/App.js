@@ -95,6 +95,10 @@ class App extends Component {
   }
 
   async onMethodButtonClick(method, argums) {
+    await this.setState({
+      buttonsDisabled: true,
+    });
+
     const updatedSnapshots = addSnapshot(this.state.snapshots, method, argums);
     const newSnapshotListSize = currentListSize(updatedSnapshots);
 
@@ -134,7 +138,6 @@ class App extends Component {
 
     let newState = {
       snapshots: updatedSnapshots,
-      buttonsDisabled: true,
       listVizFlipMoveProps,
       listHistoryFlipMoveProps
     }

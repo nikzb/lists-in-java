@@ -26,13 +26,13 @@ class ListViz extends React.Component {
       listVizElements = <div className="ListViz ListViz--empty">Empty</div>
     } else {
       listVizElements = snapshot.get('listValues').map((valueMap, index) => {
-        if (animationClasses) {
-          const itemAnimationClasses =  animationClasses.get(valueMap.get('id'));
-          console.log(`searching for animation classes by id ${valueMap.get('id')}`, animationClasses.get(valueMap.get('id')));
-          if (itemAnimationClasses) {
-            console.log(`Item animation classes ${itemAnimationClasses.toString()}`);
-          }
-        }
+        // if (animationClasses) {
+        //   const itemAnimationClasses =  animationClasses.get(valueMap.get('id'));
+        //   console.log(`searching for animation classes by id ${valueMap.get('id')}`, animationClasses.get(valueMap.get('id')));
+        //   if (itemAnimationClasses) {
+        //     console.log(`Item animation classes ${itemAnimationClasses.toString()}`);
+        //   }
+        // }
         return (
           <ListItem 
             value={valueMap.get('value')} 
