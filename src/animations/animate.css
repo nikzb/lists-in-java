@@ -69,7 +69,8 @@
 }
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-/* I modified to make it shrink a bit first, then pulse out bigger than original */
+/* Nik Baltatzis: I modified to make it shrink a bit first, then pulse out bigger than original,
+   Also, now using ease-in-out-expo */
 @keyframes pulse {
   from {
     animation-timing-function: ease-in-out-expo;
