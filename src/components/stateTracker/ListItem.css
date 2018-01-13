@@ -23,7 +23,7 @@
 
 .ListItem__value--attention {
   /* background-color: #9c52fc;; */
-  animation: tada 1.0s; /* or modify pulse to make more obvious */
+  animation: pulse 1.0s; /* or modify pulse to make more obvious */
 }
 
 .ListItem__index--attention {

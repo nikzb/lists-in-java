@@ -164,7 +164,7 @@ class App extends Component {
       });
       const listHistoryFlipMoveProps = FlipMoveProps({ 
         duration: 800, 
-        delay: timeToFinish(listVizFlipMoveProps, newSnapshotListSize), 
+        delay: 400, 
         staggerDelayBy: 50 
       });
 
@@ -180,7 +180,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('rendering app', this.state.animationClasses.toString());
+    // console.log('rendering app', this.state.animationClasses.toString());
 
     return (
       <div className="App">

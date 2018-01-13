@@ -15,9 +15,9 @@ class ListViz extends React.Component {
     const animationClasses = this.props.animationClasses;
     const flipMoveProps = this.props.flipMoveProps;
 
-    if (animationClasses) {
-      console.log(`In list viz render`, animationClasses.toString());
-    }
+    // if (animationClasses) {
+    //   console.log(`In list viz render`, animationClasses.toString());
+    // }
     
     let listVizElements; 
     let numberOfElements = 1;
