@@ -32,8 +32,10 @@ class ListItem extends React.Component
     // console.log(`Value classes: ${valueClasses}`);
     const width = this.props.width < 10 ? this.props.width : 10;
     const style = {
-      width: `${width * 0.95}%`,
-      margin: `${width * 0.05}%`
+      fontSize: `${this.props.fontSize*100}%`,
+      width: `${width * 0.92}%`,
+      marginLeft: `${width * 0.08}%`,
+      marginRight: `${width * 0.08}%`
     }
 
     return (

@@ -1,18 +1,14 @@
 .ListViz {
   display: flex;
-  /* flex-wrap: nowrap; */
   width: 100%;
-  /* overflow-x: scroll; */
-  padding-bottom: 1.0em;
-  /* min-height: 6em; */
-  /* border-top: 1px dashed black; */
+  padding: 2% 0 1% 0;
+  min-height: 5.2em;
 }
 
-.ListViz--empty {
-  margin: 2.0em;
+.ListViz__empty {
   margin-left: 0.4em;
   color: var(--default-item-color, rgb(84, 161, 255));
-  font-size: 1.2rem;
-  padding-bottom: 0;
+  font-size: 1.2em;
   overflow: visible;
+  align-self: center;
 }
