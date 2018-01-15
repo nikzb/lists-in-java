@@ -1,8 +1,10 @@
 import React from 'react';
 
-import MethodButton from './MethodButton';
-import IndexInput from './IndexInput';
-import ValueInput from './ValueInput';
+// import MethodButton from './MethodButton';
+// import IndexInput from './IndexInput';
+// import ValueInput from './ValueInput';
+import APSubsetMethods from './APSubsetMethods';
+import AllMethods from './AllMethods';
 
 import './MethodToolbox.css';
 
@@ -19,58 +21,21 @@ function MethodToolbox(props) {
   return (
     <div className="MethodToolbox">
       <h2 className="section-title">List Methods</h2>
-      <MethodButton 
-        methodName="add" 
-        description={(element) => `Add the element ${element} at the end of the list.`}
-        disabled={props.disabled} 
-        nextValue={props.nextValue} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}
-      >    
-        <ValueInput value={props.nextValue} />
-      </MethodButton>
-      <MethodButton 
-        methodName="add" 
-        description={(index, element) => `At index ${index}, insert the element ${element}.`}
-        disabled={props.disabled} 
-        nextValue={props.nextValue} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'add')}
-      >
-        <IndexInput value={0} maxValue={props.listSize}/>, 
-        <ValueInput value={props.nextValue} />
-      </MethodButton>
-      <MethodButton 
-        methodName="set" 
-        description={(index, element) => `Replace the element at index ${index} with the element ${element}.`}
-        description2="Returns the element that was replaced."
-        disabled={props.disabled || listEmpty} 
-        nextValue={props.nextValue} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'set')}
-      >
-        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>, 
-        <ValueInput value={props.nextValue} />
-      </MethodButton>
-      <MethodButton 
-        methodName="remove" 
-        description={(index) => `Remove the element at index ${index}.`}
-        description2="Returns the element that was removed."
-        disabled={props.disabled || listEmpty} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'remove')}
-      >
-        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>
-      </MethodButton>
-      <MethodButton 
-        methodName="get" 
-        description={(index) => `Return a copy of the value at index ${index}.`}
-        disabled={props.disabled || listEmpty} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'get')}>
-        <IndexInput value={0} maxValue={Math.max(props.listSize - 1, 0)}/>
-      </MethodButton>
-      <MethodButton 
-        methodName="size" 
-        description={() => `Return the number of elements in the list.`}
-        disabled={props.disabled} 
-        onClick={makeOnClickFuncForMethodButton(props.onButtonClick, 'size')}>
-      </MethodButton>
+      {/* <APSubsetMethods 
+        disabled={props.disabled}
+        listSize={props.listSize}
+        nextValue={props.nextValue}
+        makeOnClickFuncForMethodButton={makeOnClickFuncForMethodButton}
+        onButtonClick={props.onButtonClick}
+      /> */}
+      <AllMethods 
+        disabled={props.disabled}
+        listSize={props.listSize}
+        nextValue={props.nextValue}
+        lastValueInList={props.lastValueInList}
+        makeOnClickFuncForMethodButton={makeOnClickFuncForMethodButton}
+        onButtonClick={props.onButtonClick}
+      />
     </div>
   );
 }

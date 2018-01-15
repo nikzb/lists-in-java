@@ -181,6 +181,16 @@ class App extends Component {
 
   render() {
     // console.log('rendering app', this.state.animationClasses.toString());
+    const listSize = currentListSize(this.state.snapshots);
+    const mostRecentSnap = getMostRecentSnapshot(this.state.snapshots);
+
+    let lastValueInList;
+    if (listSize === 0) {
+      lastValueInList = 'A';
+    } else {
+      lastValueInList = mostRecentSnap.get('listValues').get(listSize - 1).get('value');
+    }
+    console.log(lastValueInList);
 
     return (
       <div className="App">
@@ -200,6 +210,7 @@ class App extends Component {
             onButtonClick={this.onMethodButtonClick} 
             listSize={currentListSize(this.state.snapshots)}
             nextValue={this.state.nextValue}
+            lastValueInList={lastValueInList}
             disabled={this.state.buttonsDisabled}
           />
         </div>

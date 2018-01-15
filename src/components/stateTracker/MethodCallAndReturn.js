@@ -11,8 +11,12 @@ class MethodCallAndReturn extends React.Component {
     const command = this.props.command;
 
     const returnValueToCheck = command.get('returned');
+
+    console.log(command.get('method'), returnValueToCheck);
+
     let valueToUse;
     let id = null;
+
     if (returnValueToCheck === null) {
       valueToUse = null;
     } else if (Map.isMap(returnValueToCheck)) {
@@ -20,7 +24,11 @@ class MethodCallAndReturn extends React.Component {
       id = returnValueToCheck.get('id');
     } else if (Number.isInteger(returnValueToCheck)) {
       valueToUse = returnValueToCheck;
+    } else if (typeof returnValueToCheck === 'boolean') {
+      valueToUse = returnValueToCheck;
     }
+
+    console.log(valueToUse);
 
     return (
       <div className="MethodCallAndReturn">

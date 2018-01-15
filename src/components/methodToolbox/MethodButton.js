@@ -151,7 +151,7 @@ class MethodButton extends React.Component {
           </button>
         </summary>
         {/* {...descriptions} */}
-        <p>{this.props.description(...this.state.inputValues)}</p>
+        <p>{this.props.description( ...this.state.inputValues )}</p>
         <p>{this.props.description2}</p>
       </details>
     );

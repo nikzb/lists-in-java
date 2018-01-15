@@ -13,7 +13,7 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
 
   let timeToFinish = 0;
 
-  if (method === 'get' || method === 'remove' || method === 'set') {
+  if (method === 'get' || method === 'set' || (method === 'remove' && Number.isInteger(argums[0]))) {
     const index = argums[0];
 
     // const returnedValue = newSnapshot.get('command').get('returned');
