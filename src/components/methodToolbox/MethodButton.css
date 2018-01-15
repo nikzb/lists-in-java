@@ -8,23 +8,23 @@
 }
 
 .MethodButton--add {
-  background: rgb(95, 199, 95);
+  background: rgb(50, 165, 57);
 }
 
 .MethodButton--set {
-  background: #fa903f;
+  background: #f7862f;
 }
 
-.MethodButton--remove {
-  background: #ff3939;
+.MethodButton--remove, .MethodButton--clear {
+  background: #eb2e0c;
 }
 
-.MethodButton--get {
-  background: #9c52fc;
+.MethodButton--get, .MethodButton--contains, .MethodButton--indexOf, .MethodButton--lastIndexOf {
+  background: #7a3bcd;
 }
 
-.MethodButton--size {
-  background: #ff79bc;
+.MethodButton--size, .MethodButton--isEmpty {
+  background: #ca53dc;
 }
 
 .MethodButton--disabled {
