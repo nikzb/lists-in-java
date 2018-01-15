@@ -139,6 +139,7 @@ class MethodButton extends React.Component {
     // if (this.props.description2) {
     //   descriptions.push(<p>{this.props.description2}</p>);
     // }
+    const desc2 = this.props.description2 ? <p className="MethodButton__summary--desc2">{this.props.description2}</p> : null;
 
     return (
       <details>
@@ -151,8 +152,8 @@ class MethodButton extends React.Component {
           </button>
         </summary>
         {/* {...descriptions} */}
-        <p>{this.props.description( ...this.state.inputValues )}</p>
-        <p>{this.props.description2}</p>
+        <p className="MethodButton__summary--desc1">{this.props.description( ...this.state.inputValues )}</p>
+        {desc2}
       </details>
     );
   }

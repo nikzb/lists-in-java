@@ -11,7 +11,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
     <Fragment>
       <MethodButton 
         methodName="add" 
-        description={(element) => `Add the element ${element} at the end of the list.`}
+        description={(element) => `Adds the element ${element} at the end of the list.`}
         disabled={disabled} 
         nextValue={nextValue} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
@@ -20,7 +20,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="add" 
-        description={(index, element) => `At index ${index}, insert the element ${element}.`}
+        description={(index, element) => `At index ${index}, inserts the element ${element}.`}
         disabled={disabled} 
         nextValue={nextValue} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
@@ -30,7 +30,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="set" 
-        description={(index, element) => `Replace the element at index ${index} with the element ${element}.`}
+        description={(index, element) => `Replaces the element at index ${index} with the element ${element}.`}
         description2="Returns the element that was replaced."
         disabled={disabled || listEmpty} 
         nextValue={nextValue} 
@@ -41,7 +41,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="remove" 
-        description={(index) => `Remove the element at index ${index}.`}
+        description={(index) => `Removes the element at index ${index}.`}
         description2="Returns the element that was removed."
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
@@ -50,8 +50,8 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="remove" 
-        description={(element) => `Remove the first occurrence of the element ${element}, if it occurs in the list.`}
-        description2="Returns true if an element was removed, otherwise return false."
+        description={(element) => `Removes the first occurrence of the element ${element}, if it occurs in the list.`}
+        description2="Returns true if an element was removed, otherwise returns false."
         disabled={disabled || listEmpty} 
         nextValue={lastValueInList}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
@@ -60,20 +60,20 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="clear" 
-        description={() => `Remove all the elements in the list.`}
+        description={() => `Removes all the elements in the list.`}
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'clear')}>
       </MethodButton>
       <MethodButton 
         methodName="get" 
-        description={(index) => `Return a copy of the value at index ${index}.`}
+        description={(index) => `Returns a copy of the value at index ${index}.`}
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}>
         <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton 
         methodName="contains" 
-        description={(element) => `Return true if the element ${element} is present in the list, otherwise return false.`}
+        description={(element) => `Returns true if the element ${element} is present in the list, otherwise returns false.`}
         disabled={disabled} 
         nextValue={lastValueInList}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'contains')}>
@@ -81,8 +81,8 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="indexOf" 
-        description={(element) => `Return the index of the first occurrence of the element ${element}.`}
-        description2="Return -1 if the element is not found."
+        description={(element) => `Returns the index of the first occurrence of the element ${element}.`}
+        description2="Returns -1 if the element is not found."
         disabled={disabled} 
         nextValue={lastValueInList}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'indexOf')}>
@@ -90,8 +90,8 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="lastIndexOf" 
-        description={(element) => `Return the index of the last occurrence of the element ${element}.`}
-        description2="Return -1 if the element is not found."
+        description={(element) => `Returns the index of the last occurrence of the element ${element}.`}
+        description2="Returns -1 if the element is not found."
         disabled={disabled} 
         nextValue={lastValueInList}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'lastIndexOf')}>
@@ -99,13 +99,13 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="size" 
-        description={() => `Return the number of elements in the list.`}
+        description={() => `Returns the number of elements in the list.`}
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'size')}>
       </MethodButton>
       <MethodButton 
         methodName="isEmpty" 
-        description={() => `Return true if the list contains no elements, otherwise return false.`}
+        description={() => `Returns true if the list contains no elements, otherwise return false.`}
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'isEmpty')}>
       </MethodButton>

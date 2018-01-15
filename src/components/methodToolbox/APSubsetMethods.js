@@ -11,7 +11,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
     <Fragment>
       <MethodButton 
         methodName="add" 
-        description={(element) => `Add the element ${element} at the end of the list.`}
+        description={(element) => `Adds the element ${element} at the end of the list.`}
         disabled={disabled} 
         nextValue={nextValue} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
@@ -20,7 +20,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
       </MethodButton>
       <MethodButton 
         methodName="add" 
-        description={(index, element) => `At index ${index}, insert the element ${element}.`}
+        description={(index, element) => `At index ${index}, inserts the element ${element}.`}
         disabled={disabled} 
         nextValue={nextValue} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
@@ -30,7 +30,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
       </MethodButton>
       <MethodButton 
         methodName="set" 
-        description={(index, element) => `Replace the element at index ${index} with the element ${element}.`}
+        description={(index, element) => `Replaces the element at index ${index} with the element ${element}.`}
         description2="Returns the element that was replaced."
         disabled={disabled || listEmpty} 
         nextValue={nextValue} 
@@ -41,7 +41,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
       </MethodButton>
       <MethodButton 
         methodName="remove" 
-        description={(index) => `Remove the element at index ${index}.`}
+        description={(index) => `Removes the element at index ${index}.`}
         description2="Returns the element that was removed."
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
@@ -50,14 +50,14 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
       </MethodButton>
       <MethodButton 
         methodName="get" 
-        description={(index) => `Return a copy of the value at index ${index}.`}
+        description={(index) => `Returns a copy of the value at index ${index}.`}
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}>
         <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton 
         methodName="size" 
-        description={() => `Return the number of elements in the list.`}
+        description={() => `Returns the number of elements in the list.`}
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'size')}>
       </MethodButton>

@@ -31,3 +31,12 @@
   background: var(--disabled-grey);
   color: var(--disabled-grey-text);
 }
+
+.MethodButton__summary--desc1 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.MethodButton__summary--desc2 {
+  margin-bottom: 0.5em;
+}
