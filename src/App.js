@@ -175,7 +175,7 @@ class App extends Component {
         listHistoryFlipMoveProps
       }));
 
-      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * 0.9);
+      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (0.9 - updatedSnapshots.size / 100));
     }
   }
 
