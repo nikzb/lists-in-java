@@ -32,7 +32,7 @@
 }
 
 .ListItem__value--count {
-  animation: mini-bounce 0.7s;
+  animation: hop 0.5s;
 }
 
 /* .ListItem__index--pulse {

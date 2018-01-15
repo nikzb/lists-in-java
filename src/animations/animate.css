@@ -75,6 +75,23 @@
   transform-origin: center bottom;
 }
 
+@keyframes hop {
+  from, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0,0);
+  }
+
+  50% {
+    /* animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060); */
+    animation-timing-function: cubic-bezier(0.550,  0.055, 0.675, 0.190);
+    transform: translate3d(0, -0.2em, 0);
+  }
+}
+.hop {
+  animation-name: hop;
+  transform-origin: center bottom;
+}
+
 @keyframes flash {
   from, 50%, to {
     opacity: 1;

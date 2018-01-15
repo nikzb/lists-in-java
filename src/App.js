@@ -150,7 +150,7 @@ class App extends Component {
       
     // Have buttons re-enable after animation is done
     // Delay depends on method used
-    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * 0.93);
+    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (0.93 - updatedSnapshots.size / 100));
   }
 
   onUndoButtonClick() {
