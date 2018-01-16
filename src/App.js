@@ -119,7 +119,8 @@ class App extends Component {
 
     let listVizFlipMoveDuration = 0;
 
-    if (method === 'set' || method === 'remove' || method === 'add') {
+    if (method === 'set' || method === 'remove' || method === 'add' ||
+        method === 'contains' || method === 'indexOf' || method === 'lastIndexOf') {
       listVizFlipMoveDuration = 1000;
     }
 
@@ -190,7 +191,6 @@ class App extends Component {
     } else {
       lastValueInList = mostRecentSnap.get('listValues').get(listSize - 1).get('value');
     }
-    console.log(lastValueInList);
 
     return (
       <div className="App">

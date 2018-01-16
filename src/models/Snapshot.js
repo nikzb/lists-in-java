@@ -70,7 +70,7 @@ export function remove(prevSnapshot, argums) {
   const argum = argums[0];
 
   // Need to determine if argument is a value or index
-  if (Number.isInteger(argum)) {
+  if (typeof argum === 'number') {
     const index = argum;
 
     if (index < 0 || index >= listValues.size) {
@@ -108,8 +108,9 @@ export function size(prevSnapshot) {
 }
 
 export function clear(prevSnapshot) {
+  const listValues = prevSnapshot.get('listValues');
   const command = Map({ method: 'clear', arguments: [], returned: null });
-  return Snapshot(List(), command);
+  return Snapshot(listValues.clear(), command);
 }
 
 function findIndex(listValues, value) {

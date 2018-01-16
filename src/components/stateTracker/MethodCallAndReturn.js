@@ -9,10 +9,7 @@ import './MethodCallAndReturn.css';
 class MethodCallAndReturn extends React.Component {
   render() {
     const command = this.props.command;
-
     const returnValueToCheck = command.get('returned');
-
-    console.log(command.get('method'), returnValueToCheck);
 
     let valueToUse;
     let id = null;
@@ -22,13 +19,11 @@ class MethodCallAndReturn extends React.Component {
     } else if (Map.isMap(returnValueToCheck)) {
       valueToUse = returnValueToCheck.get('value');
       id = returnValueToCheck.get('id');
-    } else if (Number.isInteger(returnValueToCheck)) {
+    } else if (typeof returnValueToCheck === 'number') {
       valueToUse = returnValueToCheck;
     } else if (typeof returnValueToCheck === 'boolean') {
       valueToUse = returnValueToCheck;
     }
-
-    console.log(valueToUse);
 
     return (
       <div className="MethodCallAndReturn">

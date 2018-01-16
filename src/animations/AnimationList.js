@@ -8,12 +8,29 @@ function longerTimeToFinish(accum, anim) {
   }
 }
 
+function findIndex(listValues, value) {
+  return listValues.findIndex(valueMap => {
+    return valueMap.get('value') === value;
+  });
+}
+
+function findLastIndex(listValues, value) {
+  return listValues.findLastIndex(valueMap => {
+    return valueMap.get('value') === value;
+  });
+}
+
+function getDelay(index) {
+  return 350 + index * 400;
+}
+
 export default function AnimationList({ getAnimationFunction, newSnapshot, prevSnapshot, method, argums }) {
   let animationList = List();
 
   let timeToFinish = 0;
+  let index;
 
-  if (method === 'get' || method === 'set' || (method === 'remove' && Number.isInteger(argums[0]))) {
+  if (method === 'get' || method === 'set' || (method === 'remove' && (typeof argums[0] === 'number'))) {
     const index = argums[0];
 
     // const returnedValue = newSnapshot.get('command').get('returned');
@@ -47,16 +64,84 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
         elementId: listValue.get('id'),
         elementPart: 'value',
         className: 'count',
-        delay: 350 + index * 50,
+        delay: 350 + index * 300,
         duration: 1000
       }
     ));
+  } else if (method === 'contains' || method === 'indexOf' || method === 'lastIndexOf' || 
+            (method === 'remove' && (typeof argums[0] === 'string'))) {
+    const listValues = prevSnapshot.get('listValues'); 
+
+    if (method === 'lastIndexOf') {
+      index = findLastIndex(listValues, argums[0]);
+    } else {
+      index = findIndex(listValues, argums[0]);
+
+      // If the element is not found, still need to animate the search for it
+      let maxIndex;
+
+      if (index === -1) {
+        maxIndex = listValues.size - 1;
+      } else {
+        maxIndex = index - 1;
+      }
+ 
+      for (let k = 0; k <= maxIndex; k += 1) {
+        animationList = animationList.push({
+          elementId: listValues.get(k).get('id'),
+          elementPart: 'value',
+          className: 'not-it',
+          delay: getDelay(k),
+          duration: 400
+        });
+      }
+      
+      if (index !== -1) {
+        const elementToAnimate = listValues.get(index);
+        const elementId = elementToAnimate.get('id');
+
+        const valueAnimation = {
+          elementId,
+          elementPart: 'value',
+          className: 'found',
+          delay: getDelay(index),
+          duration: 1000
+        }
+
+        animationList = animationList.push(valueAnimation); 
+      }
+    }
+
+    if (index !== -1) {
+      const elementToAnimate = listValues.get(index);
+      const elementId = elementToAnimate.get('id');
+      
+      if (method === 'indexOf' || method === 'lastIndexOf') {
+        const indexAnimation = {
+          elementId,
+          elementPart: 'index',
+          className: 'attention',
+          delay: getDelay(index) + 700,
+          duration: 1000
+        }
+
+        animationList = animationList.push(indexAnimation);
+      }
+    }
   }
 
   if (animationList.size > 0) {
     const longestAnimation = animationList.reduce(longerTimeToFinish, animationList.get(0));
     timeToFinish = longestAnimation.delay + longestAnimation.duration;
   }
+
+  console.log(timeToFinish);
+  // Hack to eliminate pause after searching and not finding item for removal
+  if (method === 'remove' && (typeof argums[0] === 'string') && index === -1) {
+    timeToFinish -= 600;
+  }
+
+  console.log(timeToFinish);
 
   return { 
     timeToFinish, 

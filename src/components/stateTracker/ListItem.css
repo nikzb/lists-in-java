@@ -35,6 +35,14 @@
   animation: hop 0.5s;
 }
 
+.ListItem__value--found {
+  animation: tada 1.0s;
+}
+
+.ListItem__value--not-it {
+  animation: headShake 0.9s;
+}
+
 /* .ListItem__index--pulse {
   font-size: 2.0em;
 } */
