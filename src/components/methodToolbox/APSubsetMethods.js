@@ -14,7 +14,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         description={(element) => `Adds the element ${element} at the end of the list.`}
         disabled={disabled} 
         nextValue={nextValue} 
-        inputTypes={['index']}
+        inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >    
         <ValueInput value={nextValue} />
