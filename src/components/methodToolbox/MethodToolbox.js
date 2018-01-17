@@ -42,9 +42,6 @@ class MethodToolbox extends React.Component {
   }
 
   render() {
-    // Buttons for set, remove, get will be disabled when the list is empty
-    const listEmpty = this.props.listSize === 0;
-
     const methods = this.state.apOnly ? (
       <APSubsetMethods 
         disabled={this.props.disabled}
