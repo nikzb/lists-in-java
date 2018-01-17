@@ -123,20 +123,21 @@ class App extends Component {
       animationFunc();
     });
 
+    console.log(animationList.timeToFinish);
+
     await timeout(animationList.timeToFinish);
 
     let listVizFlipMoveDuration = 0;
+    let listVizFlipMoveDelay = animationList.timeToFinish === 0 ? 250 : 0;
     // let staggerDelayBy = 10;
 
-    if (method === 'set' || method === 'remove' || method === 'add' ||
-        method === 'contains' || method === 'indexOf' || method === 'lastIndexOf'
-        || method === 'clear') {
+    if (method === 'set' || method === 'remove' || method === 'add' || method === 'clear') {
       listVizFlipMoveDuration = 1000;
     }
 
     const listVizFlipMoveProps = FlipMoveProps({ 
       duration: listVizFlipMoveDuration, 
-      delay: 0, 
+      delay: listVizFlipMoveDelay, 
       staggerDelayBy: 10 
     });
     const listHistoryFlipMoveProps = FlipMoveProps({ 

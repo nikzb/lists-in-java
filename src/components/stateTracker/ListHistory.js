@@ -7,10 +7,7 @@ import MethodCallAndReturn from './MethodCallAndReturn';
 import './ListHistory.css';
 
 function ListHistory({snapshots, flipMoveProps}) {
-  console.log('List History snapshots', snapshots ? snapshots.toString() : null);
   const pastSnapshots = snapshots.pop().reverse();
-
-  console.log('List History past snapshots', pastSnapshots ? pastSnapshots.toString() : null);
 
   const history = [];
   
@@ -42,8 +39,6 @@ function ListHistory({snapshots, flipMoveProps}) {
       />
     );
   }
-
-  console.log(history);
 
   const flipMove = flipMoveProps ? (
     <FlipMove className="ListHistory__body" {...flipMoveProps.toObject()}>
