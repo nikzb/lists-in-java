@@ -74,6 +74,39 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
 
     if (method === 'lastIndexOf') {
       index = findLastIndex(listValues, argums[0]);
+
+      let minIndex;
+
+      if (index === -1) {
+        minIndex = 0;
+      } else {
+        minIndex = index + 1;
+      }
+
+      for (let k = listValues.size - 1; k >= minIndex; k -= 1) {
+        animationList = animationList.push({
+          elementId: listValues.get(k).get('id'),
+          elementPart: 'value',
+          className: 'not-it',
+          delay: getDelay(listValues.size - 1 - k),
+          duration: 400
+        });
+      }
+
+      if (index !== -1) {
+        const elementToAnimate = listValues.get(index);
+        const elementId = elementToAnimate.get('id');
+
+        const valueAnimation = {
+          elementId,
+          elementPart: 'value',
+          className: 'found',
+          delay: getDelay(listValues.size - 1 - index),
+          duration: 1000
+        }
+
+        animationList = animationList.push(valueAnimation); 
+      }
     } else {
       index = findIndex(listValues, argums[0]);
 
@@ -117,11 +150,18 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
       const elementId = elementToAnimate.get('id');
       
       if (method === 'indexOf' || method === 'lastIndexOf') {
+        let delay;
+
+        if (method === 'indexOf') {
+          delay = getDelay(index) + 700;
+        } else if (method === 'lastIndexOf') {
+          delay = getDelay(listValues.size - 1 - index) + 700;
+        }
         const indexAnimation = {
           elementId,
           elementPart: 'index',
           className: 'attention',
-          delay: getDelay(index) + 700,
+          delay,
           duration: 1000
         }
 
