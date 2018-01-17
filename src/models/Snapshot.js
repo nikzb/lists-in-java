@@ -68,7 +68,7 @@ export function remove(prevSnapshot, argums) {
   const listValues = prevSnapshot.get('listValues');
 
   const argum = argums[0];
-
+  
   // Need to determine if argument is a value or index
   if (typeof argum === 'number') {
     const index = argum;
@@ -83,8 +83,8 @@ export function remove(prevSnapshot, argums) {
 
     return Snapshot(newListValues, command);
   } else {
-    const regexp = /^[A-Z]/;
-    if (regexp.test(argum)) {
+    const regexpChar = /^[A-Z]/;
+    if (regexpChar.test(argum)) {
       const index = findIndex(listValues, argum);
 
       if (index === -1) {
