@@ -135,13 +135,13 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
     timeToFinish = longestAnimation.delay + longestAnimation.duration;
   }
 
-  console.log(timeToFinish);
+  
   // Hack to eliminate pause after searching and not finding item for removal
   if (method === 'remove' && (typeof argums[0] === 'string') && index === -1) {
     timeToFinish -= 600;
   }
 
-  console.log(timeToFinish);
+
 
   return { 
     timeToFinish, 

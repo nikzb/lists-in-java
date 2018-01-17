@@ -30,11 +30,19 @@ class App extends Component {
     this.getAnimationFunction = this.getAnimationFunction.bind(this);
   }
 
-  async enableButtonsAfterWait(waitTime) {
+  async enableButtonsAfterWait(waitTime, isUndo) {
     await timeout(waitTime);
 
-    this.setState({
-      buttonsDisabled: false
+    // Hack to fix issue with undo flip move issue: delay until undo is completely done, then set state of snapshots one extra time
+    if (isUndo) {
+      await timeout(300);
+    }
+
+    this.setState((prevState, props) => {
+      return {
+        buttonsDisabled: false,
+        snapshots: this.state.snapshots
+      }
     });
   }
 
@@ -151,12 +159,14 @@ class App extends Component {
       
     // Have buttons re-enable after animation is done
     // Delay depends on method used
-    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (0.93 - updatedSnapshots.size / 100));
+    this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (1 - updatedSnapshots.size / 100), false);
   }
 
-  onUndoButtonClick() {
+  async onUndoButtonClick() {
     if (this.state.snapshots.size > 1) {
       const updatedSnapshots = undoSnapshot(this.state.snapshots);
+
+      console.log('updated snapshots upon undo call', updatedSnapshots.toString());
       
       const listVizFlipMoveProps = FlipMoveProps({ 
         duration: 1000, 
@@ -165,18 +175,18 @@ class App extends Component {
       });
       const listHistoryFlipMoveProps = FlipMoveProps({ 
         duration: 800, 
-        delay: 400, 
+        delay: 600, 
         staggerDelayBy: 50 
       });
 
-      this.setState((prevState, props) => ({
-        snapshots: undoSnapshot(prevState.snapshots),
-        buttonsDisabled: true ,
+      await this.setState({
+        snapshots: updatedSnapshots,
+        buttonsDisabled: true,
         listVizFlipMoveProps,
         listHistoryFlipMoveProps
-      }));
+      });
 
-      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (0.9 - updatedSnapshots.size / 100));
+      this.enableButtonsAfterWait(timeToFinish(listHistoryFlipMoveProps, updatedSnapshots.size) * (1 - updatedSnapshots.size / 100), true);
     }
   }
 

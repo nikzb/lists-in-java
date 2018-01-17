@@ -7,7 +7,10 @@ import MethodCallAndReturn from './MethodCallAndReturn';
 import './ListHistory.css';
 
 function ListHistory({snapshots, flipMoveProps}) {
+  console.log('List History snapshots', snapshots ? snapshots.toString() : null);
   const pastSnapshots = snapshots.pop().reverse();
+
+  console.log('List History past snapshots', pastSnapshots ? pastSnapshots.toString() : null);
 
   const history = [];
   
@@ -17,18 +20,18 @@ function ListHistory({snapshots, flipMoveProps}) {
 
     history.push(<MethodCallAndReturn 
       command={command} 
-      key={`${snapshots.get(snapshots.size - 1).get('id')}MCR`} />);
+      key={`MCR${snapshots.get(snapshots.size - 1).get('id')}`} />);
     
     // The pastSnapshots are in reverse order, so start at beginning of List 
     for (let index = 0; index < pastSnapshots.size - 1; index += 1) {      
       if (!pastSnapshots.get(index).get('listValues').equals(pastSnapshots.get(index + 1).get('listValues'))) {
-          history.push(<ListViz snapshot={pastSnapshots.get(index)} key={pastSnapshots.get(index).get('id')} />);
-      }
+        history.push(<ListViz snapshot={pastSnapshots.get(index)} key={pastSnapshots.get(index).get('id')} />);
+      } 
       
       if (index < pastSnapshots.size - 1) { 
         history.push(<MethodCallAndReturn 
           command={pastSnapshots.get(index).get('command')} 
-          key={`${pastSnapshots.get(index).get('id')}MCR`} />);
+          key={`MCR${pastSnapshots.get(index).get('id')}`} />);
       }
     }
 
@@ -40,6 +43,8 @@ function ListHistory({snapshots, flipMoveProps}) {
     );
   }
 
+  console.log(history);
+
   const flipMove = flipMoveProps ? (
     <FlipMove className="ListHistory__body" {...flipMoveProps.toObject()}>
       {history}
@@ -50,7 +55,6 @@ function ListHistory({snapshots, flipMoveProps}) {
     </FlipMove>
   );
   
-
   return (
     <div className="ListHistory">
       <div className="ListHistory__header">

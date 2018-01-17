@@ -9,6 +9,7 @@ import './ListViz.css';
 class ListViz extends React.Component {
   render() {
     const snapshot = this.props.snapshot;
+    
     const animationClasses = this.props.animationClasses;
     const flipMoveProps = this.props.flipMoveProps;
 
