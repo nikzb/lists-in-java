@@ -6,6 +6,9 @@ class MethodButton extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+    console.log(props.children);
+
     let inputValues = [];
     if (props.children) {
       if (!Array.isArray(props.children)) {
