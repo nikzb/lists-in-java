@@ -37,10 +37,10 @@ export function addSnapshot(snapshots, method, argums) {
 }
 
 export function undoSnapshot(snapshots) {
-  if (snapshots.size >= 2) {
+  if (snapshots.size > 1) {
     return snapshots.pop();
   } else {
-    return snapshots;
+    throw new Error('Cannot undo when original empty list is only snapshot');
   }
 }
 
