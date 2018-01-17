@@ -123,8 +123,6 @@ class App extends Component {
       animationFunc();
     });
 
-    console.log(animationList.timeToFinish);
-
     await timeout(animationList.timeToFinish);
 
     let listVizFlipMoveDuration = 0;

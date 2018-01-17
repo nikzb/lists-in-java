@@ -17,11 +17,13 @@ class MethodButton extends React.Component {
       } else {
         for (let index = 0; index < props.children.length; index += 1) {
           if (index % 2 === 0) {
+            console.log(props.children[index].type.name);
             if (props.children[index].type.name === 'IndexInput') {
               inputValues.push(0);
             } else if (props.children[index].type.name === 'ValueInput') {
               inputValues.push(props.nextValue);
             } else {
+              console.log('Fail', props.children[index].type.name);
               throw new Error('Child is not a valid Input type');
             }
           }
