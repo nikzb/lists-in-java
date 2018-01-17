@@ -44,15 +44,15 @@ export default function AnimationList({ getAnimationFunction, newSnapshot, prevS
       elementId,
       elementPart: 'index',
       className: 'attention',
-      delay: 350,
-      duration: 1000
+      delay: 250,
+      duration: 1500
     };
 
     const valueAnimation = {
       elementId,
       elementPart: 'value',
       className: 'attention',
-      delay: 900,
+      delay: 800,
       duration: 1000
     }
 

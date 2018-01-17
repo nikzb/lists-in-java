@@ -167,18 +167,29 @@ class App extends Component {
 
   async onUndoButtonClick() {
     if (this.state.snapshots.size > 1) {
+      const mostRecentSnap = getMostRecentSnapshot(this.state.snapshots);
       const updatedSnapshots = undoSnapshot(this.state.snapshots);
 
-      console.log('updated snapshots upon undo call', updatedSnapshots.toString());
+      let listVizFlipMoveDuration = 0;
+      let listVizFlipMoveDelay = 0;
+      let listHistoryFlipMoveDelay = 250;
+
+      const method = mostRecentSnap.get('command').get('method');
+
+      if (method === 'set' || method === 'remove' || method === 'add' || method === 'clear') {
+        listVizFlipMoveDuration = 1000;
+        listVizFlipMoveDelay = 250;
+        listHistoryFlipMoveDelay = 500;
+      }
       
       const listVizFlipMoveProps = FlipMoveProps({ 
-        duration: 1000, 
-        delay: 250, 
+        duration: listVizFlipMoveDuration, 
+        delay: listVizFlipMoveDelay, 
         staggerDelayBy: 10 
       });
       const listHistoryFlipMoveProps = FlipMoveProps({ 
         duration: 800, 
-        delay: 600, 
+        delay: listHistoryFlipMoveDelay, 
         staggerDelayBy: 50 
       });
 
