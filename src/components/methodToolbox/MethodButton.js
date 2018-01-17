@@ -12,22 +12,24 @@ class MethodButton extends React.Component {
     let inputValues = [];
     if (props.children) {
       if (!Array.isArray(props.children)) {
-        if (props.children.type.name === 'IndexInput') {
+        if (props.inputTypes[0] === 'index') {
           inputValues.push(0);
-        } else if (props.children.type.name === 'ValueInput') {
+        } else if (props.inputTypes[0] === 'value') {
           inputValues.push(props.nextValue);
+        } else {
+          throw new Error('not a valid input type');
         }
       } else {
         for (let index = 0; index < props.children.length; index += 1) {
           if (index % 2 === 0) {
             console.log(props.children[index].type.name);
-            if (props.children[index].type.name === 'IndexInput') {
+            if (props.inputTypes[index / 2] === 'index') {
               inputValues.push(0);
-            } else if (props.children[index].type.name === 'ValueInput') {
+            } else if (props.inputTypes[index / 2] === 'value') {
               inputValues.push(props.nextValue);
             } else {
-              console.log('Fail', props.children[index].type.name);
-              throw new Error('Child is not a valid Input type');
+              console.log('Fail', props.inputTypes[index / 2]);
+              throw new Error('not a valid input type');
             }
           }
         }
@@ -46,7 +48,7 @@ class MethodButton extends React.Component {
 
     if (nextProps.children) {  
       if (!Array.isArray(nextProps.children)) {
-        if (nextProps.children.type.name === 'IndexInput') {
+        if (nextProps.inputTypes[0] === 'index') {
           const inputValue = this.state.inputValues[0];
           const max = nextProps.children.props.maxValue;
           
@@ -55,7 +57,7 @@ class MethodButton extends React.Component {
           } else {
             newInputValues.push(inputValue);
           }
-        } else if (nextProps.children.type.name === 'ValueInput') {
+        } else if (nextProps.inputTypes[0] === 'value') {
           if (nextProps.nextValue) {
             newInputValues.push(nextProps.nextValue);
           } else {
@@ -65,7 +67,7 @@ class MethodButton extends React.Component {
       } else {
         for (let index = 0; index < nextProps.children.length; index += 1) {
           if (index % 2 === 0) {
-            if (nextProps.children[index].type.name === 'IndexInput') {
+            if (nextProps.inputTypes[index / 2] === 'index') {
               const inputValue = this.state.inputValues[index];
               const max = nextProps.children[index].props.maxValue;
               
@@ -74,7 +76,7 @@ class MethodButton extends React.Component {
               } else {
                 newInputValues.push(inputValue);
               }
-            } else if (nextProps.children[index].type.name === 'ValueInput') {
+            } else if (nextProps.inputTypes[index / 2] === 'value') {
               if (nextProps.nextValue) {
                 newInputValues.push(nextProps.nextValue);
               } else {

@@ -14,6 +14,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         description={(element) => `Adds the element ${element} at the end of the list.`}
         disabled={disabled} 
         nextValue={nextValue} 
+        inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >    
         <ValueInput value={nextValue} />
@@ -23,6 +24,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         description={(index, element) => `At index ${index}, inserts the element ${element}.`}
         disabled={disabled} 
         nextValue={nextValue} 
+        inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >
         <IndexInput value={0} maxValue={listSize}/>, 
@@ -34,6 +36,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         description2="Returns the element that was replaced."
         disabled={disabled || listEmpty} 
         nextValue={nextValue} 
+        inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}
       >
         <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>, 
@@ -44,6 +47,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         description={(index) => `Removes the element at index ${index}.`}
         description2="Returns the element that was removed."
         disabled={disabled || listEmpty} 
+        inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
       >
         <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
@@ -52,13 +56,15 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         methodName="get" 
         description={(index) => `Returns a copy of the value at index ${index}.`}
         disabled={disabled || listEmpty} 
-        onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}>
+        onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}
+        inputTypes={['index']}>
         <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
       </MethodButton>
       <MethodButton 
         methodName="size" 
         description={() => `Returns the number of elements in the list.`}
         disabled={disabled} 
+        inputTypes={[]}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'size')}>
       </MethodButton>
     </Fragment>
