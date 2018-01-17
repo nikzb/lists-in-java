@@ -12,7 +12,7 @@ class MethodButton extends React.Component {
         if (props.children.type.name === 'IndexInput') {
           inputValues.push(0);
         } else if (props.children.type.name === 'ValueInput') {
-          inputValues.push('A');
+          inputValues.push(props.nextValue);
         }
       } else {
         for (let index = 0; index < props.children.length; index += 1) {
@@ -20,7 +20,7 @@ class MethodButton extends React.Component {
             if (props.children[index].type.name === 'IndexInput') {
               inputValues.push(0);
             } else if (props.children[index].type.name === 'ValueInput') {
-              inputValues.push('A');
+              inputValues.push(props.nextValue);
             } else {
               throw new Error('Child is not a valid Input type');
             }
