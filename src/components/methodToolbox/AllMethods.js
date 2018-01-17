@@ -4,13 +4,11 @@ import MethodButton from './MethodButton';
 import IndexInput from './IndexInput';
 import ValueInput from './ValueInput';
 
-import './MethodButtonsContainer.css';
-
 function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonClick, makeOnClickFuncForMethodButton }) {
   const listEmpty = listSize === 0;
 
   return (
-    <div className="MethodButtonsContainer">
+    <Fragment>
       <MethodButton 
         methodName="add" 
         description={(element) => `Adds the element ${element} at the end of the list.`}
@@ -111,7 +109,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'isEmpty')}>
       </MethodButton>
-    </div>
+    </Fragment>
   );
 }
 

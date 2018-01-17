@@ -76,7 +76,9 @@ class MethodToolbox extends React.Component {
       <div className="MethodToolbox">
         <h2 className="section-title">List Methods</h2>
         {this.props.showAPCheckbox ? apCheckbox : null}
-        {methods}
+        <div className={"MethodToolbox__buttons-container"}>
+          {methods}
+        </div>
       </div>
     );
   }

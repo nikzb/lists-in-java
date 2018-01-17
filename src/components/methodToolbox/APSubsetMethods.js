@@ -4,13 +4,11 @@ import MethodButton from './MethodButton';
 import IndexInput from './IndexInput';
 import ValueInput from './ValueInput';
 
-import './MethodButtonsContainer.css';
-
 function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnClickFuncForMethodButton }) {
   const listEmpty = listSize === 0;
 
   return (
-    <div className="MethodButtonsContainer">
+    <Fragment>
       <MethodButton 
         methodName="add" 
         description={(element) => `Adds the element ${element} at the end of the list.`}
@@ -63,7 +61,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         disabled={disabled} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'size')}>
       </MethodButton>
-    </div>
+    </Fragment>
   );
 }
 
