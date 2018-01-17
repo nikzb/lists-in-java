@@ -126,9 +126,11 @@ class App extends Component {
     await timeout(animationList.timeToFinish);
 
     let listVizFlipMoveDuration = 0;
+    // let staggerDelayBy = 10;
 
     if (method === 'set' || method === 'remove' || method === 'add' ||
-        method === 'contains' || method === 'indexOf' || method === 'lastIndexOf') {
+        method === 'contains' || method === 'indexOf' || method === 'lastIndexOf'
+        || method === 'clear') {
       listVizFlipMoveDuration = 1000;
     }
 
