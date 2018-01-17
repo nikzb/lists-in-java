@@ -5,3 +5,12 @@
   border-left: 1px dashed black;
   height: inherit;
 }
+
+.MethodToolbox__ap-check {
+  margin-bottom: 0.4em;
+  margin-left: 0.6em;
+}
+
+.MethodToolbox__ap-check--label {
+  margin-left: 0.8em;
+}

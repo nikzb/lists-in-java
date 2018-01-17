@@ -236,6 +236,7 @@ class App extends Component {
             nextValue={this.state.nextValue}
             lastValueInList={lastValueInList}
             disabled={this.state.buttonsDisabled}
+            showAPCheckbox={true}
           />
         </div>
 
