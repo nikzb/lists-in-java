@@ -70,11 +70,13 @@ class MethodToolbox extends React.Component {
     );
 
     return (
-      <div className="MethodToolbox">
-        <h2 className="section-title">List Methods</h2>
-        {this.props.showAPCheckbox ? apCheckbox : null}
-        <div className={"MethodToolbox__buttons-container"}>
-          {methods}
+      <div className="MethodToolbox__wrapper">
+        <div className="MethodToolbox">
+          <h2 className="section-title">List Methods</h2>
+          {this.props.showAPCheckbox ? apCheckbox : null}
+          <div className={"MethodToolbox__buttons-container"}>
+            {methods}
+          </div>
         </div>
       </div>
     );

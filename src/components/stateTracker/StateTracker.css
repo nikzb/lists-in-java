@@ -1,9 +1,17 @@
-.StateTracker {
-  flex: 0 1 36em;
+.StateTracker__wrapper {
   /* margin-left: 1em; */
-  overflow: hidden;
-  padding: 0.5em 1.0em 0 2.0em;
+  /* overflow: hidden; */
+  flex: 1 1 36em;
+  
   border-right: 1px dashed #222;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.StateTracker {
+  padding: 0.5em 1.0em 0 2.0em;
+  flex: 0 1 36em;
+  height: inherit;
 }
 
 .StateTracker__header {
