@@ -1,8 +1,9 @@
 .MethodToolbox {
-  flex: 0 0 20em;
+  flex: 0 0 18em;
   margin-left: 1em;
+  padding-top: 0.5em;
   padding-left: 1em;
-  border-left: 1px dashed black;
+  border-left: 1px dashed #222;
   height: inherit;
 }
 

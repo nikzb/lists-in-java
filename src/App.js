@@ -216,7 +216,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1 className="App__header">Lists in Java</h1>
+        <div className="App__header">
+          <h1 className="App__title">Lists in Java</h1>
+        </div>
         <div className="App__main-row">
           <StateTracker
             snapshots={this.state.snapshots}

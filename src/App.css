@@ -1,14 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Averia+Sans+Libre:700");
+
 .App {
+  font-family: 'Open Sans', sans-serif;
   text-align: left;
   margin: auto;
-  width: 50em;
+  width: 100%;
   color: #222;
   min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App__main-row {
   display: flex;
   min-height: inherit;
+  border-top: 1px dashed #222;
+  width: 100%;
+  justify-content: center;
 }
 
 .App-logo {
@@ -18,14 +27,20 @@
 
 .App__header {
   /* background-color: #222; */
-  height: 50px;
-  padding: 20px;
+  height: 6em;
+  /* padding: 2em; */
   margin-top: 0;
-  /* text-align: center; */
+  width: 100%;
+  text-align: center;
+  
 }
 
-.App-title {
-  font-size: 1.5em;
+.App__title {
+  font-size: 2.5em;
+  color: #666;
+  text-shadow: 0.02em 0.02em #222;
+  font-family: 'Averia Sans Libre';
+  
 }
 
 .App-intro {

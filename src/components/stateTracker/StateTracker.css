@@ -2,6 +2,7 @@
   flex: 0 0 36em;
   margin-left: 1em;
   overflow: hidden;
+  padding-top: 0.5em;
 }
 
 .StateTracker__header {
