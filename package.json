@@ -10,7 +10,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-flip-move": "^2.10.1",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "sticky-js": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
