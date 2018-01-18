@@ -4,6 +4,8 @@
   justify-content: flex-start;
   overflow-y: scroll;
   max-height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
 .MethodToolbox {

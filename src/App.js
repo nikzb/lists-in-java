@@ -220,7 +220,7 @@ class App extends Component {
         <div className="App__header">
           <h1 className="App__title">Lists in Java</h1>
         </div>
-        <div className="App__main-row data-sticky-container">
+        <div className="App__main-row">
           <StateTracker
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 

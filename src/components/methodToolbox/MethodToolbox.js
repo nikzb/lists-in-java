@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Checkbox from 'rc-checkbox';
-import Sticky from 'sticky-js';
 
 import APSubsetMethods from './APSubsetMethods';
 import AllMethods from './AllMethods';
@@ -19,19 +18,10 @@ class MethodToolbox extends React.Component {
     }
 
     this.state = {
-      apOnly,
-      sticky: null
+      apOnly
     }
 
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
-
-
-  }
-
-  componentDidMount() {
-    this.setState({
-      sticky: new Sticky('.MethodToolbox__wrapper')
-    });
   }
 
   makeOnClickFuncForMethodButton(onClickFromParent, method) {
