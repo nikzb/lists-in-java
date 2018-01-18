@@ -5,6 +5,7 @@
   font-size: 1.0em;
   margin: 0.5em;
   transition: background-color 0.8s;
+  border: none;
 }
 
 .MethodButton--add {
