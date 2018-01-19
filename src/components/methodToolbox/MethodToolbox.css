@@ -15,12 +15,21 @@
 }
 
 .MethodToolbox__ap-check {
-  margin-bottom: 0.4em;
-  margin-left: 0.6em;
+  margin: 0.4em 0 0.8em 0;
+}
+
+.MethodToolbox__ap-check .rc-checkbox-input {
+  margin-right: 0.8em;
 }
 
 .MethodToolbox__ap-check--label {
-  margin-left: 0.8em;
+  margin-left: 0.6em;
+  
+}
+
+.ap-check--actual-label {
+  position: relative;
+  top: 2px;
 }
 
 .MethodToolbox__buttons-container {

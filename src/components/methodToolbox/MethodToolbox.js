@@ -63,11 +63,11 @@ class MethodToolbox extends React.Component {
 
     const apCheckbox = (
       <div className="MethodToolbox__ap-check">
-            <Checkbox defaultChecked onChange={this.onCheckboxChange} />
-            <label className="MethodToolbox__ap-check--label">
-              AP Subset Only
-            </label>
-        </div>
+        <label className="MethodToolbox__ap-check--label">
+          <Checkbox id="ap-check" defaultChecked onChange={this.onCheckboxChange} />
+          <span className="ap-check--actual-label">AP Subset Only</span>
+        </label>
+      </div>
     );
 
     return (
