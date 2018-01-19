@@ -4,6 +4,7 @@ import ListHistory from './ListHistory';
 import ListViz from './ListViz';
 import UndoButton from './UndoButton';
 
+import '../../variables.css';
 import './StateTracker.css';
 
 function StateTracker({

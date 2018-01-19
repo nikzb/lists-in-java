@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Map, List } from 'immutable';
 
 // import logo from './logo.svg';
+import './variables.css';
 import './App.css';
 
 import { Snapshots, addSnapshot, undoSnapshot, currentListSize, getMostRecentSnapshot } from './models/Snapshots';
