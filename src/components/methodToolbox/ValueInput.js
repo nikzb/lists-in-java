@@ -25,7 +25,7 @@ class ValueInput extends React.Component {
 
   render() {
     return (
-      <input className="Input"
+      <input className="Input Input--value"
         type="text"
         size="1"
         minLength="1"

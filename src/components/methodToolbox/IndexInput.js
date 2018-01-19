@@ -22,7 +22,7 @@ class IndexInput extends React.Component {
 
   render() {
     return (
-      <input className="Input"
+      <input className="Input Input--index"
         type="number"
         size="1"
         min="0"

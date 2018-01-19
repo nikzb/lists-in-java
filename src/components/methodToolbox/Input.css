@@ -2,3 +2,11 @@
   font-size: 1em;
   background-color: #f9f9f9;
 }
+
+.Input--index {
+  width: 2.2em;
+}
+
+.Input--value {
+  width: 1.2em;
+}
