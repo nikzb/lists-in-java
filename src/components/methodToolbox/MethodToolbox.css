@@ -8,6 +8,14 @@
   top: 0;
 }
 
+@media only screen and (max-device-width : 700px) {
+  .MethodToolbox__wrapper {
+    position: static;
+    display: block;
+    height: 40vh;
+  }
+}
+
 .MethodToolbox {
   flex: 0 1 18em;
   padding: 0.5em 2.0em 0em 1.5em;

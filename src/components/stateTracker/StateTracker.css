@@ -8,10 +8,26 @@
   justify-content: flex-end;
 }
 
+@media only screen and (max-device-width : 700px) {
+  .StateTracker__wrapper {
+    flex: 1 1 auto;
+    height: 60vh;
+    overflow-y: scroll;
+    border-bottom: 10px solid var(--border-grey);
+    font-size: 0.9em;
+  }
+}
+
 .StateTracker {
   padding: 0.5em 1.0em 0 2.0em;
   flex: 0 1 36em;
   height: inherit;
+}
+
+@media only screen and (max-device-width : 700px) {
+  .StateTracker {
+    flex: 1 1 auto;
+  }
 }
 
 .StateTracker__header {

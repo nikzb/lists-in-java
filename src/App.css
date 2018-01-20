@@ -12,6 +12,12 @@
   align-items: center;
 }
 
+@media only screen and (max-device-width : 700px) {
+  .App {
+    font-size: 0.8em;
+  }
+}
+
 .App__main-row {
   display: flex;
   justify-content: center;
@@ -20,6 +26,13 @@
   
   width: 100%;
   min-width: 45em;
+}
+
+@media only screen and (max-device-width : 700px) {
+  .App__main-row {
+    display: block;
+    min-width: 0;
+  }
 }
 
 .App-logo {
@@ -34,7 +47,13 @@
   margin-top: 0;
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid var(--border-grey);;
+  border-bottom: 1px solid var(--border-grey);
+}
+
+@media only screen and (max-device-width : 700px) {
+  .App__header {
+    height: 0;
+  }
 }
 
 .App__title {
@@ -42,7 +61,14 @@
   color: #666;
   text-shadow: 0.02em 0.02em #222;
   font-family: 'Averia Sans Libre';
-  
+}
+
+@media only screen and (max-device-width : 700px) {
+  .App__title {
+    display: none;
+    font-size: 1.8em;
+    margin: 0.5em;
+  }
 }
 
 .App-intro {
