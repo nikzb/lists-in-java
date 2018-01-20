@@ -13,3 +13,10 @@
   background: var(--disabled-grey);
   color: var(--disabled-grey-text);
 }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .UndoButton--disabled {
+    background: rgb(157, 157, 157);
+    color: rgb(220, 220, 220);
+  }
+}

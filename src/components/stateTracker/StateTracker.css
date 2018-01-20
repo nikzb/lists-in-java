@@ -8,6 +8,12 @@
   justify-content: flex-end;
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .StateTracker__wrapper {
+    border-right: 1px solid rgb(207,207,207);
+  }
+}
+
 @media only screen and (max-device-width : 700px) and (orientation : portrait){
   .StateTracker__wrapper {
     flex: 1 1 auto;

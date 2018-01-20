@@ -7,8 +7,15 @@
 
 .ListViz__empty {
   margin-left: 0.4em;
-  color: var(--default-item-color, rgb(84, 161, 255));
+  color: var(--default-item-color);
   font-size: 1.2em;
   overflow: visible;
   align-self: center;
 }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .ListViz__empty {
+    color: rgb(39, 148, 244);
+  }
+}
+

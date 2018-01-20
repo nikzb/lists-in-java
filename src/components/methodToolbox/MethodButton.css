@@ -33,6 +33,13 @@
   color: var(--disabled-grey-text);
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .MethodButton--disabled {
+    background: rgb(157, 157, 157);
+    color: rgb(220, 220, 220);
+  }
+}
+
 .MethodButton__summary--desc1 {
   margin-top: 0.5em;
   margin-bottom: 0.5em;

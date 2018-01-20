@@ -50,6 +50,12 @@
   border-bottom: 1px solid var(--border-grey);
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .App__header {
+    border-bottom: 1px solid rgb(207,207,207);
+  }
+}
+
 @media only screen and (max-device-width : 700px) {
   .App__header {
     height: 0;

@@ -21,6 +21,13 @@
   transition: background-color 0.5s ease-out;
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .ListItem__value {
+    background: rgb(39, 148, 244);
+    color: #f9f9f9;
+  }
+}
+
 .ListItem__value--attention {
   /* background-color: #9c52fc;; */
   animation: pulse 1.0s; /* or modify pulse to make more obvious */
@@ -29,6 +36,12 @@
 .ListItem__index--attention {
   color:  var(--default-item-color);
   animation: rubberBand 1.0s;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .ListItem__index--attention {
+    color: rgb(39, 148, 244);
+  }
 }
 
 .ListItem__value--count {
