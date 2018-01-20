@@ -8,6 +8,18 @@
   border: none;
 }
 
+.MethodCall {
+  color: var(--off-white);
+  border-radius: 0.5em;
+  border: none;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .MethodCall {
+    color: #f9f9f9;
+  }
+}
+
 .MethodButton--add {
   background: rgb(50, 165, 57);
 }
