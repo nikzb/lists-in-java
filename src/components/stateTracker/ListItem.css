@@ -13,9 +13,9 @@
 .ListItem__value {
   font-size: 150%;
   background: var(--default-item-color, rgb(67, 157, 235));
-  padding: 25% 0;
+  padding: 25% 0 28% 0;
   width: 100%;
-  border-radius: 20%;
+  border-radius: 0;
   color: #f9f9f9;
   text-align: center;
   transition: background-color 0.5s ease-out;
@@ -27,7 +27,7 @@
 }
 
 .ListItem__index--attention {
-  color:  rgb(67, 157, 235);
+  color:  var(--default-item-color);
   animation: rubberBand 1.0s;
 }
 
