@@ -1,5 +1,6 @@
 :root {
   --default-item-color: rgb(22, 133, 230);
+  --modal-background-color: rgb(195, 224, 250);
   --disabled-grey: rgb(157, 157, 157);
   --disabled-grey-text: rgb(220, 220, 220);
   --border-grey: rgb(207,207,207);

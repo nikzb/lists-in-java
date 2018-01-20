@@ -1,7 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Averia+Sans+Libre:700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
 
 .App {
   font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
   text-align: left;
   margin: auto;
   width: 100%;
@@ -66,7 +67,6 @@
   font-size: 2.5em;
   color: #666;
   text-shadow: 0.02em 0.02em #222;
-  font-family: 'Averia Sans Libre';
 }
 
 @media only screen and (max-device-width : 700px) {

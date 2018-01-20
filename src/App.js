@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Map, List } from 'immutable';
+import Modal from 'react-modal';
 
 // import logo from './logo.svg';
 import './variables.css';
@@ -14,6 +15,24 @@ import timeout from './handyScripts/timeout';
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
 
+const customModalStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    background            : 'rgb(22, 133, 230)',
+    color                 : 'rgb(240, 240, 240)',
+    paddingLeft           : '30px',
+    paddingRight          : '30px',
+    borderRadius          : '0',
+    fontFamily            : "'Open Sans', sans-serif",
+    fontWeight            : "300",
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -23,13 +42,30 @@ class App extends Component {
       buttonsDisabled: false,
       listVizFlipMoveProps: null,
       listHistoryFlipMoveProps: null,
-      animationClasses: Map()
+      animationClasses: Map(),
+      modalIsOpen: true
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
     this.onUndoButtonClick = this.onUndoButtonClick.bind(this);
     this.enableButtonsAfterWait = this.enableButtonsAfterWait.bind(this);
     this.getAnimationFunction = this.getAnimationFunction.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+ 
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#f00';
+  }
+ 
+  closeModal() {
+    this.setState({modalIsOpen: false});
   }
 
   async enableButtonsAfterWait(waitTime, isUndo) {
@@ -218,6 +254,18 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          contentLabel="Welcome Modal"
+          style={customModalStyles}
+        >
+          <h1 style={{fontSize: '2.8em', color: "rgb(215, 215, 215)", textShadow: "2px 2px #222"}}>Lists in Java</h1>
+          <h2>An interactive tool for exploring the List interface in Java</h2>
+          <p>Use the buttons to call a method, then watch the list to see the result.</p>
+          <p>A history of every method call, return value, and state change is included.</p>
+          <button style={{background: "rgb(135, 135, 135)", padding: '0.5em', margin: '0.5em 0 1em 0', fontSize: '1.4em', fontWeight: '300'}} onClick={this.closeModal}>Get Started</button>
+        </Modal>
         <div className="App__header">
           <h1 className="App__title">Lists in Java</h1>
         </div>
