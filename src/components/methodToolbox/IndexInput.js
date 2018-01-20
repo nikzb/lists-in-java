@@ -20,6 +20,11 @@ class IndexInput extends React.Component {
     }
   }
 
+  onClick(e) {
+    e.stopPropagation();
+    e.target.select();
+  }
+
   render() {
     return (
       <input className="Input Input--index"
@@ -30,7 +35,7 @@ class IndexInput extends React.Component {
         ref={(input) => { this.input = input; }} 
         value={this.props.value}
         onChange={this.onChange}
-        onClick={e => { e.stopPropagation() }}
+        onClick={this.onClick}
       />
     );
   }

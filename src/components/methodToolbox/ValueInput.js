@@ -14,13 +14,24 @@ class ValueInput extends React.Component {
   }
 
   onChange() {
+    const oldValue = this.props.value;
+
     let newValue = this.input.value;
 
-    if (newValue.length > 1) {
-      newValue = newValue.substring(0, 1);
-    }
+    var startsWithLetter = /^[A-Za-z]/;
 
-    this.props.onChange(this.props.inputIndex, newValue);
+    if (newValue.match(startsWithLetter)) {
+      if (newValue.length > 1) {
+        newValue = newValue.substring(0, 1);
+      }
+
+      this.props.onChange(this.props.inputIndex, newValue.toUpperCase());
+    } 
+  }
+
+  onClick(e) {
+    e.stopPropagation();
+    e.target.select();
   }
 
   render() {
@@ -33,7 +44,8 @@ class ValueInput extends React.Component {
         ref={(input) => { this.input = input; }} 
         value={this.props.value}
         onChange={this.onChange}
-        onClick={e => { e.stopPropagation() }}
+        onClick={ this.onClick }
+        onSubmit={ (e) => { e.preventDefault(); console.log('in on submit'); }}
       />
     );
   }
