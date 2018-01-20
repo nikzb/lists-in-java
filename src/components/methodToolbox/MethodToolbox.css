@@ -19,10 +19,21 @@
 }
 
 .MethodToolbox__ap-check .rc-checkbox-input {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -2px;
+  *overflow: hidden;
   margin-right: 0.8em;
 }
 
 .MethodToolbox__ap-check--label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
   margin-left: 0.6em;
   
 }
