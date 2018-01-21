@@ -77,11 +77,57 @@
   }
 }
 
-.App-intro {
-  font-size: large;
+@keyframes Modal--bounceOutDown {
+  20% {
+    transform: translate3d(-50%, -48%, 0);
+  }
+
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(-50%, -54%, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-50%, 500%, 0);
+  }
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Modal--bounceOutDown {
+  animation-name: Modal--bounceOutDown;
 }
+
+@keyframes Modal--bounceInDown {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -1000%, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(-50%, -47%, 0);
+  }
+
+  75% {
+    transform: translate3d(-50%, -52%, 0);
+  }
+
+  90% {
+    transform: translate3d(-50%, -49%, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, -50%, 0);
+  }
+}
+
+.Modal--bounceInDown {
+  animation-name: Modal--bounceInDown;
+}
+
+
+

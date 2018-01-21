@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Map, List } from 'immutable';
 import Modal from 'react-modal';
 
-// import logo from './logo.svg';
 import './variables.css';
 import './App.css';
 
@@ -28,8 +27,10 @@ const customModalStyles = {
     paddingLeft           : '30px',
     paddingRight          : '30px',
     borderRadius          : '0',
+    fontSize              : '0.85em',
     fontFamily            : "'Open Sans', sans-serif",
     fontWeight            : "300",
+    maxWidth              : "75vw",
   }
 };
 
@@ -43,7 +44,8 @@ class App extends Component {
       listVizFlipMoveProps: null,
       listHistoryFlipMoveProps: null,
       animationClasses: Map(),
-      modalIsOpen: true
+      modalIsOpen: true,
+      modalAnimationState: 'entering'
     }
 
     this.onMethodButtonClick = this.onMethodButtonClick.bind(this);
@@ -51,7 +53,7 @@ class App extends Component {
     this.enableButtonsAfterWait = this.enableButtonsAfterWait.bind(this);
     this.getAnimationFunction = this.getAnimationFunction.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
+    // this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
@@ -59,12 +61,14 @@ class App extends Component {
     this.setState({modalIsOpen: true});
   }
  
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
+  // afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   this.subtitle.style.color = '#f00';
+  // }
  
-  closeModal() {
+  async closeModal() {
+    this.setState({modalAnimationState: 'exiting'});
+    await timeout(1000);
     this.setState({modalIsOpen: false});
   }
 
@@ -240,8 +244,15 @@ class App extends Component {
     }
   }
 
+  async componentDidMount() {
+    await timeout(1500);
+
+    this.setState({
+      modalAnimationState: 'showing'
+    });
+  }
+
   render() {
-    // console.log('rendering app', this.state.animationClasses.toString());
     const listSize = currentListSize(this.state.snapshots);
     const mostRecentSnap = getMostRecentSnapshot(this.state.snapshots);
 
@@ -251,6 +262,20 @@ class App extends Component {
     } else {
       lastValueInList = mostRecentSnap.get('listValues').get(listSize - 1).get('value');
     }
+
+    // const modalAnimationClasses = this.state.animationClasses.get('modal');
+    // if (modalAnimationClasses) {
+    //   console.log(modalAnimationClasses.toString());
+    // }
+
+    if (this.state.modalAnimationState === 'entering') {
+      customModalStyles.content.animation = 'Modal--bounceInDown 1.0s';
+    } else if (this.state.modalAnimationState === 'exiting') {
+      customModalStyles.content.animation = 'Modal--bounceOutDown 1.5s';
+    } else {
+      customModalStyles.content.animation = null;
+    }
+    
 
     return (
       <div className="App">
@@ -262,9 +287,13 @@ class App extends Component {
         >
           <h1 style={{fontSize: '2.8em', color: "rgb(215, 215, 215)", textShadow: "2px 2px #222"}}>Lists in Java</h1>
           <h2>An interactive tool for exploring the List interface in Java</h2>
-          <p>Use the buttons to call a method, then watch the list to see the result.</p>
-          <p>A history of every method call, return value, and state change is included.</p>
-          <button style={{background: "rgb(135, 135, 135)", padding: '0.5em', margin: '0.5em 0 1em 0', fontSize: '1.4em', fontWeight: '300'}} onClick={this.closeModal}>Get Started</button>
+          <p style={{fontSize: '1.15em'}}>Use the buttons to call a method, then watch the list to see the result.</p>
+          <p style={{fontSize: '1.15em'}}>A history of every method call, return value, and state change is included.</p>
+          <button 
+            style={{background: "rgb(135, 135, 135)", padding: '0.5em', margin: '0.5em 0 1em 0', fontSize: '1.4em', fontWeight: '300'}} 
+            onClick={this.closeModal}>
+            Get Started
+          </button>
         </Modal>
         <div className="App__header">
           <h1 className="App__title">Lists in Java</h1>
@@ -289,14 +318,6 @@ class App extends Component {
             showAPCheckbox={true}
           />
         </div>
-
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p> */}
       </div>
     );
   }
