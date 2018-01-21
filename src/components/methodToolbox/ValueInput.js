@@ -14,8 +14,6 @@ class ValueInput extends React.Component {
   }
 
   onChange() {
-    const oldValue = this.props.value;
-
     let newValue = this.input.value;
 
     var startsWithLetter = /^[A-Za-z]/;

@@ -1,11 +1,12 @@
 .ListItem {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .ListItem__index {
+  text-align: center;
   font-size: 150%;
   transition: color 1.0s ease-out;
 }
