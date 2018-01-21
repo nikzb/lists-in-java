@@ -263,11 +263,6 @@ class App extends Component {
       lastValueInList = mostRecentSnap.get('listValues').get(listSize - 1).get('value');
     }
 
-    // const modalAnimationClasses = this.state.animationClasses.get('modal');
-    // if (modalAnimationClasses) {
-    //   console.log(modalAnimationClasses.toString());
-    // }
-
     if (this.state.modalAnimationState === 'entering') {
       customModalStyles.content.animation = 'Modal--bounceInDown 1.0s';
     } else if (this.state.modalAnimationState === 'exiting') {

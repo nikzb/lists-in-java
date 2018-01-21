@@ -1,6 +1,4 @@
 .MethodButton {
-  /* display: flex; */
-  /* align-items: center; */
   padding: 0.5em;
   font-size: 1.0em;
   margin: 0.5em;
@@ -59,9 +57,19 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   line-height: 1.3em;
+  font-weight: 300;
 }
 
 .MethodButton__summary--desc2 {
   margin-bottom: 0.5em;
   line-height: 1.3em;
+  font-weight: 300;
 }
+
+@media only screen and (max-device-width : 700px) {
+  .MethodButton__summary--desc1, .MethodButton__summary--desc2 { 
+    font-weight: 400;
+  }
+}
+
+
