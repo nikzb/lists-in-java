@@ -15,8 +15,6 @@ class ListItem extends React.Component
       const indexClassesArray = this.props.animationClasses.get('index').toJS();
       const valueClassesArray = this.props.animationClasses.get('value').toJS();
 
-      // console.log(`index classes passed in as props`, indexClassesArray);
-
       indexClasses = ['ListItem__index', 'animated'].concat(indexClassesArray.map(
         className => `ListItem__index--${className}`
       ));
@@ -28,8 +26,6 @@ class ListItem extends React.Component
       valueClasses = ['ListItem__value'];
     }
 
-    // console.log(`Index classes: ${indexClasses}`);
-    // console.log(`Value classes: ${valueClasses}`);
     const width = this.props.width < 10 ? this.props.width : 10;
     const style = {
       fontSize: `${this.props.fontSize*100}%`,

@@ -17,7 +17,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >    
-        <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/>
+        <ValueInput value={nextValue} />
       </MethodButton>
       <MethodButton 
         methodName="add" 
@@ -27,8 +27,8 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >
-        <IndexInput value={0} maxValue={listSize} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/>, 
-        <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/>
+        <IndexInput value={0} maxValue={listSize} />, 
+        <ValueInput value={nextValue} />
       </MethodButton>
       <MethodButton 
         methodName="set" 
@@ -39,8 +39,8 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}
       >
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}/>, 
-        <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}/>
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} />, 
+        <ValueInput value={nextValue} />
       </MethodButton>
       <MethodButton 
         methodName="remove" 
@@ -50,7 +50,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
       >
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}/>
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} />
       </MethodButton>
       <MethodButton 
         methodName="remove" 
@@ -61,7 +61,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
       >
-        <ValueInput value={lastValueInList} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}/>
+        <ValueInput value={lastValueInList} />
       </MethodButton>
       <MethodButton 
         methodName="clear" 
@@ -76,7 +76,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         disabled={disabled || listEmpty} 
         inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}>
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}/>
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} />
       </MethodButton>
       <MethodButton 
         methodName="contains" 
@@ -85,7 +85,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         nextValue={lastValueInList}
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'contains')}>
-        <ValueInput value={lastValueInList} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'contains')}/>
+        <ValueInput value={lastValueInList} />
       </MethodButton>
       <MethodButton 
         methodName="indexOf" 
@@ -95,7 +95,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         nextValue={lastValueInList}
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'indexOf')}>
-        <ValueInput value={lastValueInList} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'indexOf')} />
+        <ValueInput value={lastValueInList} />
       </MethodButton>
       <MethodButton 
         methodName="lastIndexOf" 
@@ -105,7 +105,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
         nextValue={lastValueInList}
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'lastIndexOf')}>
-        <ValueInput value={lastValueInList} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'lastIndexOf')} />
+        <ValueInput value={lastValueInList} />
       </MethodButton>
       <MethodButton 
         methodName="size" 

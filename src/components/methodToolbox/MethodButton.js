@@ -150,43 +150,28 @@ class MethodButton extends React.Component {
     const desc2 = this.props.description2 ? <p className="MethodButton__summary--desc2">{this.props.description2}</p> : null;
 
     return (
-      <details
-        className="MethodButton__details"
-        // onClick={ (e) => { 
-        //   console.log(e.target.className);
-        //   if (e.target.className !== "MethodButton__summary") {
-        //     console.log('preventing default');
-        //     e.preventDefault();
-        //   }
-        // }}
-        >
+      <details className="MethodButton__details">
         <summary 
           className="MethodButton__summary" 
           onClick={ (e) => { 
-            console.log(e.target.tabIndex);
             if (e.target.className !== "MethodButton__summary") {
-              console.log('preventing default');
               e.preventDefault();
             }
           }}
           onKeyUp={ (e) => {
             if ((e.key === ' ') && e.target.className !== "MethodButton__summary") {
-              console.log(e.target.className);
-              console.log('on key up preventing default');
               e.preventDefault();
             }
           }}
           >
           <div 
             className={classNames.join(' ')} 
-            onClick={ (e) => { 
-              console.log(e.target.className);
-              console.log(e.target.type);
+            onClick={ (e) => {
               if (!this.props.disabled) {
                 if (e.target.className.indexOf('MethodButton') !== -1) {
                   this.props.onClick(this.state.inputValues) 
                 } else if (e.target.type === 'text' || e.target.type === 'number') {
-                  // console.log('text element inside of this button was clicked');
+                  
                 } else {
                   throw new Error('Could not determine which part of this button was clicked');
                 }
@@ -194,14 +179,13 @@ class MethodButton extends React.Component {
             }} 
             tabIndex={0}
             onKeyPress={ (e) => {
-              console.log(e.target.className);
               if (e.key === ' ' || e.key === 'Enter') {
                 e.preventDefault();
                 if (!this.props.disabled) {
                   if (e.target.className.indexOf('MethodButton') !== -1) {
                     this.props.onClick(this.state.inputValues) 
                   } else if (e.target.type === 'text' || e.target.type === 'number') {
-                    // console.log('text element inside of this button was clicked');
+                    
                   } else {
                     throw new Error('Could not determine which part of this button was clicked');
                   }

@@ -126,7 +126,6 @@ class App extends Component {
       let updatedElementMap = elementMap.set(elementPart, updatedClassesList);
       let updatedAnimationClasses = this.state.animationClasses.set(elementId, updatedElementMap);
 
-      // console.log(`In animation function `, updatedAnimationClasses.toString());
       await this.setState({
         animationClasses: updatedAnimationClasses
       });
@@ -147,8 +146,6 @@ class App extends Component {
   }
 
   async onMethodButtonClick(method, argums) {
-    console.log('on method button click begin');
-
     await this.setState({
       buttonsDisabled: true,
     });
