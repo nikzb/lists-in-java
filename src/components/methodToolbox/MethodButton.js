@@ -19,13 +19,11 @@ class MethodButton extends React.Component {
       } else {
         for (let index = 0; index < props.children.length; index += 1) {
           if (index % 2 === 0) {
-            console.log(props.children[index].type.name);
             if (props.inputTypes[index / 2] === 'index') {
               inputValues.push(0);
             } else if (props.inputTypes[index / 2] === 'value') {
               inputValues.push(props.nextValue);
             } else {
-              console.log('Fail', props.inputTypes[index / 2]);
               throw new Error('not a valid input type');
             }
           }
@@ -110,7 +108,10 @@ class MethodButton extends React.Component {
       return React.cloneElement(props.children, {
         value: this.state.inputValues[0],
         onChange: this.onChange,
-        inputIndex: 0
+        inputIndex: 0,
+        getInputValuesFromParent: () => this.state.inputValues,
+        parentButtonOnClick: this.props.onClick,
+        disabled: this.props.disabled
       });
     } else {
       let newChildren = [];
@@ -121,7 +122,10 @@ class MethodButton extends React.Component {
             value: this.state.inputValues[index / 2],
             onChange: this.onChange,
             inputIndex: index / 2,
-            key: index
+            key: index,
+            getInputValuesFromParent: () => this.state.inputValues,
+            parentButtonOnClick: this.props.onClick,
+            disabled: this.props.disabled
           }));
         } else {
           newChildren.push(props.children[index]);
@@ -146,16 +150,69 @@ class MethodButton extends React.Component {
     const desc2 = this.props.description2 ? <p className="MethodButton__summary--desc2">{this.props.description2}</p> : null;
 
     return (
-      <details>
-        <summary>
-          <button 
+      <details
+        className="MethodButton__details"
+        // onClick={ (e) => { 
+        //   console.log(e.target.className);
+        //   if (e.target.className !== "MethodButton__summary") {
+        //     console.log('preventing default');
+        //     e.preventDefault();
+        //   }
+        // }}
+        >
+        <summary 
+          className="MethodButton__summary" 
+          onClick={ (e) => { 
+            console.log(e.target.tabIndex);
+            if (e.target.className !== "MethodButton__summary") {
+              console.log('preventing default');
+              e.preventDefault();
+            }
+          }}
+          onKeyUp={ (e) => {
+            if ((e.key === ' ') && e.target.className !== "MethodButton__summary") {
+              console.log(e.target.className);
+              console.log('on key up preventing default');
+              e.preventDefault();
+            }
+          }}
+          >
+          <div 
             className={classNames.join(' ')} 
-            onClick={ () => { this.props.onClick(this.state.inputValues) }} 
+            onClick={ (e) => { 
+              console.log(e.target.className);
+              console.log(e.target.type);
+              if (!this.props.disabled) {
+                if (e.target.className.indexOf('MethodButton') !== -1) {
+                  this.props.onClick(this.state.inputValues) 
+                } else if (e.target.type === 'text' || e.target.type === 'number') {
+                  // console.log('text element inside of this button was clicked');
+                } else {
+                  throw new Error('Could not determine which part of this button was clicked');
+                }
+              }
+            }} 
+            tabIndex={0}
+            onKeyPress={ (e) => {
+              console.log(e.target.className);
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (!this.props.disabled) {
+                  if (e.target.className.indexOf('MethodButton') !== -1) {
+                    this.props.onClick(this.state.inputValues) 
+                  } else if (e.target.type === 'text' || e.target.type === 'number') {
+                    // console.log('text element inside of this button was clicked');
+                  } else {
+                    throw new Error('Could not determine which part of this button was clicked');
+                  }
+                }
+              }
+            }}
             disabled={this.props.disabled}>
+            
             {this.props.methodName}({this.renderChildren(this.props)})
-          </button>
+          </div>
         </summary>
-        {/* {...descriptions} */}
         <p className="MethodButton__summary--desc1">{this.props.description( ...this.state.inputValues )}</p>
         {desc2}
       </details>

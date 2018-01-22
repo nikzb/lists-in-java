@@ -1,6 +1,7 @@
 .Input {
   font-size: 1em;
   background-color: #f9f9f9;
+  z-index: 5;
 }
 
 .Input--index {

@@ -17,7 +17,8 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         inputTypes={['value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >    
-        <ValueInput value={nextValue} />
+        {/* <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/> */}
+        <ValueInput value={nextValue}/>
       </MethodButton>
       <MethodButton 
         methodName="add" 
@@ -27,8 +28,8 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}
       >
-        <IndexInput value={0} maxValue={listSize}/>, 
-        <ValueInput value={nextValue} />
+        <IndexInput value={0} maxValue={listSize} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/>, 
+        <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'add')}/>
       </MethodButton>
       <MethodButton 
         methodName="set" 
@@ -39,8 +40,8 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         inputTypes={['index', 'value']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}
       >
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>, 
-        <ValueInput value={nextValue} />
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}/>, 
+        <ValueInput value={nextValue} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'set')}/>
       </MethodButton>
       <MethodButton 
         methodName="remove" 
@@ -50,7 +51,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}
       >
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'remove')}/>
       </MethodButton>
       <MethodButton 
         methodName="get" 
@@ -58,7 +59,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}
         inputTypes={['index']}>
-        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)}/>
+        <IndexInput value={0} maxValue={Math.max(listSize - 1, 0)} parentButtonOnClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}/>
       </MethodButton>
       <MethodButton 
         methodName="size" 

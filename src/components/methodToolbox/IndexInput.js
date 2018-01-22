@@ -21,7 +21,8 @@ class IndexInput extends React.Component {
   }
 
   onClick(e) {
-    e.stopPropagation();
+    // e.preventDefault();
+    // e.stopPropagation();
     e.target.select();
   }
 
@@ -36,6 +37,14 @@ class IndexInput extends React.Component {
         value={this.props.value}
         onChange={this.onChange}
         onClick={this.onClick}
+        onKeyPress={ 
+          (e) => { console.log('in on key press', e.key); 
+          if (e.key === ' ' || e.key === 'Enter') {
+            if (!this.props.disabled) {
+              this.props.parentButtonOnClick(this.props.getInputValuesFromParent()); 
+            }
+          }
+        }}
       />
     );
   }

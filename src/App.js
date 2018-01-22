@@ -14,6 +14,8 @@ import timeout from './handyScripts/timeout';
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
 
+Modal.setAppElement('#root');
+
 const customModalStyles = {
   content : {
     top                   : '50%',
@@ -145,6 +147,8 @@ class App extends Component {
   }
 
   async onMethodButtonClick(method, argums) {
+    console.log('on method button click begin');
+
     await this.setState({
       buttonsDisabled: true,
     });
