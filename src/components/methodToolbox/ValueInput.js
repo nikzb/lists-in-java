@@ -16,7 +16,7 @@ class ValueInput extends React.Component {
   onChange() {
     let newValue = this.input.value;
 
-    var startsWithLetter = /^[A-Za-z]/;
+    const startsWithLetter = /^[A-Za-z]/;
 
     if (newValue.match(startsWithLetter)) {
       if (newValue.length > 1) {
@@ -28,7 +28,9 @@ class ValueInput extends React.Component {
   }
 
   onClick(e) {
-    e.target.select();
+    // e.target.select();
+    console.log(e.target);
+    e.target.setSelectionRange(0, e.target.value.length);
   }
 
   render() {
@@ -42,12 +44,24 @@ class ValueInput extends React.Component {
         value={this.props.value}
         onChange={this.onChange}
         onClick={ this.onClick }
+        onKeyDown={
+          (e) => {
+            if (e.key === 'Backspace') {
+              e.preventDefault();
+              e.target.setSelectionRange(0, e.target.value.length);
+            }
+          }
+        }
         onKeyPress={ 
           (e) => { 
+            const startsWithLetter = /^[A-Za-z]/;
             if (e.key === ' ' || e.key === 'Enter') {
               if (!this.props.disabled) {
                 this.props.parentButtonOnClick(this.props.getInputValuesFromParent()); 
               }
+            } else if (e.key.length === 1 && e.key.match(startsWithLetter)) {
+              // this.props.onChange(this.props.inputIndex, e.key.toUpperCase());
+              this.onChange();
             }
           }
         }

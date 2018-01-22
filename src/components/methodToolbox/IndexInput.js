@@ -35,11 +35,29 @@ class IndexInput extends React.Component {
         value={this.props.value}
         onChange={this.onChange}
         onClick={this.onClick}
+        onKeyDown={
+          (e) => {
+            if (e.key === 'Backspace') {
+              e.preventDefault();
+              e.target.select();
+            }
+          }
+        }
         onKeyPress={ 
-          (e) => {  
+          (e) => { 
+            const startsWithNumber = /^[0-9]/;
             if (e.key === ' ' || e.key === 'Enter') {
               if (!this.props.disabled) {
                 this.props.parentButtonOnClick(this.props.getInputValuesFromParent()); 
+              }
+            } else if (e.key.match(startsWithNumber)) {
+              // const oldValue = e.target.value;
+              const newValue = Number.parseInt(e.key, 10);
+
+              console.log(newValue);
+
+              if (newValue <= this.props.maxValue && newValue >= 0) {
+                this.onChange();
               }
             }
           }
