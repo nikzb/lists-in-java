@@ -6,8 +6,12 @@ class MethodButton extends React.Component {
   constructor(props) {
     super(props);
 
+    // Initialize an array of input values for the initial state
+    // index inputs get 0 by default
+    // value inputs get nextValue prop
     let inputValues = [];
     if (props.children) {
+      // If props.children is not an array, there is only one input child
       if (!Array.isArray(props.children)) {
         if (props.inputTypes[0] === 'index') {
           inputValues.push(0);
@@ -17,6 +21,8 @@ class MethodButton extends React.Component {
           throw new Error('not a valid input type');
         }
       } else {
+        // Must go through all input children
+        // Use only even numbered index values in props.children because of commas
         for (let index = 0; index < props.children.length; index += 1) {
           if (index % 2 === 0) {
             if (props.inputTypes[index / 2] === 'index') {
@@ -38,13 +44,17 @@ class MethodButton extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  // When props are received, must validate and update the input values
   componentWillReceiveProps(nextProps) {
     const newInputValues = [];
 
     if (nextProps.children) {  
       if (!Array.isArray(nextProps.children)) {
+        // Only one child input
         if (nextProps.inputTypes[0] === 'index') {
           const inputValue = this.state.inputValues[0];
+        
+          // Max value was passed to index inputs in MethodToolbox render (via AllMethods or APSubsetMethods)
           const max = nextProps.children.props.maxValue;
           
           if (inputValue > max) {
@@ -109,8 +119,7 @@ class MethodButton extends React.Component {
         value: this.state.inputValues[0],
         onChange: this.onChange,
         inputIndex: 0,
-        getInputValuesFromParent: () => this.state.inputValues,
-        parentButtonOnClick: this.props.onClick,
+        onSubmit: () => { this.props.onClick(this.state.inputValues) },
         disabled: this.props.disabled
       });
     } else {
@@ -123,8 +132,7 @@ class MethodButton extends React.Component {
             onChange: this.onChange,
             inputIndex: index / 2,
             key: index,
-            getInputValuesFromParent: () => this.state.inputValues,
-            parentButtonOnClick: this.props.onClick,
+            onSubmit: () => { this.props.onClick(this.state.inputValues) },
             disabled: this.props.disabled
           }));
         } else {

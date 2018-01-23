@@ -15,8 +15,12 @@ class IndexInput extends React.Component {
 
   onChange() {
     const newValue = Number.parseInt(this.input.value, 10);
+    
     if (newValue >= 0 && newValue <= this.props.maxValue) {
       this.props.onChange(this.props.inputIndex, newValue);
+      if (newValue === 0) {
+        this.input.value = +0;
+      }
     }
   }
 
@@ -45,19 +49,14 @@ class IndexInput extends React.Component {
         }
         onKeyPress={ 
           (e) => { 
-            const startsWithNumber = /^[0-9]/;
+            console.log('keyCode' + e.keyCode);
+            console.log('which' + e.which);
+            console.log('key' + e.key);
+            
             if (e.key === ' ' || e.key === 'Enter') {
               if (!this.props.disabled) {
-                this.props.parentButtonOnClick(this.props.getInputValuesFromParent()); 
-              }
-            } else if (e.key.match(startsWithNumber)) {
-              // const oldValue = e.target.value;
-              const newValue = Number.parseInt(e.key, 10);
-
-              console.log(newValue);
-
-              if (newValue <= this.props.maxValue && newValue >= 0) {
-                this.onChange();
+                this.props.onSubmit();
+                this.input.blur();
               }
             }
           }

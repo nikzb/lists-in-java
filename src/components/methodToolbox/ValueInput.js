@@ -28,8 +28,6 @@ class ValueInput extends React.Component {
   }
 
   onClick(e) {
-    // e.target.select();
-    console.log(e.target);
     e.target.setSelectionRange(0, e.target.value.length);
   }
 
@@ -54,14 +52,16 @@ class ValueInput extends React.Component {
         }
         onKeyPress={ 
           (e) => { 
-            const startsWithLetter = /^[A-Za-z]/;
+            // const startsWithLetter = /^[A-Za-z]/;
+
+            // Must get the key pressed correctly depending on browser :(
+
+
             if (e.key === ' ' || e.key === 'Enter') {
               if (!this.props.disabled) {
-                this.props.parentButtonOnClick(this.props.getInputValuesFromParent()); 
+                this.props.onSubmit();
+                this.input.blur();
               }
-            } else if (e.key.length === 1 && e.key.match(startsWithLetter)) {
-              // this.props.onChange(this.props.inputIndex, e.key.toUpperCase());
-              this.onChange();
             }
           }
         }
