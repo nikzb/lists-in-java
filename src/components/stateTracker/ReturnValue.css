@@ -14,7 +14,7 @@
 .ReturnValue--string {
   font-size: 2.0em;
   /* background: var(--default-item-color); */
-  background: var(rgb(22, 133, 230));
+  background: rgb(22, 133, 230);
   padding: 0.2em 0;
   border-radius: 0;
   /* color: var(--off-white); */
