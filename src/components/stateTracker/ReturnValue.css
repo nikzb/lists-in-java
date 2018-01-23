@@ -13,10 +13,12 @@
 /* These should be the same as for ListItem__value */
 .ReturnValue--string {
   font-size: 2.0em;
-  background: var(--default-item-color);
+  /* background: var(--default-item-color); */
+  background: var(rgb(22, 133, 230));
   padding: 0.2em 0;
   border-radius: 0;
-  color: var(--off-white);
+  /* color: var(--off-white); */
+  color: #f9f9f9;
   margin: 0.3em;
   width: 1.5em;
   text-align: center;

@@ -7,7 +7,8 @@
 
 .ListViz__empty {
   margin-left: 0.4em;
-  color: var(--default-item-color);
+  /* color: var(--default-item-color); */
+  color: var(rgb(22, 133, 230));
   font-size: 1.2em;
   overflow: visible;
   align-self: center;

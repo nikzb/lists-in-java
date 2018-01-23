@@ -46,8 +46,10 @@
 }
 
 .MethodButton--disabled {
-  background: var(--disabled-grey);
-  color: var(--disabled-grey-text);
+  /* background: var(--disabled-grey); */
+  background: rgb(157, 157, 157);
+  /* color: var(--disabled-grey-text); */
+  color: rgb(220, 220, 220);
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {

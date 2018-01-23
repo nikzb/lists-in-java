@@ -3,7 +3,8 @@
   /* overflow: hidden; */
   flex: 1 1 36em;
   
-  border-right: 1px solid var(--border-grey);
+  /* border-right: 1px solid var(--border-grey); */
+  border-right: 1px solid rgb(207,207,207);
   display: flex;
   justify-content: flex-end;
 }
@@ -19,7 +20,8 @@
     flex: 1 1 auto;
     height: 60vh;
     overflow-y: scroll;
-    border-bottom: 10px solid var(--border-grey);
+    /* border-bottom: 10px solid var(--border-grey); */
+    border-bottom: 1px solid rgb(207,207,207);
     font-size: 0.9em;
   }
 }

@@ -13,7 +13,8 @@
 
 .ListItem__value {
   font-size: 210%;
-  background: var(--default-item-color);
+  /* background: var(--default-item-color); */
+  background: var(rgb(22, 133, 230));
   padding: 12% 0 12% 0;
   width: 100%;
   border-radius: 0;
@@ -35,7 +36,8 @@
 }
 
 .ListItem__index--attention {
-  color:  var(--default-item-color);
+  /* color:  var(--default-item-color); */
+  color:  var(rgb(22, 133, 230));
   animation: rubberBand 1.0s;
 }
 

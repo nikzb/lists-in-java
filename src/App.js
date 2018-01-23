@@ -26,6 +26,7 @@ const customModalStyles = {
     transform             : 'translate(-50%, -50%)',
     background            : 'rgb(22, 133, 230)',
     color                 : 'rgb(240, 240, 240)',
+    // color                 : 'rgb(230, 230, 230)',
     paddingLeft           : '30px',
     paddingRight          : '30px',
     borderRadius          : '0',
