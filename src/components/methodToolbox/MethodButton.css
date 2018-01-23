@@ -2,7 +2,8 @@
   display: inline-block;
   padding: 0.5em;
   font-size: 1.0em;
-  color: var(--off-white);
+  /* color: var(--off-white); */
+  color: #f9f9f9;
   margin: 0.5em;
   transition: background-color 0.8s;
   border: none;
@@ -14,7 +15,8 @@
 
 .MethodCall {
   font-weight: 400;
-  color: var(--off-white);
+  /* color: var(--off-white); */
+  color: #f9f9f9;
   border-radius: 0.5em;
   border: none;
 }
