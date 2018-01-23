@@ -9,6 +9,7 @@
   letter-spacing: 0.05em;
   font-family: 'Open Sans', sans-serif;
   border-radius: 0.5em;
+  cursor: default;
 }
 
 .MethodCall {
