@@ -14,7 +14,7 @@ class IndexInput extends React.Component {
   }
 
   onChange() {
-    const newValue = Number.parseInt(this.input.value, 10);
+    const newValue = parseInt(this.input.value, 10);
     
     if (newValue >= 0 && newValue <= this.props.maxValue) {
       this.props.onChange(this.props.inputIndex, newValue);
