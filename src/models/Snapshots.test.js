@@ -57,12 +57,15 @@ describe('Snapshots', () => {
 
     it('should not remove the first Snapshot (the one with the empty list)', () => {
       let snapshots = Snapshots();
-      snapshots = undoSnapshot(snapshots);
-      expect(snapshots.size).toBe(1);
+      try {
+        snapshots = undoSnapshot(snapshots);
+      } catch (e) {
+        expect(snapshots.size).toBe(1);
       
-      const snapshotA = snapshots.get(0);
-      expect(snapshotA.get('listValues')).toEqual(List([]));
-      expect(snapshotA.get('command')).toBe(null);
+        const snapshotA = snapshots.get(0);
+        expect(snapshotA.get('listValues')).toEqual(List([]));
+        expect(snapshotA.get('command')).toBe(null);
+      }
     });
   });
 });

@@ -14,8 +14,6 @@ import timeout from './handyScripts/timeout';
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
 
-Modal.setAppElement('#root');
-
 const customModalStyles = {
   content : {
     top                   : '50%',
@@ -40,6 +38,7 @@ const customModalStyles = {
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       snapshots: Snapshots(),
       nextValue: 'A',
@@ -272,7 +271,6 @@ class App extends Component {
     } else {
       customModalStyles.content.animation = null;
     }
-    
 
     return (
       <div className="App">
