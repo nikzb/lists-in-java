@@ -14,6 +14,8 @@ import timeout from './handyScripts/timeout';
 import MethodToolbox from './components/methodToolbox/MethodToolbox';
 import StateTracker from './components/stateTracker/StateTracker';
 
+Modal.setAppElement('#root');
+
 const customModalStyles = {
   content : {
     top                   : '50%',
