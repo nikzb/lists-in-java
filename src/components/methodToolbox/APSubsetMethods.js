@@ -54,7 +54,7 @@ function APSubsetMethods({ disabled, listSize, nextValue, onButtonClick, makeOnC
       </MethodButton>
       <MethodButton 
         methodName="get" 
-        description={(index) => `Returns a copy of the value at index ${index}.`}
+        description={(index) => `Returns a reference to the element at index ${index}.`}
         disabled={disabled || listEmpty} 
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}
         inputTypes={['index']}>

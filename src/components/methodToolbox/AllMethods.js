@@ -72,7 +72,7 @@ function AllMethods({ disabled, listSize, nextValue, lastValueInList, onButtonCl
       </MethodButton>
       <MethodButton 
         methodName="get" 
-        description={(index) => `Returns a copy of the value at index ${index}.`}
+        description={(index) => `Returns a reference to the element at index ${index}.`}
         disabled={disabled || listEmpty} 
         inputTypes={['index']}
         onClick={makeOnClickFuncForMethodButton(onButtonClick, 'get')}>
