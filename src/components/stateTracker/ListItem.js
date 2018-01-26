@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
 
 import '../../variables.css';
 import '../../animations/animate.css';
@@ -50,10 +49,6 @@ ListItem.propTypes = {
   index: PropTypes.number,
   value: PropTypes.string,
   animationClasses: PropTypes.object
-};
-
-ListItem.defaultProps = {
-  animationClasses: List()
 };
 
 export default ListItem;
