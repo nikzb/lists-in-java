@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import "./Input.css";
 
@@ -69,5 +70,17 @@ class ValueInput extends React.Component {
     );
   }
 }
+
+ValueInput.propTypes = {
+  inputIndex: PropTypes.number,
+  value: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
+};
+
+ValueInput.defaultProps = {
+  disabled: false
+};
 
 export default ValueInput;

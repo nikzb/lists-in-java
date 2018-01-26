@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Checkbox from 'rc-checkbox';
 
@@ -84,5 +85,14 @@ class MethodToolbox extends React.Component {
     );
   }
 }
+
+MethodToolbox.propTypes = {
+  showAPCheckbox: PropTypes.bool,
+  disabled: PropTypes.bool,
+  listSize: PropTypes.number,
+  nextValue: PropTypes.string,
+  lastValueInList: PropTypes.string,
+  onButtonClick: PropTypes.func,
+};
 
 export default MethodToolbox;

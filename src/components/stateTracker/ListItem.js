@@ -1,5 +1,5 @@
 import React from 'react';
-import { List } from 'immutable';
+import PropTypes from 'prop-types';
 
 import '../../variables.css';
 import '../../animations/animate.css';
@@ -43,9 +43,12 @@ class ListItem extends React.Component
   }
 }
 
-ListItem.defaultProps = {
-  indexClasses: List(),
-  valueClasses: List()
+ListItem.propTypes = {
+  width: PropTypes.number,
+  fontSize: PropTypes.number,
+  index: PropTypes.number,
+  value: PropTypes.string,
+  animationClasses: PropTypes.object
 };
 
 export default ListItem;

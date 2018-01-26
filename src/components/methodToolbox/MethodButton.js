@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import '../../variables.css';
 import './MethodButton.css';
 
@@ -211,5 +213,14 @@ class MethodButton extends React.Component {
     );
   }
 }
+
+MethodButton.propTypes = {
+  methodName: PropTypes.string.isRequired,
+  inputTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool,
+  description: PropTypes.func.isRequired,
+  nextValue: PropTypes.string,
+  onClick: PropTypes.func.isRequired
+};
 
 export default MethodButton;
