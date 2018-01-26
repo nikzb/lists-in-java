@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
+import { Map } from 'immutable';
 
 import ListItem from './ListItem';
 // import '../../variables.css';
@@ -60,8 +61,10 @@ ListViz.defaultProps = {
 };
 
 ListViz.propTypes = {
-  snapshot: PropTypes.object,
-  isCurrentState: PropTypes.bool
+  snapshot: PropTypes.instanceOf(Map),
+  isCurrentState: PropTypes.bool,
+  flipMoveProps: PropTypes.instanceOf(Map),
+  animationClasses: PropTypes.object
 };
 
 export default ListViz;

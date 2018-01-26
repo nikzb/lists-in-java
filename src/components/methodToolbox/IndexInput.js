@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import "./Input.css";
 
@@ -65,5 +66,18 @@ class IndexInput extends React.Component {
     );
   }
 }
+
+IndexInput.propTypes = {
+  value: PropTypes.number.isRequired,
+  inputIndex: PropTypes.number,
+  maxValue: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
+};
+
+IndexInput.defaultProps = {
+  disabled: false
+};
 
 export default IndexInput;

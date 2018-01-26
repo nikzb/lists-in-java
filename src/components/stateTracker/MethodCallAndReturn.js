@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 
 import MethodCall from './MethodCall';
@@ -32,6 +33,10 @@ class MethodCallAndReturn extends React.Component {
       </div>
     );
   }
+}
+
+MethodCallAndReturn.propTypes = {
+  command: PropTypes.instanceOf(Map)
 }
 
 export default MethodCallAndReturn;
