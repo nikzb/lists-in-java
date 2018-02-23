@@ -24,9 +24,8 @@ const customModalStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    background            : 'rgb(22, 133, 230)',
-    color                 : 'rgb(240, 240, 240)',
-    // color                 : 'rgb(230, 230, 230)',
+    background            : 'rgb(0, 123, 230)',
+    color                 : '#F0F0F0',
     paddingLeft           : '30px',
     paddingRight          : '30px',
     borderRadius          : '0',
@@ -283,11 +282,21 @@ class App extends Component {
           style={customModalStyles}
         >
           <h1 style={{fontSize: '2.8em', color: "rgb(215, 215, 215)", textShadow: "2px 2px #222"}}>Lists in Java</h1>
-          <h2>An interactive tool for exploring the List interface in Java</h2>
-          <p style={{fontSize: '1.15em'}}>Use the buttons to call a method, then watch the list to see the result.</p>
-          <p style={{fontSize: '1.15em'}}>A history of every method call, return value, and state change is included.</p>
+          <h2 style={{fontSize: '1.6em'}}>An interactive tool for exploring the List interface in Java</h2>
+          <p style={{fontSize: '1.3em' }}>Use the buttons to call a method, then watch the list to see the result.</p>
+          <p style={{fontSize: '1.3em' }}>A history of every method call, return value, and state change is included.</p>
           <button 
-            style={{background: "rgb(135, 135, 135)", padding: '0.5em', margin: '0.5em 0 1em 0', fontSize: '1.4em', fontWeight: '300'}} 
+            tabIndex={1}
+            style={
+              {
+                background: '#777',//"rgb(135, 135, 135)", 
+                padding: '0.5em', 
+                margin: '0.5em 0 1em 0', 
+                fontSize: '1.4em', 
+                fontWeight: '300',
+                outlineColor: 'red'
+              }
+            } 
             onClick={this.closeModal}>
             Get Started
           </button>
