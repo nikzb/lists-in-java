@@ -1,8 +1,8 @@
 import { List, Map } from 'immutable';
 import { Snapshot, add, get, set, remove, size, clear, contains, indexOf, isEmpty, lastIndexOf } from './Snapshot';
 
-describe('Snapshot', () => {
-  describe('add to list with items', () => {
+describe('Snapshot module', () => {
+  describe('The add function, when adding to a list that already contains values', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
@@ -13,71 +13,107 @@ describe('Snapshot', () => {
       ]), Map({ method: '', arguments: [], returned: null }));
     });
 
-    it('should return a new Snapshot with an added item at the end', () => {
-      const newSnapshot = add(prevSnapshot, ['D']);
+    describe('When passed an array with a single value', () => {
+      it('should return a new Snapshot with the new item at the end of the listValues List', () => {
+        const newSnapshot = add(prevSnapshot, ['D']);
+        const actual = newSnapshot.get('listValues').map((item) => item.get('value'));
+        const expected = List(['A', 'B', 'C', 'D']);
 
-      expect(newSnapshot.get('listValues').size).toBe(4);
+        expect(actual).toEqual(expected);
+      });
 
-      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+      it('should return a new Snapshot with a "command" property set to the correct Map object', () => {
+        const newSnapshot = add(prevSnapshot, ['D']);
+        const actual = newSnapshot.get('command');
+        const expected = Map({ method: 'add', arguments: ['D'], returned: null });
 
-      expect(newValues).toEqual(List(['A', 'B', 'C', 'D']));
-      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: ['D'], returned: null }));
+        expect(actual).toEqual(expected);
+      });
     });
 
-    it('should return a new Snapshot with an added item at the beginning', () => {
-      const newSnapshot = add(prevSnapshot, [0, 'D']);
+    describe('When passed an array of two values, where the first value is 0', () => {
+      it('should return a new Snapshot with the new item at the beginning of the listValue List', () => {
+        const newSnapshot = add(prevSnapshot, [0, 'D']);
+        const actual = newSnapshot.get('listValues').map((item) => item.get('value'));
+        const expected = List(['D', 'A', 'B', 'C']);
 
-      expect(newSnapshot.get('listValues').size).toBe(4);
+        expect(actual).toEqual(expected);
+      });
 
-      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+      it('should return a new Snapshot with a "command" property set to the correct Map object', () => {
+        const newSnapshot = add(prevSnapshot, [0, 'D']);
+        const actual = newSnapshot.get('command')
+        const expected = Map({ method: 'add', arguments: [0, 'D'], returned: null })
 
-      expect(newValues).toEqual(List(['D', 'A', 'B', 'C']));
-      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [0, 'D'], returned: null }));
+        expect(actual).toEqual(expected);
+      });
     });
 
-    it('should return a new Snapshot with an added item somewhere in the middle', () => {
-      const newSnapshot = add(prevSnapshot, [1, 'D']);
+    describe('When passed an array of two values, where the first value is 1', () => {
+      it('should return a new Snapshot with the new item at index 1 of the listValue List', () => {
+        const newSnapshot = add(prevSnapshot, [1, 'D']);
+        const actual = newSnapshot.get('listValues').map((item) => item.get('value'));
+        const expected = List(['A', 'D', 'B', 'C']);
 
-      expect(newSnapshot.get('listValues').size).toBe(4);
-
-      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
-
-      expect(newValues).toEqual(List(['A', 'D', 'B', 'C']));
-      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [1, 'D'], returned: null }));
+        expect(actual).toEqual(expected);
+      });
+  
+      it('should return a new Snapshot with a "command" property set to the correct Map object', () => {
+        const newSnapshot = add(prevSnapshot, [1, 'D']);
+        const actual = newSnapshot.get('command');
+        const expected = Map({ method: 'add', arguments: [1, 'D'], returned: null });
+    
+        expect(actual).toEqual(expected);
+      });
     });
   });
 
-  describe('add to empty list', () => {
+  describe('The add function, when adding to an empty list', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
       prevSnapshot = Snapshot(List([]), null);
     });
 
-    it('should return a new Snapshot with the initial item added', () => {
-      const newSnapshot = add(prevSnapshot, ['D']);
+    describe('When passed an array with a single value', () => {
+      it('should return a new Snapshot with only the new item', () => {
+        const newSnapshot = add(prevSnapshot, ['D']);
+        const actual = newSnapshot.get('listValues').map((item) => item.get('value'));
+        const expected = List(['D']);
 
-      expect(newSnapshot.get('listValues').size).toBe(1);
+        expect(actual).toEqual(expected);
+      });
 
-      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+      it('should return a new Snapshot with a "command" property set to the correct Map object', () => {
+        const newSnapshot = add(prevSnapshot, ['D']);
+        const actual = newSnapshot.get('command');
+        const expected = Map({ method: 'add', arguments: ['D'], returned: null });
 
-      expect(newValues).toEqual(List(['D']));
-      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: ['D'], returned: null }));
+        expect(actual).toEqual(expected);
+      });
     });
 
-    it('should return a new Snapshot with the initial item added at index 0', () => {
-      const newSnapshot = add(prevSnapshot, [0, 'D']);
+    describe('When passed an array of two values, where the first value is 0', () => {
+      it('should return a new Snapshot with only the new item', () => {
+        const newSnapshot = add(prevSnapshot, [0, 'D']);
+        const actual = newSnapshot.get('listValues').map((item) => item.get('value'));
+        const expected = List(['D']);
 
-      expect(newSnapshot.get('listValues').size).toBe(1);
+        expect(actual).toEqual(expected);
+        expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [0, 'D'], returned: null }));
+      });
 
-      const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
+      it('should return a new Snapshot with a "command" property set to the correct Map object', () => {
+        const newSnapshot = add(prevSnapshot, [0, 'D']);
+        const actual = newSnapshot.get('command');
+        const expected = Map({ method: 'add', arguments: [0, 'D'], returned: null });
 
-      expect(newValues).toEqual(List(['D']));
-      expect(newSnapshot.get('command')).toEqual(Map({ method: 'add', arguments: [0, 'D'], returned: null }));
+        expect(actual).toEqual(expected);
+      });
     });
   });
 
-  describe('get from list', () => {
+  describe('The get function', () => {
     let prevSnapshot; 
 
     beforeEach(() => {
@@ -88,13 +124,17 @@ describe('Snapshot', () => {
       ]), Map({ method: '', arguments: [], returned: null }));
     });
 
-    it('should fetch the correct value from the list and not modify list values', () => {
+    it('should return the correct value from the list', () => {
       const newSnapshot = get(prevSnapshot, [0]);
       expect(newSnapshot.get('command').get('returned').get('value')).toEqual('A');
+    });
 
+    it('should not modify list values', () => {
+      const newSnapshot = get(prevSnapshot, [0]);
       const newValues = newSnapshot.get('listValues').map((item) => item.get('value'));
       expect(newValues).toEqual(List(['A', 'B', 'C']));
     });
+
   });
 
   describe('set value in list', () => {
