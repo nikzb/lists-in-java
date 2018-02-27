@@ -52,10 +52,10 @@ function ListHistory({snapshots, flipMoveProps}) {
   
   return (
     <div className="ListHistory">
-      <div className="ListHistory__header">
+      <header className="ListHistory__header">
         <h3 className="ListHistory__list-vizzes section-title">History</h3>
         <h3 className="section-title">Method Call ➔ Return Value</h3>
-      </div>
+      </header>
       {flipMove}
     </div>
   )

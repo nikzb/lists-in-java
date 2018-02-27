@@ -274,7 +274,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <main className="App">
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -286,7 +286,7 @@ class App extends Component {
           <p style={{fontSize: '1.3em' }}>Use the buttons to call a method, then watch the list to see the result.</p>
           <p style={{fontSize: '1.3em' }}>A history of every method call, return value, and state change is included.</p>
           <button 
-            tabIndex={1}
+            tabIndex={0}
             style={
               {
                 background: '#777',//"rgb(135, 135, 135)", 
@@ -301,10 +301,10 @@ class App extends Component {
             Get Started
           </button>
         </Modal>
-        <div className="App__header">
+        <header className="App__header">
           <h1 className="App__title">Lists in Java</h1>
-        </div>
-        <div className="App__main-row">
+        </header>
+        <section className="App__main-row">
           <StateTracker
             snapshots={this.state.snapshots}
             onUndo={this.onUndoButtonClick} 
@@ -323,8 +323,8 @@ class App extends Component {
             disabled={this.state.buttonsDisabled}
             showAPCheckbox={true}
           />
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 }

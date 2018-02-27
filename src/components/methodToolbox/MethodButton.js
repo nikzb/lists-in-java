@@ -174,7 +174,8 @@ class MethodButton extends React.Component {
             }
           }}
           >
-          <div 
+          <div
+            role={'button'} 
             className={classNames.join(' ')} 
             onClick={ (e) => {
               if (!this.props.disabled) {
