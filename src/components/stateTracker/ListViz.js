@@ -43,11 +43,27 @@ class ListViz extends React.Component {
 
     // const flipMoveProps = FlipMoveProps({ duration: 750, delay: 250, staggerDelayBy: 10 });
     const flipMove = flipMoveProps ? (
-      <FlipMove className="ListViz" style={style} {...flipMoveProps.toObject()}>
+      <FlipMove 
+        role="region"
+        aria-label="List State" 
+        aria-live="polite"
+        aria-atomic="true"
+        aria-relevant="all"
+        className="ListViz" 
+        style={style} {...flipMoveProps.toObject()}
+      >
         {listVizElements}
       </FlipMove>
     ) : (
-      <FlipMove className="ListViz" style={style}>
+      <FlipMove 
+        role="region" 
+        aria-label="List State" 
+        aria-live="polite" 
+        aria-atomic="true"
+        className="ListViz" 
+        aria-relevant="all"
+        style={style}
+      >
         {listVizElements}
       </FlipMove>
     );
